@@ -17,6 +17,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("heladería.fxml"));
+        Parent root = fxmlLoader.load();
+        
+        scene = new Scene(root, 640, 480);
+        stage.setScene(scene);
+        stage.show();
     
     }
 
