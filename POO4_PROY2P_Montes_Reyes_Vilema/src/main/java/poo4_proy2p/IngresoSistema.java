@@ -47,11 +47,12 @@ public class IngresoSistema implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //TO DO
     }
     
     @FXML
     public void iniciarSesion(){
-        
+        Usuario u1 = new Usuario("majoabril", "majito1234");
+        Usuario u2 = new Usuario("cx", "c21X");
     }
 }

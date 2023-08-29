@@ -17,10 +17,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("heladería.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("heladeria.fxml"));
         Parent root = fxmlLoader.load();
         
-        scene = new Scene(root, 640, 480);
+        scene = new Scene(root, 600, 400);
         stage.setScene(scene);
         stage.show();
     
