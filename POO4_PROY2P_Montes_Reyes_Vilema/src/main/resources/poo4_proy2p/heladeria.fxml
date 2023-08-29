@@ -63,7 +63,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="btnIniciarSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="289.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar Sesión" textAlignment="CENTER" textFill="#5e2973">
+      <Button fx:id="btnIniciarSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="289.0" mnemonicParsing="false" onAction="#iniciarSesion" styleClass="color-btns" stylesheets="@../../java/poo4_proy2p/style/styles.css" text="Iniciar Sesión" textAlignment="CENTER" textFill="#5e2973">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
