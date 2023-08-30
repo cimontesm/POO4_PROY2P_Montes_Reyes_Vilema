@@ -86,6 +86,7 @@ public class IngresoSistema implements Initializable {
         for (Usuario u : usuarios) {
             if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
                 datosErroneos = false;
+                VentanaOpciones.mostrarVentanaOpciones(u.usuario);
             }
         }
         if (datosErroneos) {
