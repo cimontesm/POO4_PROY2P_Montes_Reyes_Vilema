@@ -22,17 +22,17 @@
             <GaussianBlur radius="4.81" />
          </effect>
       </ImageView>
-      <Label layoutX="14.0" layoutY="14.0" text="Gioletti">
+      <Label layoutX="14.0" layoutY="14.0" text="Heladetti">
          <font>
             <Font name="AR BERKLEY" size="73.0" />
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="100.0" text="Ice Cream">
+      <Label layoutX="130.0" layoutY="100.0" text="Ice Cream">
          <font>
             <Font name="AR CENA" size="23.0" />
          </font>
       </Label>
-      <HBox fx:id="hDatos" alignment="CENTER" layoutY="170.0" prefHeight="100.0" prefWidth="302.0">
+      <HBox fx:id="hDatos" alignment="CENTER" layoutY="170.0" prefHeight="156.0" prefWidth="470.0">
          <children>
             <VBox fx:id="vLabels" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -53,17 +53,22 @@
             </VBox>
             <VBox fx:id="vDatos" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="140.0">
                <children>
-                  <TextField fx:id="tfusuario" prefHeight="25.0" prefWidth="118.0" promptText="Usuario">
+                  <TextField fx:id="tfusuario" prefHeight="25.0" prefWidth="118.0">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="tfcontrasenia" promptText="Contraseña" />
+                  <TextField fx:id="tfcontrasenia" />
                </children>
+            </VBox>
+            <VBox fx:id="vLabelError" alignment="CENTER" prefHeight="156.0" prefWidth="149.0">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="btnIniciarSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="137.0" layoutY="289.0" mnemonicParsing="false" onAction="#iniciarSesion" styleClass="color-btns" stylesheets="@../../java/poo4_proy2p/style/styles.css" text="Iniciar Sesión" textAlignment="CENTER" textFill="#5e2973">
+      <Button fx:id="btnIniciarSesion" alignment="CENTER" contentDisplay="CENTER" layoutX="159.0" layoutY="313.0" mnemonicParsing="false" onAction="#iniciarSesion" styleClass="color-btns" stylesheets="@style/styles.css" text="Iniciar Sesión" textAlignment="CENTER" textFill="#5e2973">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -5,15 +5,21 @@
 package poo4_proy2p;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  *
@@ -45,13 +51,50 @@ public class IngresoSistema implements Initializable {
     @FXML
     private Button btnIniciarSesion;
 
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+
+   
+
+    @FXML
+    private VBox vLabelError;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //TO DO
     }
     
+
+
     @FXML
-    public void iniciarSesion(){
-        
+    public void iniciarSesion() {
+        Usuario u1 = new Usuario("majoab", "majito1234");
+        Usuario u2 = new Usuario("cx", "c21X");
+        Usuario u3 = new Usuario("cmm", "12345");
+        Usuario u4 = new Usuario("amp", "abcd");
+        Usuario u5 = new Usuario("wasd", "ijkl");
+
+        usuarios.add(u1);
+        usuarios.add(u2);
+        usuarios.add(u3);
+        usuarios.add(u4);
+        usuarios.add(u5);
+
+        String ingresoU = tfusuario.getText();
+        String ingresoC = tfcontrasenia.getText();
+        boolean datosErroneos = true;
+
+        for (Usuario u : usuarios) {
+            if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
+                datosErroneos = false;
+            }
+        }
+        if (datosErroneos) {
+            Label lb = new Label("Datos Erróneos");
+            lb.setTextFill(Color.PALEVIOLETRED); // #ff2c56
+            lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
+            lb.setTextAlignment(TextAlignment.CENTER);
+
+            vLabelError.getChildren().add(lb);
+        }
     }
 }
