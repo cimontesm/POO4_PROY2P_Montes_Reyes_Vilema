@@ -82,11 +82,12 @@ public class IngresoSistema implements Initializable {
         for (Usuario u : usuarios) {
             if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
                 datosErroneos = false;
+                //pasa a la escena sig
             }
         }
         if (datosErroneos) {
             Label lb = new Label("Datos Erróneos");
-            lb.setTextFill(Color.PALEVIOLETRED); // #ff2c56
+            lb.setTextFill(Color.PALEVIOLETRED); 
             lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
             lb.setTextAlignment(TextAlignment.CENTER);
 
