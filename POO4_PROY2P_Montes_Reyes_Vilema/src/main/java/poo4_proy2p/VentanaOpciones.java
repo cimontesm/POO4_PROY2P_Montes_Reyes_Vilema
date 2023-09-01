@@ -24,12 +24,11 @@ public class VentanaOpciones implements Initializable {
     private static Label lblBienvenida;
     static String  usuario = null;
     public static void mostrarVentanaOpciones(String usuario) throws IOException{
-        Stage stage = new Stage();
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("VentanaOpciones.fxml"));
         Parent root = fxmLoader.load();
         App.scene = new Scene(root,600,400);
-        stage.setScene(App.scene);
-        stage.show();
+        App.stage.setScene(App.scene);
+        App.stage.show();
         VentanaOpciones.usuario = usuario;
     }
 
