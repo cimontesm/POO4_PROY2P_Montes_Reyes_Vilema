@@ -12,5 +12,6 @@ public class Pedido {
     
     String nombre;
     double total;
+    String id;
     
 }

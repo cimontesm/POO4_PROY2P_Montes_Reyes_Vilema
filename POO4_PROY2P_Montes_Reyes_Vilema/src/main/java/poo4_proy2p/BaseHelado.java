@@ -4,6 +4,13 @@
  */
 package poo4_proy2p;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+
 /**
  *
  * @author cmontes
@@ -11,4 +18,27 @@ package poo4_proy2p;
 public class BaseHelado {
     String nombre; 
     double precio;
+    
+    @FXML
+    private Button btnContinuar;
+    
+    @FXML
+    private Label lblValor;
+    
+    @FXML
+    private Pane rootH;
+    
+    @FXML
+    private HBox hImag;
+    
+    @FXML
+    private VBox vContenido;
+    
+    @FXML
+    private HBox hPrecio;
+    
+    @FXML
+    public void continuar(){
+        
+    }
 }

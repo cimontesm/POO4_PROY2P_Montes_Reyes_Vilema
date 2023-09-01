@@ -69,6 +69,7 @@ public class VentanaOpciones implements Initializable {
         h1.getChildren().addAll((new Label ("Hola")),new Label ("Chao")); //agregar Pedido del Usuario
         root.getChildren().add(h1);
         stage.setScene(scene);
+        stage.setTitle("Pedidos Generados");
         stage.show();
     }
     
