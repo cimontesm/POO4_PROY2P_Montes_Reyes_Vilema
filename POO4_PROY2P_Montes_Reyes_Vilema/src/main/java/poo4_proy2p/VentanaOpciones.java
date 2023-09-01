@@ -66,7 +66,7 @@ public class VentanaOpciones implements Initializable {
         VBox root = new VBox();
         Scene scene = new Scene(root,420,420);
         HBox h1 = new HBox();
-        h1.getChildren().addAll((new TextField ("Hola")),new TextField ("Chao")); //agregar Pedido del Usuario
+        h1.getChildren().addAll((new Label ("Hola")),new Label ("Chao")); //agregar Pedido del Usuario
         root.getChildren().add(h1);
         stage.setScene(scene);
         stage.show();
