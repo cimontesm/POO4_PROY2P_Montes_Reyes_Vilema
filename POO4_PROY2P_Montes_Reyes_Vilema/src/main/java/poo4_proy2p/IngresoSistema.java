@@ -99,6 +99,7 @@ public class IngresoSistema implements Initializable {
             Label lb = new Label("Datos Erróneos");
             lb.setTextFill(Color.PALEVIOLETRED); 
             lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
+            lb.setStyle("-fx-background-color: POWDERBLUE");
             lb.setTextAlignment(TextAlignment.CENTER);
 
             vLabelError.getChildren().add(lb);
