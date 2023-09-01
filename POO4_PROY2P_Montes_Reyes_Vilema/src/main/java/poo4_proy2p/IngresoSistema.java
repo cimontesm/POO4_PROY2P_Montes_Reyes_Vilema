@@ -53,7 +53,7 @@ public class IngresoSistema implements Initializable {
     @FXML
     private Button btnIniciarSesion;
 
-    ArrayList<Usuario> usuarios = new ArrayList<>();
+    ArrayList<Usuario> usuarios;
 
    
 
@@ -69,6 +69,8 @@ public class IngresoSistema implements Initializable {
 
     @FXML
     public void iniciarSesion() {
+        usuarios = new ArrayList<>();
+        
         Usuario u1 = new Usuario("majoab", "majito1234");
         Usuario u2 = new Usuario("cx", "c21X");
         Usuario u3 = new Usuario("cmm", "12345");
@@ -94,20 +96,32 @@ public class IngresoSistema implements Initializable {
                     ex.printStackTrace();
                 }
                 
+            } else if (datosErroneos){
+                vLabelError.getChildren().clear();
+                tfusuario.clear();
+                tfcontrasenia.clear();
+            
+                Label lb = new Label("Datos Erróneos");
+                lb.setTextFill(Color.PALEVIOLETRED); 
+                lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
+                lb.setStyle("-fx-background-color: POWDERBLUE");
+                lb.setTextAlignment(TextAlignment.CENTER);
+
+                vLabelError.getChildren().add(lb);
             }
         }
-        if (datosErroneos) {
-            vLabelError.getChildren().clear();
-            tfusuario.clear();
-            tfcontrasenia.clear();
-            
-            Label lb = new Label("Datos Erróneos");
-            lb.setTextFill(Color.PALEVIOLETRED); 
-            lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
-            lb.setStyle("-fx-background-color: POWDERBLUE");
-            lb.setTextAlignment(TextAlignment.CENTER);
-
-            vLabelError.getChildren().add(lb);
-        }
+//        if (datosErroneos) {
+//            vLabelError.getChildren().clear();
+//            tfusuario.clear();
+//            tfcontrasenia.clear();
+//            
+//            Label lb = new Label("Datos Erróneos");
+//            lb.setTextFill(Color.PALEVIOLETRED); 
+//            lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
+//            lb.setStyle("-fx-background-color: POWDERBLUE");
+//            lb.setTextAlignment(TextAlignment.CENTER);
+//
+//            vLabelError.getChildren().add(lb);
+//        }
     }
 }
