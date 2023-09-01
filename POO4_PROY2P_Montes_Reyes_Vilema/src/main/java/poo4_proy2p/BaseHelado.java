@@ -36,4 +36,9 @@ public class BaseHelado {
     
     @FXML
     private HBox hPrecio;
+    
+    @FXML
+    public void continuar(){
+        
+    }
 }
