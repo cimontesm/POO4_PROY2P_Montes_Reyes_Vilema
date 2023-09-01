@@ -97,7 +97,7 @@ public class IngresoSistema implements Initializable {
         }
         if (datosErroneos) {
             Label lb = new Label("Datos Erróneos");
-            lb.setTextFill(Color.PALEVIOLETRED); // #ff2c56
+            lb.setTextFill(Color.PALEVIOLETRED); 
             lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
             lb.setTextAlignment(TextAlignment.CENTER);
 
