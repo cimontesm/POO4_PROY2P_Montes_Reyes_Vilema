@@ -24,9 +24,10 @@ import javafx.stage.Stage;
  * @author cmontes
  */
 public class VentanaOpciones implements Initializable {
-    public Usuario usuario = null;
+    public static Usuario usuario = null;
     
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
+        VentanaOpciones.usuario = usuario;
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("VentanaOpciones.fxml"));
         Parent root = fxmLoader.load();
         App.scene = new Scene(root,600,400);
@@ -41,23 +42,25 @@ public class VentanaOpciones implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblBienvenida.setText("Bienvenido/a "+usuario);
-            Thread pedidos = new Thread(()->{
-                while(true){
-                    try{
-                        Platform.runLater(()->{
-                            ventanaPedidos();
-                        });
-                        Thread.sleep(5*60*1000);
-                    }catch(InterruptedException e){
-                        e.printStackTrace();
-                    }
-
+        lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
+        Thread pedidos = new Thread(()->{
+            while(true){
+                try{
+                    Platform.runLater(()->{
+                        ventanaPedidos();
+                    });
+                    Thread.sleep(5*60*1000);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
                 }
+
+            }
                 
-            });
-            pedidos.setDaemon(true);
-            pedidos.start();
+        });
+        pedidos.setDaemon(true);
+        pedidos.start();
+        
+        
         
     }
     
