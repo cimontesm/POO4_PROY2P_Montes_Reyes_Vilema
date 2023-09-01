@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.VentanaOpciones">
    <children>
       <ImageView fitHeight="114.0" fitWidth="655.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -21,6 +20,7 @@
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="282.0" prefWidth="324.0">
                <children>
+                  <Label fx:id="lblText2" text="Hola" />
                   <Label fx:id="lblBienvenida" text="Mensaje de Bienvenida">
                      <opaqueInsets>
                         <Insets />

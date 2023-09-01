@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+
 /**
  *
  * @author cmontes
@@ -88,7 +89,7 @@ public class IngresoSistema implements Initializable {
             if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
                 datosErroneos = false;
                 try {
-                    VentanaOpciones.mostrarVentanaOpciones(u.usuario);
+                    VentanaOpciones.mostrarVentanaOpciones(u);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
