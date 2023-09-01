@@ -26,32 +26,34 @@ import javafx.scene.text.TextAlignment;
  * @author cmontes
  */
 public class IngresoSistema implements Initializable {
+    
+    @FXML
+    private TextField tfusuario;
+    
+    @FXML
+    private ImageView imagenprincipal;
+    
+    @FXML
+    private Pane pane;
+    
+    @FXML
+    private HBox hDatos;
+    
+    @FXML
+    private VBox vLabels;
+    
+    @FXML
+    private VBox vDatos;
+    
+    @FXML
+    private TextField tfcontrasenia;
+    
+    @FXML
+    private Button btnIniciarSesion;
 
     ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    @FXML
-    private TextField tfusuario;
-
-    @FXML
-    private ImageView imagenprincipal;
-
-    @FXML
-    private Pane pane;
-
-    @FXML
-    private HBox hDatos;
-
-    @FXML
-    private VBox vLabels;
-
-    @FXML
-    private VBox vDatos;
-
-    @FXML
-    private TextField tfcontrasenia;
-
-    @FXML
-    private Button btnIniciarSesion;
+   
 
     @FXML
     private VBox vLabelError;
@@ -60,6 +62,8 @@ public class IngresoSistema implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //TO DO
     }
+    
+
 
     @FXML
     public void iniciarSesion() {
@@ -82,7 +86,7 @@ public class IngresoSistema implements Initializable {
         for (Usuario u : usuarios) {
             if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
                 datosErroneos = false;
-                //pasa a la escena sig
+                VentanaOpciones.mostrarVentanaOpciones(u.usuario);
             }
         }
         if (datosErroneos) {
