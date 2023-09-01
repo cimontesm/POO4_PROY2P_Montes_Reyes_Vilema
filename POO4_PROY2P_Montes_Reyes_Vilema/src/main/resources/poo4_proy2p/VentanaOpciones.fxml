@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.VentanaOpciones">
+   <children>
+      <ImageView fitHeight="114.0" fitWidth="655.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@banderind.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="2.0" layoutY="115.0" prefHeight="282.0" prefWidth="600.0">
+         <children>
+            <VBox alignment="CENTER_LEFT" prefHeight="282.0" prefWidth="324.0">
+               <children>
+                  <Label fx:id="lblBienvenida" text="Mensaje de Bienvenida">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Encuentra nuestro locales">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Haz tu pedido">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <ImageView fitHeight="266.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@helado.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</Pane>

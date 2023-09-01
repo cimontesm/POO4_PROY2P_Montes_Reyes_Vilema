@@ -4,6 +4,7 @@
  */
 package poo4_proy2p;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -86,7 +87,12 @@ public class IngresoSistema implements Initializable {
         for (Usuario u : usuarios) {
             if (u.getUsuario().equals(ingresoU) && u.getContrasenia().equals(ingresoC)) {
                 datosErroneos = false;
-                VentanaOpciones.mostrarVentanaOpciones(u.usuario);
+                try {
+                    VentanaOpciones.mostrarVentanaOpciones(u.usuario);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                
             }
         }
         if (datosErroneos) {
