@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * @author cmontes
  */
 public class VentanaOpciones implements Initializable {
-     @FXML
+    @FXML
     private static Label lblBienvenida;
     static String  usuario = null;
     public static void mostrarVentanaOpciones(String usuario) throws IOException{
