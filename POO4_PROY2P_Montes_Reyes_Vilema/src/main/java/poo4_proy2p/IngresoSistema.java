@@ -110,18 +110,5 @@ public class IngresoSistema implements Initializable {
                 vLabelError.getChildren().add(lb);
             }
         }
-//        if (datosErroneos) {
-//            vLabelError.getChildren().clear();
-//            tfusuario.clear();
-//            tfcontrasenia.clear();
-//            
-//            Label lb = new Label("Datos Erróneos");
-//            lb.setTextFill(Color.PALEVIOLETRED); 
-//            lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
-//            lb.setStyle("-fx-background-color: POWDERBLUE");
-//            lb.setTextAlignment(TextAlignment.CENTER);
-//
-//            vLabelError.getChildren().add(lb);
-//        }
     }
 }
