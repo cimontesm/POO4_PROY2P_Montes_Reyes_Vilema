@@ -48,7 +48,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox fx:id="hprecio" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="hPrecio" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label fx:id="precioy" text="1.50" textFill="#845b9e">
                      <font>
