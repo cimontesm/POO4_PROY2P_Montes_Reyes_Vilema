@@ -100,6 +100,7 @@ public class IngresoSistema implements Initializable {
             vLabelError.getChildren().clear();
             tfusuario.clear();
             tfcontrasenia.clear();
+            
             Label lb = new Label("Datos Erróneos");
             lb.setTextFill(Color.PALEVIOLETRED); 
             lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
