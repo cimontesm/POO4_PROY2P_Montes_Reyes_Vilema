@@ -8,45 +8,58 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.VentanaOpciones">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F5E8FF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.VentanaOpciones">
    <children>
-      <ImageView fitHeight="114.0" fitWidth="655.0" layoutX="3.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="114.0" fitWidth="655.0" layoutX="-98.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" rotate="-12.8">
          <image>
             <Image url="@banderind.png" />
          </image>
       </ImageView>
-      <HBox layoutX="2.0" layoutY="115.0" prefHeight="282.0" prefWidth="600.0">
+      <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="62.0" prefHeight="335.0" prefWidth="603.0">
          <children>
-            <VBox alignment="CENTER_LEFT" prefHeight="282.0" prefWidth="324.0">
+            <VBox alignment="CENTER" prefHeight="335.0" prefWidth="263.0">
                <children>
-                  <Label fx:id="lblText2" text="Hola" />
-                  <Label fx:id="lblBienvenida" text="Mensaje de Bienvenida">
+                  <Label fx:id="lblBienvenida" prefHeight="30.0" prefWidth="219.0" text="Mensaje de Bienvenida">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <VBox.margin>
                         <Insets bottom="50.0" left="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
                   </Label>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Encuentra nuestro locales">
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="27.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Encuentra nuestro locales" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="20.0" left="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Haz tu pedido">
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Haz tu pedido" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets left="30.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Button>
                </children>
             </VBox>
-            <ImageView fitHeight="266.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="251.0" layoutY="62.0" prefHeight="365.0" prefWidth="497.0">
+         <children>
+            <ImageView fitHeight="296.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" rotate="10.6">
                <image>
-                  <Image url="@helado.jpg" />
+                  <Image url="@helado%20escena%202.jpg" />
                </image>
             </ImageView>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </Pane>
