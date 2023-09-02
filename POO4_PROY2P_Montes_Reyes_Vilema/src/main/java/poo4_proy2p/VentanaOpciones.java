@@ -12,13 +12,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,12 +39,18 @@ public class VentanaOpciones implements Initializable {
         Parent root = fxmLoader.load();
         App.scene = new Scene(root,600,400);
         App.stage.setScene(App.scene);
+        App.stage.setTitle("Bienvenidos");
         App.stage.show();
     }
     
     @FXML
     private Label lblBienvenida;
    
+    @FXML
+    private Button btnLocales;
+    
+    @FXML
+    private Button btnPedido;
     
     
     @Override
@@ -64,7 +73,23 @@ public class VentanaOpciones implements Initializable {
         pedidos.setDaemon(true);
         pedidos.start();
         
+        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent t){
+                
+            }
+        });
         
+        btnPedido.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent t){
+                try {
+                    BaseHelado.mostrarVentanaPedido1();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        });
         
     }
     
