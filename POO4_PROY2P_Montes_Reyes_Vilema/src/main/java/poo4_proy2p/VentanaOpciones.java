@@ -4,6 +4,9 @@
  */
 package poo4_proy2p;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,11 +72,28 @@ public class VentanaOpciones implements Initializable {
         VBox root = new VBox();
         Scene scene = new Scene(root,420,420);
         HBox h1 = new HBox();
-        h1.getChildren().addAll((new TextField ("Hola")),new TextField ("Chao")); //agregar Pedido del Usuario
-        root.getChildren().add(h1);
-        stage.setScene(scene);
-        stage.setTitle("Pedidos Generados");
-        stage.show();
+        try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
+            String linea = bf.readLine();
+            while(true){
+                if(linea==null){
+                    h1.getChildren().add(new Label(" "));
+                }else{
+                    h1.getChildren().add(new Label(linea));
+                    root.getChildren().add(h1);
+                    stage.setScene(scene);
+                    stage.setTitle("Pedidos Generados");
+                    stage.show();
+                }
+                linea = bf.readLine();
+
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encontro el archivo.");
+        } catch (IOException ex) {
+            System.out.println("Algo salio mal.");
+        }
+        
+        
     }
     
     
