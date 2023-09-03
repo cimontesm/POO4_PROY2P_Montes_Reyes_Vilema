@@ -60,7 +60,12 @@ public class Sabores {
     public void cargarcb(){
         try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
             String linea;
-            
+            while((linea=br.readLine())!=null){
+                String items = linea.replace(",", "-");
+                cbsabor1.getItems().add(items);
+                cbsabor2.getItems().add(items);
+               
+            }
             
             
         }catch(FileNotFoundException ex){
