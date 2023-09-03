@@ -30,7 +30,6 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <ToggleButton layoutX="30.0" layoutY="30.0" mnemonicParsing="false" />
                   <ImageView fx:id="imgHelado" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@helado.jpg" />
@@ -39,7 +38,6 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                   <ImageView fx:id="imgVegano" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@vegano.jpg" />
@@ -48,8 +46,21 @@
                         <Insets left="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ToggleButton mnemonicParsing="false" text="  " />
+                  <ToggleButton mnemonicParsing="false" text="  ">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="140.0" right="140.0" top="10.0" />
+                     </HBox.margin>
+                  </ToggleButton>
+                  <ToggleButton mnemonicParsing="false" text="  " />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
             <HBox fx:id="hPrecio" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -58,7 +69,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="precioh" text="2.00" textFill="#845b9e">
+                  <Label fx:id="precioh" prefHeight="19.0" prefWidth="301.0" text="    2.00" textFill="#845b9e">
                      <padding>
                         <Insets left="125.0" right="125.0" />
                      </padding>

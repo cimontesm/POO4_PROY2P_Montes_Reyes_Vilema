@@ -80,17 +80,17 @@ public class VentanaOpciones implements Initializable {
             }
         });
         
-        btnPedido.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t){
-                try {
-                    BaseHelado.mostrarVentanaPedido1();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-        });
-        
+//        btnPedido.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent t){
+//                try {
+//                    BaseHelado.mostrarVentanaPedido1();
+//                } catch (IOException ex) {
+//                    System.out.println(ex.getMessage());
+//                }
+//            }
+//        });
+//        
     }
     
     public void ventanaPedidos(){
@@ -137,5 +137,21 @@ public class VentanaOpciones implements Initializable {
         
     }
     
+    @FXML
+    public void mostrarVentanaPedido1(){
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmloader = new FXMLLoader(VentanaOpciones.class.getResource("pedido.fxml"));
+            Parent root;
+            root = fxmloader.load();
+            Scene scene = new Scene(root,600,400);
+            stage.setScene(scene);
+            stage.setTitle("ArmaTuHelado");
+            stage.show();
+        } catch (IOException ex) {
+//            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
     
 }

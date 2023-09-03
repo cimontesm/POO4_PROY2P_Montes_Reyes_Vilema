@@ -40,7 +40,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnPedido" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Haz tu pedido" textAlignment="CENTER">
+                  <Button fx:id="btnPedido" mnemonicParsing="false" onAction="#mostrarVentanaPedido1" prefHeight="25.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Haz tu pedido" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets left="30.0" />
                      </VBox.margin>
