@@ -70,8 +70,8 @@ public class Topping {
             while ((linea = br.readLine()) != null && i <= 6) {
                 String[] items = linea.split(",");
                 if (items.length >= 2) {
-                    String nombreTopping = items[0].trim();
-                    String precioTopping = items[1].trim();
+                    String nombreTopping = items[0];
+                    String precioTopping = items[1];
 
                     String checkBoxName = "cb" + i;
                     CheckBox checkBox = (CheckBox) getClass().getDeclaredField(checkBoxName).get(this);

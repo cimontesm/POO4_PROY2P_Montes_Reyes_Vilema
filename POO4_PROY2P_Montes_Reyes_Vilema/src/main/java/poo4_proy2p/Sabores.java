@@ -63,13 +63,33 @@ public class Sabores implements Initializable{
         
     }
     
+//    public void cargarcb(){
+//        try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
+//            String linea;
+//            while((linea=br.readLine())!=null){
+//                String items = linea.replace(",", "-");
+//                cbsabor1.getItems().add(items);
+//                cbsabor2.getItems().add(items);
+//               
+//            }
+//            
+//            
+//        }catch(FileNotFoundException ex){
+//            ex.printStackTrace();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+    
     public void cargarcb(){
         try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
             String linea;
             while((linea=br.readLine())!=null){
-                String items = linea.replace(",", "-");
-                cbsabor1.getItems().add(items);
-                cbsabor2.getItems().add(items);
+                String[] items = linea.split(",");
+                String nombreSabor= items[0];
+                String precioSabor= items[1];
+                cbsabor1.getItems().add(nombreSabor+" - "+precioSabor);
+                cbsabor2.getItems().add(nombreSabor+" - "+precioSabor);
                
             }
             
@@ -80,6 +100,7 @@ public class Sabores implements Initializable{
             e.printStackTrace();
         }
     }
+    
     
     static Usuario usuario;
     
