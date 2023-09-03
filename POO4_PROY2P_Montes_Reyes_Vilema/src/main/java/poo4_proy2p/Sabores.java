@@ -111,8 +111,8 @@ public class Sabores implements Initializable {
 
     static Usuario usuario;
 
-    public static void mostrarVentanaSabores(Usuario usuario) throws IOException {
-        Sabores.usuario = usuario;
+    public static void mostrarVentanaSabores() throws IOException {
+        
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
         App.scene = new Scene(root, 600, 400);
