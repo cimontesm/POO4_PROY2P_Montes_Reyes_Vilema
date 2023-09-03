@@ -113,7 +113,7 @@ public class Sabores implements Initializable {
 
     public static void mostrarVentanaSabores() throws IOException {
         
-        FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("sabores.fxml"));
+        FXMLLoader fxmLoader = new FXMLLoader(BaseHelado.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
         App.scene = new Scene(root, 600, 400);
         App.stage.setScene(App.scene);
