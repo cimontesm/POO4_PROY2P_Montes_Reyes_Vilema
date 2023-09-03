@@ -10,15 +10,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -40,30 +42,36 @@ public class VentanaOpciones implements Initializable {
     
     @FXML
     private Label lblBienvenida;
+    @FXML
+    private Button btnLocales;
+    @FXML
+    private Button btnPedido;
    
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
-        Thread pedidos = new Thread(()->{
-            while(true){
-                try{
-                    Platform.runLater(()->{
-                        ventanaPedidos();
-                    });
-                    Thread.sleep(5*60*1000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-
-            }
-                
-        });
-        pedidos.setDaemon(true);
-        pedidos.start();
-        
-        
+//        Thread pedidos = new Thread(()->{
+//            while(true){
+//                try{
+//                    Platform.runLater(()->{
+//                        ventanaPedidos();
+//                    });
+//                    Thread.sleep(5*60*1000);
+//                }catch(InterruptedException e){
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//                
+//        });
+//        pedidos.setDaemon(true);
+//        pedidos.start();
+//        
+//        
+        btnLocales.setOnMouseClicked(e->{});
+        ventanaLocales();
         
     }
     
@@ -94,7 +102,20 @@ public class VentanaOpciones implements Initializable {
         }
         
         
-    }
+    }   
     
+    public void ventanaLocales(){
+        Stage stage = new Stage();
+        StackPane root = new StackPane();
+        ImageView imgView = new ImageView();
+        Image image = new Image("logo helado 1.png");
+        imgView = new ImageView(image);
+        root.getChildren().add(imgView);
+        Scene scene = new Scene(root,400,400);
+        stage.setTitle("Ubicaciones");
+        stage.setScene(scene);
+        stage.show();
+        
+    }
     
 }
