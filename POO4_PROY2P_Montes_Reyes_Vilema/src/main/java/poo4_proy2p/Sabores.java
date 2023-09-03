@@ -8,8 +8,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +27,7 @@ import javafx.scene.layout.VBox;
  *
  * @author cmontes
  */
-public class Sabores {
+public class Sabores implements Initializable{
     String nombre;
     double precio;
     
@@ -88,5 +91,10 @@ public class Sabores {
         App.stage.setScene(App.scene);
         App.stage.setTitle("ArmaTuHelado2");
         App.stage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //TO DO
     }
 }
