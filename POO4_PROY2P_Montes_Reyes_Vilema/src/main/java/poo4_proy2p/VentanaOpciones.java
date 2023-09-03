@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +56,7 @@ public class VentanaOpciones implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        hallarLocales();
         lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
         Thread pedidos = new Thread(()->{
             while(true){
@@ -90,6 +92,7 @@ public class VentanaOpciones implements Initializable {
 //                }
 //            }
 //        });
+        
 //        
     }
     
@@ -153,5 +156,41 @@ public class VentanaOpciones implements Initializable {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    private void mostrarMapa(ActionEvent event) {
+        
+        
+        
+    }
+    
+    
+    
+    public void hallarLocales(){
+        ArrayList<Local> locales = new ArrayList<>();
+        try(BufferedReader bf = new BufferedReader(new FileReader("locales.txt"))){
+            String linea = bf.readLine();
+            while(linea!=null){
+                
+                String datosP[] = linea.trim().split(",");
+                double coordX = Double.parseDouble(datosP[0]);
+                double coordY = Double.parseDouble(datosP[1]);
+                String nombre = datosP[2];
+                String horario = datosP[3];
+                Local local = new Local(coordX,coordY,nombre,horario);
+                locales.add(local);
+                
+                linea = bf.readLine();
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+    
     
 }
