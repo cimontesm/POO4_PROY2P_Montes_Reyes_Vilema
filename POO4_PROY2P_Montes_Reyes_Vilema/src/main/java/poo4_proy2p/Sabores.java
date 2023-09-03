@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -73,5 +76,17 @@ public class Sabores {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+    
+    static Usuario usuario;
+    
+    public static void mostrarVentanaSabores(Usuario usuario) throws IOException{
+        Sabores.usuario = usuario;
+        FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("sabores.fxml"));
+        Parent root = fxmLoader.load();
+        App.scene = new Scene(root,600,400);
+        App.stage.setScene(App.scene);
+        App.stage.setTitle("ArmaTuHelado2");
+        App.stage.show();
     }
 }
