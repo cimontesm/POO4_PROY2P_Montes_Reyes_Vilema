@@ -80,20 +80,20 @@ public class BaseHelado implements Initializable {
 //                } catch (IOException ex) {
 //                    ex.printStackTrace();
 //                }
-        btnContinuar.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t){
-//                Usuario u=VentanaOpciones.usuario;
-                Usuario u = VentanaOpciones.usuario;
-                try {
-                    VentanaOpciones.mostrarVentanaOpciones(u);
-                } catch(IOException ex){
-                    System.out.println(ex.getMessage());
-                    ex.printStackTrace();
-                }
-            }
-            
-        });
+//        btnContinuar.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent t){
+////                Usuario u=VentanaOpciones.usuario;
+////                Usuario u = VentanaOpciones.usuario;
+//                try {
+//                    Sabores.mostrarVentanaSabores();
+//                } catch(IOException ex){
+//                    System.out.println(ex.getMessage());
+//                    ex.printStackTrace();
+//                }
+//            }
+//            
+//        });
         
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
@@ -140,6 +140,11 @@ public class BaseHelado implements Initializable {
     
     @FXML
     public void continuar(){
-        
+        try {
+            Sabores.mostrarVentanaSabores();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 }
