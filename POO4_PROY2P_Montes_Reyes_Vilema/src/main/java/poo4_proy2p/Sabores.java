@@ -4,6 +4,10 @@
  */
 package poo4_proy2p;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -51,5 +55,18 @@ public class Sabores {
     @FXML
     public void continuar(){
         
+    }
+    
+    public void cargarcb(){
+        try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
+            String linea;
+            
+            
+            
+        }catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
