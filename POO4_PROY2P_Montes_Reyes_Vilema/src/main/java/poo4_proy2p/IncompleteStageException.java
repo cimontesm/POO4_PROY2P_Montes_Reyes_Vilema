@@ -8,9 +8,9 @@ package poo4_proy2p;
  *
  * @author cmontes
  */
-public class IncompeteStageException extends Exception{
+public class IncompleteStageException extends Exception{
     
-    public IncompeteStageException(String n){
+    public IncompleteStageException(String n){
         super(n);
     }
     

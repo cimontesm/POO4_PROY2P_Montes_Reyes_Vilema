@@ -27,42 +27,52 @@ import javafx.scene.layout.VBox;
  *
  * @author cmontes
  */
-public class Sabores implements Initializable{
+public class Sabores implements Initializable {
+
     String nombre;
     double precio;
-    
+
     @FXML
     private Pane root;
-    
+
     @FXML
     private ImageView fondo;
-    
+
     @FXML
     private HBox hbox;
-    
+
     @FXML
     private VBox v1;
-    
+
     @FXML
     private VBox v2;
-    
+
     @FXML
     private ComboBox cbsabor1;
-    
+
     @FXML
     private ComboBox cbsabor2;
-    
+
     @FXML
     private Label lblValor;
-            
+
     @FXML
     private Button btnContinuar;
-    
+
     @FXML
-    public void continuar(){
-        
+    public void continuar() {
+        if (!cbsabor1.getSelectionModel().isEmpty() || !cbsabor2.getSelectionModel().isEmpty()) {
+
+        } else {
+            try {
+                throw new IncompleteStageException("Debes seleccionar al menos una opción para continuar.");
+            } catch (IncompleteStageException ex) {
+                ex.printStackTrace();
+            }
+
+        }
     }
-    
+
 //    public void cargarcb(){
 //        try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
 //            String linea;
@@ -80,35 +90,32 @@ public class Sabores implements Initializable{
 //            e.printStackTrace();
 //        }
 //    }
-    
-    public void cargarcb(){
-        try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
+    public void cargarcb() {
+        try ( BufferedReader br = new BufferedReader(new FileReader("sabores.txt"))) {
             String linea;
-            while((linea=br.readLine())!=null){
+            while ((linea = br.readLine()) != null) {
                 String[] items = linea.split(",");
-                String nombreSabor= items[0];
-                String precioSabor= items[1];
-                cbsabor1.getItems().add(nombreSabor+" - "+precioSabor);
-                cbsabor2.getItems().add(nombreSabor+" - "+precioSabor);
-               
+                String nombreSabor = items[0];
+                String precioSabor = items[1];
+                cbsabor1.getItems().add(nombreSabor + " - " + precioSabor);
+                cbsabor2.getItems().add(nombreSabor + " - " + precioSabor);
+
             }
-            
-            
-        }catch(FileNotFoundException ex){
+
+        } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    
+
     static Usuario usuario;
-    
-    public static void mostrarVentanaSabores(Usuario usuario) throws IOException{
+
+    public static void mostrarVentanaSabores(Usuario usuario) throws IOException {
         Sabores.usuario = usuario;
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
-        App.scene = new Scene(root,600,400);
+        App.scene = new Scene(root, 600, 400);
         App.stage.setScene(App.scene);
         App.stage.setTitle("ArmaTuHelado2");
         App.stage.show();
