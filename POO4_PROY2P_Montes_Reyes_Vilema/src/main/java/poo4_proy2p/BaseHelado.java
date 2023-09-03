@@ -7,6 +7,8 @@ package poo4_proy2p;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 public class BaseHelado {
     String nombre; 
     double precio;
+    public static Scene scene;
     
     public BaseHelado(String nombre, double precio) {
         this.nombre = nombre;
@@ -29,7 +32,12 @@ public class BaseHelado {
     
     public static void mostrarVentanaPedido1() throws IOException{
         Stage stage = new Stage();
-//        FXMLLoader fxmloader = new FXMLLoader("src/main/resources/poo4_proy2p");
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("pedido.fxml"));
+        Parent root = fxmloader.load();
+        scene = new Scene(root,600,400);
+        stage.setScene(scene);
+        stage.setTitle("ArmaTuHelado");
+        stage.show();
         
     }
     
