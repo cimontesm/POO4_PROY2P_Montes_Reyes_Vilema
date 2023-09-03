@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -21,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -50,17 +52,6 @@ public class BaseHelado implements Initializable {
         return precio;
     }
     
-//    public static void mostrarVentanaPedido1() throws IOException{
-//        Stage stage = new Stage();
-//        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("pedido.fxml"));
-//        Parent root = fxmloader.load();
-//        scene = new Scene(root,600,400);
-//        stage.setScene(scene);
-//        stage.setTitle("ArmaTuHelado");
-//        stage.show();
-//        
-//    }
-    
     public static ArrayList<BaseHelado> cargarBases(){
         ArrayList<BaseHelado> bh = new ArrayList<>();
         try(BufferedReader bf=new BufferedReader(new FileReader("bases.txt"))){
@@ -68,7 +59,6 @@ public class BaseHelado implements Initializable {
             while((linea=bf.readLine())!=null){
                 String[] datosp =linea.split(",");
                 bh.add(new BaseHelado(datosp[0],Double.parseDouble(datosp[1])));
-                
             }
 
         }catch(FileNotFoundException ex1){
@@ -77,7 +67,6 @@ public class BaseHelado implements Initializable {
         }catch(IOException ex2){
             System.out.println(ex2.getMessage());
         }
-        
         return bh;
     }
     
@@ -91,6 +80,20 @@ public class BaseHelado implements Initializable {
 //                } catch (IOException ex) {
 //                    ex.printStackTrace();
 //                }
+        btnContinuar.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent t){
+//                Usuario u=VentanaOpciones.usuario;
+                Usuario u = VentanaOpciones.usuario;
+                try {
+                    VentanaOpciones.mostrarVentanaOpciones(u);
+                } catch(IOException ex){
+                    System.out.println(ex.getMessage());
+                    ex.printStackTrace();
+                }
+            }
+            
+        });
         
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
