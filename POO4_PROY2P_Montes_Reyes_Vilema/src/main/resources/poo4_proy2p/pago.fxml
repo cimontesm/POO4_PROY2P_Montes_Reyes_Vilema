@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="fondo" fitHeight="400.0" fitWidth="725.0" layoutX="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pedidohelado2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="18.0" layoutY="35.0" text="Pago" textFill="#3e0b63">
+         <font>
+            <Font name="AR CHRISTY" size="32.0" />
+         </font>
+      </Label>
+      <HBox fx:id="hrb" layoutX="70.0" layoutY="98.0" prefHeight="22.0" prefWidth="257.0" spacing="50.0">
+         <children>
+            <RadioButton fx:id="rbtarjeta" mnemonicParsing="false" text="Tarjeta de Credito">
+               <toggleGroup>
+                  <ToggleGroup fx:id="modopago" />
+               </toggleGroup>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="rbefectivo" mnemonicParsing="false" text="Efectivo" toggleGroup="$modopago" />
+         </children>
+      </HBox>
+      <HBox fx:id="hdatos" layoutX="47.0" layoutY="176.0" prefHeight="163.0" prefWidth="233.0" spacing="15.0" style="-fx-background-color: pink;">
+         <children>
+            <VBox fx:id="vlabels" prefHeight="200.0" prefWidth="100.0" spacing="24.0">
+               <children>
+                  <Label text="Valor a pagar:" />
+                  <Label text="Adicional tarjeta:" />
+                  <Label text="IVA:" />
+                  <Label text="Total a pagar:" />
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox fx:id="vtf" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="tfvalor" />
+                  <TextField fx:id="tfadt" />
+                  <TextField fx:id="tfiva" />
+                  <TextField fx:id="tftot" />
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="btnConfirmar" layoutX="403.0" layoutY="359.0" mnemonicParsing="false" onAction="#confirmar" styleClass="color-btns" stylesheets="@style/styles.css" text="Confirmar" textFill="#845b9e">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCancelar" layoutX="497.0" layoutY="360.0" mnemonicParsing="false" onAction="#cancelar" styleClass="color-btns" stylesheets="@style/styles.css" text="Cancelar" textFill="#845b9e">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="47.0" layoutY="149.0" text="Detalle de pago" textFill="#3e0b63">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

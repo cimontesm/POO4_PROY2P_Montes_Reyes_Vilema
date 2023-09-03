@@ -1,3 +1,6 @@
 Grageas de chocolate,0.50
 Grageas de caramelo,0.50
 Sirope de manjar,0.80
+Sirope de Fresa,0.90
+Sirope de Chocolate,0.80
+Galleta Oreo,0.40

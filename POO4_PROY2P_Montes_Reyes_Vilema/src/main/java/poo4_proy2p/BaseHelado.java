@@ -4,7 +4,10 @@
  */
 package poo4_proy2p;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -15,9 +18,34 @@ import javafx.scene.layout.VBox;
  *
  * @author cmontes
  */
-public class BaseHelado {
+public class BaseHelado implements Initializable {
     String nombre; 
     double precio;
+    
+    public BaseHelado(){
+        
+    }
+    
+    public BaseHelado(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+    
+//    public static void mostrarVentanaPedido1() throws IOException{
+//        Stage stage = new Stage();
+//        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("pedido.fxml"));
+//        Parent root = fxmloader.load();
+//        scene = new Scene(root,600,400);
+//        stage.setScene(scene);
+//        stage.setTitle("ArmaTuHelado");
+//        stage.show();
+//        
+//    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //TO DO
+    }
     
     @FXML
     private Button btnContinuar;
