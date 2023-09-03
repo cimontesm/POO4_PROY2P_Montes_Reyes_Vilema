@@ -4,6 +4,7 @@
  */
 package poo4_proy2p;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -44,7 +45,14 @@ public class BaseHelado implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TO DO
+        //PARA CAMBIAR DE ESCENA
+//        Usuario u=null;
+//        Sabores.usuario = u;
+//        try {
+//                    VentanaOpciones.mostrarVentanaOpciones(u);
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
     }
     
     @FXML
