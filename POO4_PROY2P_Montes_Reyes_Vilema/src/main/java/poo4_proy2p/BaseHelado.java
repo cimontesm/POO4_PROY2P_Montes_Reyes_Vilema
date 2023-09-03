@@ -22,7 +22,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -67,8 +66,8 @@ public class BaseHelado implements Initializable {
         try(BufferedReader bf=new BufferedReader(new FileReader("bases.txt"))){
             String linea;
             while((linea=bf.readLine())!=null){
-                String[] datosp =linea.split(";");
-                bh.add(new BaseHelado(datosp[0],Integer.parseInt(datosp[1])));
+                String[] datosp =linea.split(",");
+                bh.add(new BaseHelado(datosp[0],Double.parseDouble(datosp[1])));
                 
             }
 
@@ -97,7 +96,7 @@ public class BaseHelado implements Initializable {
         ImageView imgView = null;
         
         for (BaseHelado base : bases){
-            try (FileInputStream input = new FileInputStream("src/main/resources/poo4_proy2p/")){
+            try (FileInputStream input = new FileInputStream("src/main/resources/poo4_proy2p/"+base.getNombre()+".jpg")){
                 Image image = new Image(input,30,30,false,false);
                 imgView = new ImageView(image);
                 
