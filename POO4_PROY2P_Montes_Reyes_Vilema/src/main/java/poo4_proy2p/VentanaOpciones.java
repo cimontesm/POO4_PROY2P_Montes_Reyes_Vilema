@@ -12,6 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,6 +35,7 @@ import javafx.stage.Stage;
  */
 public class VentanaOpciones implements Initializable {
     public static Usuario usuario = null;
+    public static ArrayList<Pedido> pedidos = new ArrayList<>();
     
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
         VentanaOpciones.usuario = usuario;
@@ -57,13 +61,18 @@ public class VentanaOpciones implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         hallarLocales();
         lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
+//        crearVentanaPedidos();
+        Stage stage = new Stage();
+        ListView root = new ListView();
+        Scene scene = new Scene(root,420,420);
+//        HBox h1 = new HBox();
         Thread pedidos = new Thread(()->{
             while(true){
                 try{
                     Platform.runLater(()->{
-                        ventanaPedidos();
+                        cargarPedidos(stage,root,scene);
                     });
-                    Thread.sleep(5*60*1000);
+                    Thread.sleep(5000);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
@@ -74,68 +83,41 @@ public class VentanaOpciones implements Initializable {
         pedidos.setDaemon(true);
         pedidos.start();
         
-        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t){
-                
-            }
-        });
+        stage.setScene(scene);
+        stage.setTitle("Pedidos Generados");
+        stage.show();
         
-//        btnPedido.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
 //            @Override
 //            public void handle(MouseEvent t){
-//                try {
-//                    BaseHelado.mostrarVentanaPedido1();
-//                } catch (IOException ex) {
-//                    System.out.println(ex.getMessage());
-//                }
+//                
 //            }
 //        });
         
-//        
     }
     
-    public void ventanaPedidos(){
-        Stage stage = new Stage();
-        VBox root = new VBox();
-        Scene scene = new Scene(root,420,420);
-        HBox h1 = new HBox();
+    public void cargarPedidos(Stage stage, ListView root, Scene scene){
+        root.getItems().clear();
         try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
             String linea;
-            ArrayList<String> pedidos = new ArrayList<>();
-            if ((linea=bf.readLine()) == null){
-                h1.getChildren().add(new Label(" "));
-            } else {
-                while((linea=bf.readLine())!= null){
-//                if(linea==null){
-//                    h1.getChildren().add(new Label(" "));
-//                }else{
-                    pedidos.add(linea);
-//                    h1.getChildren().add(new Label(linea));
-//                    root.getChildren().add(h1);
-//                    stage.setScene(scene);
-//                    stage.setTitle("Pedidos Generados");
-//                    stage.show();
-//                }
-//                linea = bf.readLine();
+            pedidos.clear();
+            while((linea=bf.readLine())!= null){
+                String[] datos = linea.trim().split(",");
+                Pedido p = new Pedido(datos[0],Double.parseDouble(datos[2]),datos[1]);
+                pedidos.add(p);
 
-                }
             }
-            for (String pedido : pedidos){
-                h1.getChildren().add(new Label(pedido));
-                
-            }
-            root.getChildren().add(h1);
             
-            stage.setScene(scene);
-            stage.setTitle("Pedidos Generados");
-            stage.show();
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontro el archivo.");
         } catch (IOException ex) {
             System.out.println("Algo salio mal.");
         }
         
+        ObservableList<Pedido> items = FXCollections.observableArrayList(pedidos);
+        root.setItems(items);
+        root.setDisable(false);
+            
         
     }
     

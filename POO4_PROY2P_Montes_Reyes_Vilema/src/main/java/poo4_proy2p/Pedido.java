@@ -27,6 +27,12 @@ public class Pedido {
     
     @FXML
     private Pane root;
+
+    public Pedido(String nombre, double total, String id) {
+        this.nombre = nombre;
+        this.total = total;
+        this.id = id;
+    }
     
     @FXML
     private ImageView fondo;
@@ -59,6 +65,11 @@ public class Pedido {
     @FXML
     public void eliminar(){
         
+    }
+    
+    @Override
+    public String toString(){
+        return nombre+", "+id;
     }
     
     public void mostrarVentanaPedido() throws IOException{
