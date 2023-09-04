@@ -240,30 +240,42 @@ public class VentanaOpciones implements Initializable {
     }
     
     public void mostrarInfo(String nombre, String horario){
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Informacion de Local");
-        alert.setHeaderText(nombre);
-        //alert.setContentText("Horario: "+horario);
+        Stage stage = new Stage();
+        VBox root = new VBox();
+        Scene scene = new Scene(root,300,150);
+        Label lnombre = new Label(nombre);
+        Label lhorario = new Label("Horario: "+horario);
+        Label lsegundos = new Label("Cerrando en 5 segundos...");
+        
+        root.getChildren().addAll(lnombre,lhorario,lsegundos);
+        
+        stage.setScene(scene);
+        stage.setTitle("Informacion de local");
+        stage.show();
+        
         
         Thread duracion = new Thread(()->{
             int tiempo = 5; 
             while(tiempo>0){
-                String mensaje = "Cerrando en "+tiempo+" segundos.";
-                Platform.runLater(()->{
-                    alert.setContentText("Horario: "+horario+"\n"+mensaje);
-
-                });
+                
                 try{
                     Thread.sleep(1000);
                 }catch(InterruptedException e){
                     System.out.println("Algo salio mal");
                 }
                 tiempo --;
+                
+                final int segundosF = tiempo;
+                
+                Platform.runLater(()->{
+                    lsegundos.setText("Cerrando en "+segundosF+" restantes");
+
+                });
                
             }
             Platform.runLater(()->{
                 
-                alert.close();
+                stage.close();
         
             });
             
@@ -272,7 +284,6 @@ public class VentanaOpciones implements Initializable {
         
         duracion.setDaemon(true);
         duracion.start();
-        alert.showAndWait();
         
         
     }
