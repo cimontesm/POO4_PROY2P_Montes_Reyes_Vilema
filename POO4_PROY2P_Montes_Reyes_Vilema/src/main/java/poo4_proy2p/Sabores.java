@@ -48,10 +48,10 @@ public class Sabores implements Initializable {
     private VBox v2;
 
     @FXML
-    private ComboBox cbsabor1;
+    private ComboBox<String> cbsabor1;
 
     @FXML
-    private ComboBox cbsabor2;
+    private ComboBox<String> cbsabor2;
 
     @FXML
     private Label lblValor;
@@ -94,7 +94,7 @@ public class Sabores implements Initializable {
         try ( BufferedReader br = new BufferedReader(new FileReader("sabores.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] items = linea.split(",");
+                String[] items = linea.strip().split(",");
                 String nombreSabor = items[0];
                 String precioSabor = items[1];
                 cbsabor1.getItems().add(nombreSabor + " - " + precioSabor);
