@@ -41,5 +41,6 @@
          </font>
       </Button>
       <ListView fx:id="lv" layoutX="61.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+      <Label layoutX="276.0" layoutY="171.0" prefHeight="17.0" prefWidth="261.0" style="-fx-background-color: turquoise;" text="(Para eliminar escoja un sabor y de click encima)" />
    </children>
 </Pane>
