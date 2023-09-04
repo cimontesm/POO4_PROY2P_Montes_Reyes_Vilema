@@ -4,12 +4,16 @@
  */
 package poo4_proy2p;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.TextFlow;
 
 /**
  *
@@ -28,7 +32,7 @@ public class Pedido {
     private ImageView fondo;
     
     @FXML
-    private TextFlow textflow;
+    private ListView lv;
     
     @FXML
     private Label lblValor;
@@ -55,5 +59,14 @@ public class Pedido {
     @FXML
     public void eliminar(){
         
+    }
+    
+    public static void mostrarVentanaPedido() throws IOException{
+        FXMLLoader fxmLoader = new FXMLLoader(Topping.class.getResource("pedidogen.fxml"));
+        Parent root = fxmLoader.load();
+        BaseHelado.scene = new Scene(root, 600, 400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado4");
+        BaseHelado.stage.show();
     }
 }

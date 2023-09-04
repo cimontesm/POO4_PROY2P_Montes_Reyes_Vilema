@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="rootH" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.BaseHelado">
@@ -18,74 +15,6 @@
             <Image url="@pedidohelado2.jpg" />
          </image>
       </ImageView>
-      <VBox fx:id="vContenido" alignment="TOP_CENTER" layoutX="67.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <HBox fx:id="hImag" alignment="CENTER" prefHeight="214.0" prefWidth="570.0">
-               <children>
-                  <ImageView fx:id="imgYogurt" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@yogurt.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="imgHelado" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@helado.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="imgVegano" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@vegano.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ToggleButton mnemonicParsing="false" text="  " />
-                  <ToggleButton mnemonicParsing="false" text="  ">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="140.0" right="140.0" top="10.0" />
-                     </HBox.margin>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" text="  " />
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-            <HBox fx:id="hPrecio" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="precioy" text="1.50" textFill="#845b9e">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="precioh" prefHeight="19.0" prefWidth="301.0" text="    2.00" textFill="#845b9e">
-                     <padding>
-                        <Insets left="125.0" right="125.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="preciov" text="2.50" textFill="#845b9e">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
       <Label layoutX="19.0" layoutY="35.0" text="Paso 1: Escoge tu base:" textFill="#3e0b63">
          <font>
             <Font name="AR CHRISTY" size="32.0" />
@@ -101,5 +30,11 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="lblmensaje" layoutX="293.0" layoutY="345.0" textAlignment="CENTER" textFill="#6f029a">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <FlowPane fx:id="seccionBases" layoutX="48.0" layoutY="100.0" prefHeight="206.0" prefWidth="504.0" />
    </children>
 </Pane>
