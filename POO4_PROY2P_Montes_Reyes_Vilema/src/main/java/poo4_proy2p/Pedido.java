@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -72,7 +73,7 @@ public class Pedido {
         return nombre+", "+id;
     }
     
-    public void mostrarVentanaPedido() throws IOException{
+    public static void mostrarVentanaPedido() throws IOException{
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("pedidogen.fxml"));
         Parent root = fxmLoader.load();
         App.scene = new Scene(root,600,400);
