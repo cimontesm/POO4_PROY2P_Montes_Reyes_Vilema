@@ -48,10 +48,10 @@ public class Sabores implements Initializable {
     private VBox v2;
 
     @FXML
-    private ComboBox<String> cbsabor1;
+    private ComboBox cbsabor1;
 
     @FXML
-    private ComboBox<String> cbsabor2;
+    private ComboBox cbsabor2;
 
     @FXML
     private Label lblValor;
@@ -94,7 +94,7 @@ public class Sabores implements Initializable {
         try ( BufferedReader br = new BufferedReader(new FileReader("sabores.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] items = linea.strip().split(",");
+                String[] items = linea.split(",");
                 String nombreSabor = items[0];
                 String precioSabor = items[1];
                 cbsabor1.getItems().add(nombreSabor + " - " + precioSabor);
@@ -113,12 +113,12 @@ public class Sabores implements Initializable {
 
     public static void mostrarVentanaSabores() throws IOException {
         
-        FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("sabores.fxml"));
+        FXMLLoader fxmLoader = new FXMLLoader(Sabores.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
-        App.scene = new Scene(root, 600, 400);
-        App.stage.setScene(App.scene);
-        App.stage.setTitle("ArmaTuHelado2");
-        App.stage.show();
+        BaseHelado.scene = new Scene(root, 600, 400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado2");
+        BaseHelado.stage.show();
     }
 
     @Override

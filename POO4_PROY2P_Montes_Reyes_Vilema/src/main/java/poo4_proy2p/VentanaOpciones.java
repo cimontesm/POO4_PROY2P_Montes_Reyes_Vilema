@@ -142,14 +142,14 @@ public class VentanaOpciones implements Initializable {
     @FXML
     public void mostrarVentanaPedido1(){
         try {
-            Stage stage = new Stage();
+            BaseHelado.stage = new Stage();
             FXMLLoader fxmloader = new FXMLLoader(VentanaOpciones.class.getResource("pedido.fxml"));
             Parent root;
             root = fxmloader.load();
-            Scene scene = new Scene(root,600,400);
-            stage.setScene(scene);
-            stage.setTitle("ArmaTuHelado");
-            stage.show();
+            BaseHelado.scene = new Scene(root,600,400);
+            BaseHelado.stage.setScene(BaseHelado.scene);
+            BaseHelado.stage.setTitle("ArmaTuHelado");
+            BaseHelado.stage.show();
         } catch (IOException ex) {
 //            System.out.println(ex.getMessage());
             ex.printStackTrace();
