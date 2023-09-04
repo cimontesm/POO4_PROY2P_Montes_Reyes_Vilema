@@ -20,11 +20,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -77,10 +80,12 @@ public class BaseHelado implements Initializable {
         
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
+        ArrayList<ToggleButton> tgbuttons = new ArrayList<>();
+        ToggleGroup tg = new ToggleGroup();
         
         for (BaseHelado base : bases){
             try (FileInputStream input = new FileInputStream("src/main/resources/poo4_proy2p/"+base.getNombre()+".jpg")){
-                Image image = new Image(input,30,30,false,false);
+                Image image = new Image(input,50,50,false,false);
                 imgView = new ImageView(image);
                 
             } catch (IOException e){
@@ -88,9 +93,10 @@ public class BaseHelado implements Initializable {
             }
 //            Label l1 = new Label(base.getNombre());
             Label l2 = new Label(String.valueOf(base.getPrecio()));
+            l2.setStyle("-fx-text-fill: purple; -fx-font-weight: bold; -fx-font-size: 15px;");
             
-            ToggleButton tb = new ToggleButton(base.getNombre());
-            tb.setGraphic(imgView);
+            ToggleButton tb = crearToggleButton(base.getNombre(),imgView,tg);
+            tgbuttons.add(tb);
             
             VBox VBase = new VBox();
             VBase.getChildren().addAll(tb,l2);
@@ -101,6 +107,31 @@ public class BaseHelado implements Initializable {
             
         }
         
+    }
+    
+    public ToggleButton crearToggleButton(String texto, ImageView imgView, ToggleGroup tg){
+        ToggleButton tb = new ToggleButton(texto);
+        tb.setToggleGroup(tg);
+        
+        DropShadow brillo = new DropShadow();
+        brillo.setColor(Color.BLUE);
+        brillo.setWidth(40);
+        brillo.setHeight(40);
+        
+        tb.setStyle("-fx-text-fill: purple; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-color: #E0FFFF; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 3, 3);");
+        tb.setGraphic(imgView);
+        tb.setMinWidth(130);
+        tb.setMinHeight(100);
+        
+        tb.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
+            if (isSelected){
+                tb.setEffect(brillo);
+            } else {
+                tb.setEffect(null);
+            }
+        });
+        
+        return tb;
     }
     
     @FXML

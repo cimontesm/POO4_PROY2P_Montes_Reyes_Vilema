@@ -30,11 +30,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label fx:id="lblmensaje" layoutX="293.0" layoutY="345.0" textAlignment="CENTER" textFill="#6f029a">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
       <FlowPane fx:id="seccionBases" layoutX="48.0" layoutY="100.0" prefHeight="206.0" prefWidth="504.0" />
    </children>
 </Pane>
