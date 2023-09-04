@@ -74,28 +74,6 @@ public class BaseHelado implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //PARA CAMBIAR DE ESCENA
-//        Usuario u=null;
-//        Sabores.usuario = u;
-//        try {
-//                    VentanaOpciones.mostrarVentanaOpciones(u);
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//        btnContinuar.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent t){
-////                Usuario u=VentanaOpciones.usuario;
-////                Usuario u = VentanaOpciones.usuario;
-//                try {
-//                    Sabores.mostrarVentanaSabores();
-//                } catch(IOException ex){
-//                    System.out.println(ex.getMessage());
-//                    ex.printStackTrace();
-//                }
-//            }
-//            
-//        });
         
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
