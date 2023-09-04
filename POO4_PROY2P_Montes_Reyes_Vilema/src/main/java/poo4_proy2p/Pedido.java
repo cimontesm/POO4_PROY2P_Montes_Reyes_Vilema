@@ -15,22 +15,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author cmontes
  */
 public class Pedido {
-    
+    public static Scene scene;
+    public static Stage stage;
     String nombre;
     double total;
     String id;
-    
-    @FXML
-    private Pane root;
-
+  
     public Pedido(){
-        
+        stage = new Stage();
     }
     
     public Pedido(String nombre, double total, String id) {
@@ -38,6 +37,9 @@ public class Pedido {
         this.total = total;
         this.id = id;
     }
+    
+    @FXML
+    private Pane root;
     
     @FXML
     private ImageView fondo;
@@ -63,12 +65,24 @@ public class Pedido {
     }
     
     @FXML
-    public void cancelar(){
+    public void cancelar() throws IOException{
+        FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("cancelarcompra.fxml"));
+        Parent root = fxmLoader.load();
+        Pedido.scene = new Scene(root, 400, 200);
+        Pedido.stage.setScene(Pedido.scene);
+        Pedido.stage.setTitle("Mensaje");
+        Pedido.stage.show();
         
     }
     
     @FXML
-    public void eliminar(){
+    public void eliminar() throws IOException{
+        FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("eliminarsabor.fxml"));
+        Parent root = fxmLoader.load();
+        Pedido.scene = new Scene(root, 400, 200);
+        Pedido.stage.setScene(Pedido.scene);
+        Pedido.stage.setTitle("Mensaje");
+        Pedido.stage.show();
         
     }
     

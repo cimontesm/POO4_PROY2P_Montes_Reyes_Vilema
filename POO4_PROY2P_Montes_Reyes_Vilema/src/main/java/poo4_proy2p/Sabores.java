@@ -60,20 +60,21 @@ public class Sabores implements Initializable {
     private Button btnContinuar;
 
     @FXML
-    public void continuar() throws IOException {
-        if (!cbsabor1.getSelectionModel().isEmpty() || !cbsabor2.getSelectionModel().isEmpty()) {
-            Topping.cargarVentanaTopping();
+    public void continuar() {
+
+        if (cbsabor1.getSelectionModel().isEmpty() && cbsabor2.getSelectionModel().isEmpty()) {
+            try {
+                throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
+            } catch (IncompleteStageException i) {
+                i.printStackTrace();
+            }
+
         } else {
             try {
-                throw new IncompleteStageException("Debes seleccionar al menos una opción para continuar.");
-
-            } catch (IncompleteStageException ex) {
+                Topping.cargarVentanaTopping();
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            Label lb = new Label("Debes seleccionar al menos una opción para continuar.");
-            lb.setStyle("-fx-text-fill: red");
-            VBox v = new VBox(lb);
-            root.getChildren().add(v);
         }
     }
 
