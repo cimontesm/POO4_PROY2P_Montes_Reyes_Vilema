@@ -29,6 +29,10 @@ public class Pedido {
     @FXML
     private Pane root;
 
+    public Pedido(){
+        
+    }
+    
     public Pedido(String nombre, double total, String id) {
         this.nombre = nombre;
         this.total = total;
@@ -70,15 +74,15 @@ public class Pedido {
     
     @Override
     public String toString(){
-        return nombre+", "+id;
+        return nombre+","+id;
     }
     
     public static void mostrarVentanaPedido() throws IOException{
-        FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("pedidogen.fxml"));
+        FXMLLoader fxmLoader = new FXMLLoader(Topping.class.getResource("pedidogen.fxml"));
         Parent root = fxmLoader.load();
-        App.scene = new Scene(root,600,400);
-        App.stage.setScene(App.scene);
-        App.stage.setTitle("ArmaTuHelado2");
-        App.stage.show();
+        BaseHelado.scene = new Scene(root,600,400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado4");
+        BaseHelado.stage.show();
     }
 }
