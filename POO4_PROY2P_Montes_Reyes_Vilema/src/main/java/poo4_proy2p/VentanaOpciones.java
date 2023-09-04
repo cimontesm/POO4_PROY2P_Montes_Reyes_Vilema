@@ -20,10 +20,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -240,30 +239,44 @@ public class VentanaOpciones implements Initializable {
     }
     
     public void mostrarInfo(String nombre, String horario){
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Informacion de Local");
-        alert.setHeaderText(nombre);
-        //alert.setContentText("Horario: "+horario);
+        Stage stage = new Stage();
+        VBox root = new VBox();
+        Scene scene = new Scene(root,300,150);
+        Label lnombre = new Label(nombre);
+        lnombre.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+        Label lhorario = new Label("Horario: "+horario);
+        Label lsegundos = new Label("Cerrando en 5 segundos...");
+        
+        root.getChildren().addAll(lnombre,lhorario,lsegundos);
+        root.setPadding(new Insets(10));
+        
+        stage.setScene(scene);
+        stage.setTitle("Informacion de local");
+        stage.show();
+        
         
         Thread duracion = new Thread(()->{
             int tiempo = 5; 
             while(tiempo>0){
-                String mensaje = "Cerrando en "+tiempo+" segundos.";
-                Platform.runLater(()->{
-                    alert.setContentText("Horario: "+horario+"\n"+mensaje);
-
-                });
+                
                 try{
                     Thread.sleep(1000);
                 }catch(InterruptedException e){
                     System.out.println("Algo salio mal");
                 }
                 tiempo --;
+                
+                final int segundosF = tiempo;
+                
+                Platform.runLater(()->{
+                    lsegundos.setText("Cerrando en "+segundosF+" restantes");
+
+                });
                
             }
             Platform.runLater(()->{
                 
-                alert.close();
+                stage.close();
         
             });
             
@@ -272,7 +285,6 @@ public class VentanaOpciones implements Initializable {
         
         duracion.setDaemon(true);
         duracion.start();
-        alert.showAndWait();
         
         
     }
