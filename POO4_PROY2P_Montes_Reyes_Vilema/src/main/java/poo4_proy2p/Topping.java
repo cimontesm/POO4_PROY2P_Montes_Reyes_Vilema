@@ -65,8 +65,13 @@ public class Topping implements Initializable {
     private Button btnContinuar;
 
     @FXML
-    public void continuar() {
-
+    public void continuar(){
+        try {
+            Pedido.mostrarVentanaPedido();
+        } catch(IOException ex){
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 
     public void cargarTopping() {
