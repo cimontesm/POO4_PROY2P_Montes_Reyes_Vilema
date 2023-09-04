@@ -70,7 +70,6 @@ public class Topping implements Initializable {
         try {
             Pedido.mostrarVentanaPedido();
         } catch(IOException ex){
-            System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
     }
