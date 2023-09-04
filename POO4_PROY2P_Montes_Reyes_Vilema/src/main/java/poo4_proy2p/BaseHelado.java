@@ -74,6 +74,7 @@ public class BaseHelado implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
         

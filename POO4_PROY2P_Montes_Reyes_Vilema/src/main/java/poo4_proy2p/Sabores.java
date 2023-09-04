@@ -66,10 +66,14 @@ public class Sabores implements Initializable {
         } else {
             try {
                 throw new IncompleteStageException("Debes seleccionar al menos una opción para continuar.");
+
             } catch (IncompleteStageException ex) {
                 ex.printStackTrace();
             }
-
+//            Label lb = new Label("Debes seleccionar al menos una opción para continuar.");
+//            lb.setStyle("-fx-text-fill: red");
+//            VBox v = new VBox(lb);
+//            root.getChildren().add(v);
         }
     }
 
@@ -95,7 +99,7 @@ public class Sabores implements Initializable {
     static Usuario usuario;
 
     public static void mostrarVentanaSabores() throws IOException {
-        
+
         FXMLLoader fxmLoader = new FXMLLoader(Sabores.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
         BaseHelado.scene = new Scene(root, 600, 400);
