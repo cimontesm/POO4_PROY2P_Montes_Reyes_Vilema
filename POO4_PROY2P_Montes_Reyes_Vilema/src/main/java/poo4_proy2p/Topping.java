@@ -8,7 +8,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -20,7 +26,7 @@ import javafx.scene.layout.VBox;
  *
  * @author cmontes
  */
-public class Topping {
+public class Topping implements Initializable {
 
     String nombre;
     double precio;
@@ -88,6 +94,20 @@ public class Topping {
             e.printStackTrace();
         }
 
+    }
+    
+    public static void cargarVentanaTopping() throws IOException{
+        FXMLLoader fxmLoader = new FXMLLoader(Sabores.class.getResource("toppings.fxml"));
+        Parent root = fxmLoader.load();
+        BaseHelado.scene = new Scene(root, 600, 400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado3");
+        BaseHelado.stage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        cargarTopping();
     }
 
 }

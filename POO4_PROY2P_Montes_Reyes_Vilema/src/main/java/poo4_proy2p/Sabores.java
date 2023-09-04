@@ -48,10 +48,10 @@ public class Sabores implements Initializable {
     private VBox v2;
 
     @FXML
-    private ComboBox cbsabor1;
+    private ComboBox<String> cbsabor1;
 
     @FXML
-    private ComboBox cbsabor2;
+    private ComboBox<String> cbsabor2;
 
     @FXML
     private Label lblValor;
@@ -60,9 +60,9 @@ public class Sabores implements Initializable {
     private Button btnContinuar;
 
     @FXML
-    public void continuar() {
+    public void continuar() throws IOException {
         if (!cbsabor1.getSelectionModel().isEmpty() || !cbsabor2.getSelectionModel().isEmpty()) {
-
+            Topping.cargarVentanaTopping();
         } else {
             try {
                 throw new IncompleteStageException("Debes seleccionar al menos una opción para continuar.");
@@ -73,23 +73,6 @@ public class Sabores implements Initializable {
         }
     }
 
-//    public void cargarcb(){
-//        try(BufferedReader br = new BufferedReader(new FileReader("sabores.txt")) ){
-//            String linea;
-//            while((linea=br.readLine())!=null){
-//                String items = linea.replace(",", "-");
-//                cbsabor1.getItems().add(items);
-//                cbsabor2.getItems().add(items);
-//               
-//            }
-//            
-//            
-//        }catch(FileNotFoundException ex){
-//            ex.printStackTrace();
-//        }catch(IOException e){
-//            e.printStackTrace();
-//        }
-//    }
     public void cargarcb() {
         try ( BufferedReader br = new BufferedReader(new FileReader("sabores.txt"))) {
             String linea;
@@ -123,6 +106,6 @@ public class Sabores implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TO DO
+        cargarcb();
     }
 }
