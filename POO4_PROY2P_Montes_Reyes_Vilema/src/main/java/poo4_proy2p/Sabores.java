@@ -70,10 +70,10 @@ public class Sabores implements Initializable {
             } catch (IncompleteStageException ex) {
                 ex.printStackTrace();
             }
-//            Label lb = new Label("Debes seleccionar al menos una opción para continuar.");
-//            lb.setStyle("-fx-text-fill: red");
-//            VBox v = new VBox(lb);
-//            root.getChildren().add(v);
+            Label lb = new Label("Debes seleccionar al menos una opción para continuar.");
+            lb.setStyle("-fx-text-fill: red");
+            VBox v = new VBox(lb);
+            root.getChildren().add(v);
         }
     }
 
