@@ -207,7 +207,7 @@ public class BaseHelado implements Initializable {
                 Sabores.mostrarVentanaSabores();
             } catch(IOException ex2){
                 System.out.println(ex2.getMessage());
-//                ex2.printStackTrace();
+                ex2.printStackTrace();
             }
             
         }

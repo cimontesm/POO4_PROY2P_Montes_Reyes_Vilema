@@ -6,8 +6,11 @@
 package poo4_proy2p;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author cmontes
  */
-public class Pedido {
+public class Pedido implements Initializable {
     public static Scene scene;
     public static Stage stage;
     String nombre;
@@ -91,6 +94,12 @@ public class Pedido {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        VentanaOpciones.cargarValorAPagar(lblValor);
+        
     }
     
     @FXML

@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+//import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -289,10 +290,14 @@ public class VentanaOpciones implements Initializable {
     
     public static void cargarValorAPagar(Label lblValor){
         double suma = 0.0;
+//        DecimalFormat df = new DecimalFormat("#.##");
         
         for (Double valor : VentanaOpciones.valoresAPagar){
             suma += valor;
         }
+//        String numFormat = df.format(suma);
+        
+//        lblValor.setText("Valor a pagar: "+Double.parseDouble(numFormat));
         lblValor.setText("Valor a pagar: "+suma);
         
     }
