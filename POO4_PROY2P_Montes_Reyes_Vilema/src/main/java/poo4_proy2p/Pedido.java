@@ -86,7 +86,11 @@ public class Pedido {
     
     @FXML
     public void confirmar(){
-        
+        try {
+            Pago.mostrarVentanaPago();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
     
     @FXML
