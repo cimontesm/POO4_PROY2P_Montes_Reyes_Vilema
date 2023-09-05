@@ -143,7 +143,7 @@ public class VentanaOpciones implements Initializable {
         Thread hilo = new Thread(()->{
             for(Local local:locales){
                 Platform.runLater(()->{
-                    try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))){
+                    try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/pinH.png"))){
                         Image image = new Image(input);
                         
                         ImageView punto = new ImageView(image);
