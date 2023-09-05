@@ -113,6 +113,7 @@ public class Pago implements Pagable, Initializable {
     }
 
     public void mostrarVentanaTarjeta() throws IOException {
+        FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
         HBox h = new HBox();
 
         VBox vlab = new VBox();
@@ -133,11 +134,16 @@ public class Pago implements Pagable, Initializable {
 
         h.getChildren().addAll(l, vlab, vdatos);
         root.getChildren().add(h);
+        
+        BaseHelado.scene = new Scene(root, 600, 400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado6");
+        BaseHelado.stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //modoPago();
+        modoPago();
     }
 
 }
