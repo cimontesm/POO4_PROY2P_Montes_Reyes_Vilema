@@ -114,12 +114,7 @@ public class Topping implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarTopping();
         
-        double suma = 0.0;
-        
-        for (Double valor : VentanaOpciones.valoresAPagar){
-            suma += valor;
-        }
-        lblValor.setText("Valor a pagar: "+suma);
+        VentanaOpciones.cargarValorAPagar(lblValor);
         
     }
     

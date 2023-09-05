@@ -287,4 +287,14 @@ public class VentanaOpciones implements Initializable {
         stage.show();
     }
     
+    public static void cargarValorAPagar(Label lblValor){
+        double suma = 0.0;
+        
+        for (Double valor : VentanaOpciones.valoresAPagar){
+            suma += valor;
+        }
+        lblValor.setText("Valor a pagar: "+suma);
+        
+    }
+    
 }
