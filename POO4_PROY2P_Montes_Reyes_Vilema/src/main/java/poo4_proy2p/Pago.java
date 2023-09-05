@@ -70,6 +70,11 @@ public class Pago implements Pagable{
     public void cancelar(){
         
     }
+
+    @Override
+    public void generarTransaccion() {
+        //TO DO
+    }
     
     
 }

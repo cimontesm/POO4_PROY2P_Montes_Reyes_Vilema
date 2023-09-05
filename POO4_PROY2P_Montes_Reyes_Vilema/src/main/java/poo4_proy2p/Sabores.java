@@ -60,16 +60,21 @@ public class Sabores implements Initializable {
     private Button btnContinuar;
 
     @FXML
-    public void continuar() throws IOException {
-        if (!cbsabor1.getSelectionModel().isEmpty() || !cbsabor2.getSelectionModel().isEmpty()) {
-            Topping.cargarVentanaTopping();
-        } else {
+    public void continuar() {
+
+        if (cbsabor1.getSelectionModel().isEmpty() && cbsabor2.getSelectionModel().isEmpty()) {
             try {
-                throw new IncompleteStageException("Debes seleccionar al menos una opción para continuar.");
-            } catch (IncompleteStageException ex) {
-                ex.printStackTrace();
+                throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
+            } catch (IncompleteStageException i) {
+                i.printStackTrace();
             }
 
+        } else {
+            try {
+                Topping.cargarVentanaTopping();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -95,7 +100,7 @@ public class Sabores implements Initializable {
     static Usuario usuario;
 
     public static void mostrarVentanaSabores() throws IOException {
-        
+
         FXMLLoader fxmLoader = new FXMLLoader(Sabores.class.getResource("sabores.fxml"));
         Parent root = fxmLoader.load();
         BaseHelado.scene = new Scene(root, 600, 400);

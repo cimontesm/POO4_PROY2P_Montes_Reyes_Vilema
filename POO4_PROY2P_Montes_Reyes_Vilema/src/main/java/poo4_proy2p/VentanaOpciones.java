@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +42,7 @@ import javafx.stage.Stage;
  */
 public class VentanaOpciones implements Initializable {
     public static Usuario usuario = null;
+    public static ArrayList<Pedido> pedidos = new ArrayList<>();
     
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
         VentanaOpciones.usuario = usuario;
@@ -59,73 +63,81 @@ public class VentanaOpciones implements Initializable {
     @FXML
     private Button btnPedido;
     
-    private VBox root;
-    private String ultimoP;
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
+//        crearVentanaPedidos();
         Stage stage = new Stage();
-        stage.setTitle("Ventana de Pedidos");
-        
-        root = new VBox();
-        Scene scene = new Scene(root,400,200);
-        stage.setScene(scene);
-        stage.show();
-        agregarPedidos();
-        
-    }
-    
-    public void agregarPedidos(){
-        Thread pedidoT = new Thread(()->{
+        ListView root = new ListView();
+        Scene scene = new Scene(root,420,420);
+//        HBox h1 = new HBox();
+        Thread pedidos = new Thread(()->{
             while(true){
-                String pedido = obtenerPedido();
-                if(pedido!= null&&!pedido.equals(ultimoP)){
-                    Platform.runLater(()->{
-                        Label lpedido = new Label(pedido);
-                        root.getChildren().add(lpedido);
-                    });
-                    ultimoP = pedido;
-                }
                 try{
+                    Platform.runLater(()->{
+                        cargarPedidos(stage,root,scene);
+                    });
                     Thread.sleep(5000);
-                    
                 }catch(InterruptedException e){
-                    System.out.println("Algo salio mal.");
+                    e.printStackTrace();
                 }
+
             }
+                
         });
-        pedidoT.setDaemon(true);
-        pedidoT.start();
+        pedidos.setDaemon(true);
+        pedidos.start();
+        
+        stage.setScene(scene);
+        stage.setTitle("Pedidos Generados");
+        stage.show();
+        
+//        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent t){
+//                
+//            }
+//        });
+        
     }
     
-    public String obtenerPedido(){
+    public void cargarPedidos(Stage stage, ListView root, Scene scene){
+        root.getItems().clear();
         try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
-            String linea = bf.readLine();
-            while(linea!=null){
-                return linea;
+            String linea;
+            pedidos.clear();
+            while((linea=bf.readLine())!= null){
+                String[] datos = linea.trim().split(",");
+                Pedido p = new Pedido(datos[0],Double.parseDouble(datos[2]),datos[1]);
+                pedidos.add(p);
+
             }
             
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            System.out.println("No se encontro el archivo.");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Algo salio mal.");
         }
-        return null;
+        
+        ObservableList<Pedido> items = FXCollections.observableArrayList(pedidos);
+        root.setItems(items);
+        root.setDisable(false);
+            
+        
     }
     
     @FXML
     public void mostrarVentanaPedido1(){
         try {
-            Stage stage = new Stage();
+            BaseHelado.stage = new Stage();
             FXMLLoader fxmloader = new FXMLLoader(VentanaOpciones.class.getResource("pedido.fxml"));
             Parent root;
             root = fxmloader.load();
-            Scene scene = new Scene(root,600,400);
-            stage.setScene(scene);
-            stage.setTitle("ArmaTuHelado");
-            stage.show();
+            BaseHelado.scene = new Scene(root,600,400);
+            BaseHelado.stage.setScene(BaseHelado.scene);
+            BaseHelado.stage.setTitle("ArmaTuHelado");
+            BaseHelado.stage.show();
         } catch (IOException ex) {
 //            System.out.println(ex.getMessage());
             ex.printStackTrace();

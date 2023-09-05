@@ -1,2 +1,2 @@
-hola
-que
+Juan Flores,2835,6.50
+Valentina Saltos,2836,7.80

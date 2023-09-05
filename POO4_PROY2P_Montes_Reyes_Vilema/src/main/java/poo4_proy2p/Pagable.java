@@ -10,4 +10,6 @@ package poo4_proy2p;
  */
 public interface Pagable {
     
+    public void generarTransaccion();
+    
 }
