@@ -73,8 +73,8 @@ public class Pago implements Pagable, Initializable {
     private Button btnCancelar;
 
     @FXML
-    public void confirmar() {
-
+    public void confirmar() throws IOException {
+        OrdenGenerada.mostrarVentanaFinal();
     }
 
     @FXML
