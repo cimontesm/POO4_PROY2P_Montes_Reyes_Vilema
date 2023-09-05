@@ -31,7 +31,11 @@ public class Sabores implements Initializable {
 
     String nombre;
     double precio;
-
+    
+    public Sabores(){
+        
+    }
+    
     public Sabores(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
