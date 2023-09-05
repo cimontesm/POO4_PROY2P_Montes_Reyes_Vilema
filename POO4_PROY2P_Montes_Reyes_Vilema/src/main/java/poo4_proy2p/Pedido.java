@@ -94,7 +94,14 @@ public class Pedido implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        cargarListView();
+        
         VentanaOpciones.cargarValorAPagar(lblValor);
+        
+    }
+    
+    public void cargarListView(){
+        
         
     }
     
