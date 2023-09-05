@@ -55,6 +55,9 @@ public class Sabores implements Initializable {
 
     @FXML
     private Label lblValor;
+    
+    @FXML
+    private Label lblmensaje;
 
     @FXML
     private Button btnContinuar;
@@ -66,14 +69,17 @@ public class Sabores implements Initializable {
             try {
                 throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
             } catch (IncompleteStageException i) {
-                i.printStackTrace();
+//                i.printStackTrace();
+                System.out.println(i.getMessage());
             }
+            lblmensaje.setText("Debe seleccionar al menos una opcion para continuar");
 
         } else {
             try {
                 Topping.cargarVentanaTopping();
             } catch (IOException ex) {
-                ex.printStackTrace();
+//                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
         }
     }

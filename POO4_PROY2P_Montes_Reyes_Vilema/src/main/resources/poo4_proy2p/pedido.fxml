@@ -31,5 +31,10 @@
          </font>
       </Button>
       <FlowPane fx:id="seccionBases" layoutX="48.0" layoutY="100.0" prefHeight="206.0" prefWidth="504.0" />
+      <Label fx:id="lblmensaje" layoutX="20.0" layoutY="376.0" textFill="RED">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 public class BaseHelado implements Initializable {
     String nombre; 
     double precio;
+    ArrayList<ToggleButton> tgbuttons;
     public static Stage stage;
     public static Scene scene;
     
@@ -80,7 +81,8 @@ public class BaseHelado implements Initializable {
         
         ArrayList<BaseHelado> bases = BaseHelado.cargarBases();
         ImageView imgView = null;
-        ArrayList<ToggleButton> tgbuttons = new ArrayList<>();
+        ToggleButton tb = null;
+        tgbuttons = new ArrayList<>();
         ToggleGroup tg = new ToggleGroup();
         
         for (BaseHelado base : bases){
@@ -95,7 +97,7 @@ public class BaseHelado implements Initializable {
             Label l2 = new Label(String.valueOf(base.getPrecio()));
             l2.setStyle("-fx-text-fill: purple; -fx-font-weight: bold; -fx-font-size: 15px;");
             
-            ToggleButton tb = crearToggleButton(base.getNombre(),imgView,tg);
+            tb = crearToggleButton(base.getNombre(),imgView,tg);
             tgbuttons.add(tb);
             
             VBox VBase = new VBox();
@@ -106,6 +108,7 @@ public class BaseHelado implements Initializable {
             seccionBases.getChildren().add(VBase);
             
         }
+        
         
     }
     
@@ -134,6 +137,17 @@ public class BaseHelado implements Initializable {
         return tb;
     }
     
+    public boolean elementoSeleccionado(ArrayList<ToggleButton> tgbuttons){
+        boolean retorno = false;
+        
+        for (ToggleButton t : tgbuttons){
+            if (t.isSelected()){
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
+    
     @FXML
     private Button btnContinuar;
     
@@ -151,11 +165,26 @@ public class BaseHelado implements Initializable {
     
     @FXML
     public void continuar(){
-        try {
-            Sabores.mostrarVentanaSabores();
-        } catch(IOException ex){
-            System.out.println(ex.getMessage());
-//            ex.printStackTrace();
+        
+        if (!elementoSeleccionado(tgbuttons)){
+            try {
+                throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
+            } catch (IncompleteStageException ex1) {
+                System.out.println(ex1.getMessage());
+            }
+            lblmensaje.setText("Debe seleccionar al menos una opcion para continuar");
+            
+        } else {
+            try {
+                Sabores.mostrarVentanaSabores();
+            } catch(IOException ex2){
+                System.out.println(ex2.getMessage());
+//                ex.printStackTrace();
+            }
+            
         }
+        
+        
+        
     }
 }
