@@ -30,10 +30,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-        Pedido pedido = new Pedido();
-        BaseHelado base = new BaseHelado();
-        Sabores sabor = new Sabores();
-        Topping topping = new Topping();
+        
         
     }
 
