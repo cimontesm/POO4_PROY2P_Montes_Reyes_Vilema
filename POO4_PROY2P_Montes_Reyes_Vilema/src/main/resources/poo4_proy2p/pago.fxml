@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.Pago">
    <children>
       <ImageView fx:id="fondo" fitHeight="400.0" fitWidth="725.0" layoutX="-56.0" pickOnBounds="true" preserveRatio="true">
@@ -39,30 +38,34 @@
             <RadioButton fx:id="rbefectivo" mnemonicParsing="false" text="Efectivo" toggleGroup="$modopago" />
          </children>
       </HBox>
-      <HBox fx:id="hdatos" layoutX="47.0" layoutY="176.0" prefHeight="163.0" prefWidth="233.0" spacing="15.0" style="-fx-background-color: pink;">
+      <HBox fx:id="hdetalle" layoutX="40.0" layoutY="170.0" prefHeight="181.0" prefWidth="534.0">
          <children>
-            <VBox fx:id="vlabels" prefHeight="200.0" prefWidth="100.0" spacing="24.0">
+            <HBox fx:id="hdatos" prefHeight="163.0" prefWidth="233.0" spacing="15.0" style="-fx-background-color: pink;">
                <children>
-                  <Label text="Valor a pagar:" />
-                  <Label text="Adicional tarjeta:" />
-                  <Label text="IVA:" />
-                  <Label text="Total a pagar:" />
+                  <VBox fx:id="vlabels" prefHeight="200.0" prefWidth="100.0" spacing="24.0">
+                     <children>
+                        <Label text="Valor a pagar:" />
+                        <Label text="Adicional tarjeta:" />
+                        <Label text="IVA:" />
+                        <Label text="Total a pagar:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="vtf" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                     <children>
+                        <TextField fx:id="tfvalor" />
+                        <TextField fx:id="tfadt" />
+                        <TextField fx:id="tfiva" />
+                        <TextField fx:id="tftot" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </VBox>
                </children>
-               <HBox.margin>
-                  <Insets left="5.0" top="10.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox fx:id="vtf" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
-               <children>
-                  <TextField fx:id="tfvalor" />
-                  <TextField fx:id="tfadt" />
-                  <TextField fx:id="tfiva" />
-                  <TextField fx:id="tftot" />
-               </children>
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </VBox>
+            </HBox>
          </children>
       </HBox>
       <Button fx:id="btnConfirmar" layoutX="403.0" layoutY="359.0" mnemonicParsing="false" onAction="#confirmar" styleClass="color-btns" stylesheets="@style/styles.css" text="Confirmar" textFill="#845b9e">

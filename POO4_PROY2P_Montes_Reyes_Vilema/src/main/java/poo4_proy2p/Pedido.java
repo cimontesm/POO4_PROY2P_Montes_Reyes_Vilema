@@ -89,7 +89,11 @@ public class Pedido implements Initializable {
     
     @FXML
     public void confirmar(){
-        
+        try {
+            Pago.mostrarVentanaPago();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
     
     @Override
