@@ -6,14 +6,18 @@
 package poo4_proy2p;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author cmontes
  */
-public class Pedido {
+public class Pedido implements Initializable {
     public static Scene scene;
     public static Stage stage;
     String nombre;
@@ -60,7 +64,41 @@ public class Pedido {
     private Button btnEliminar;
     
     @FXML
+    private Pane rootc;
+    
+    @FXML
+    private HBox hbtns;
+    
+    @FXML
+    private Button btnconf2;
+    
+    @FXML
+    private Button btncancelar2;
+    
+    @FXML
+    private Pane rootelim;
+    
+    @FXML
+    private HBox hbotoneselim;
+    
+    @FXML
+    private Button btnconf3;
+    
+    @FXML
+    private Button btncancelar3;
+    
+    @FXML
     public void confirmar(){
+        try {
+            Pago.mostrarVentanaPago();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        VentanaOpciones.cargarValorAPagar(lblValor);
         
     }
     
@@ -106,7 +144,17 @@ public class Pedido {
     }
     
     @FXML
+    public void confirmarCancel(){
+        
+    }
+    
+    @FXML
     public void cancelar3(){
+        
+    }
+    
+    @FXML
+    public void confirmarElim(){
         
     }
 }

@@ -41,6 +41,14 @@ public class Sabores implements Initializable {
         this.precio = precio;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
     @FXML
     private Pane root;
 
@@ -57,10 +65,10 @@ public class Sabores implements Initializable {
     private VBox v2;
 
     @FXML
-    private ComboBox<String> cbsabor1;
+    private ComboBox<Sabores> cbsabor1;
 
     @FXML
-    private ComboBox<String> cbsabor2;
+    private ComboBox<Sabores> cbsabor2;
 
     @FXML
     private Label lblValor;
@@ -85,6 +93,21 @@ public class Sabores implements Initializable {
 
         } else {
             
+            if (cbsabor1.getValue()!=null && cbsabor2.getValue()!=null){
+                VentanaOpciones.componentes.add(cbsabor1.getValue());
+                VentanaOpciones.valoresAPagar.add(cbsabor1.getValue().getPrecio());
+                VentanaOpciones.componentes.add(cbsabor2.getValue());
+                VentanaOpciones.valoresAPagar.add(cbsabor2.getValue().getPrecio());
+                
+            } else if (cbsabor1.getValue()!=null){
+                VentanaOpciones.componentes.add(cbsabor1.getValue());
+                VentanaOpciones.valoresAPagar.add(cbsabor1.getValue().getPrecio());
+                
+            } else if (cbsabor2.getValue()!=null){
+                VentanaOpciones.componentes.add(cbsabor2.getValue());
+                VentanaOpciones.valoresAPagar.add(cbsabor2.getValue().getPrecio());
+                
+            }
             
             try {
                 Topping.cargarVentanaTopping();
@@ -100,10 +123,8 @@ public class Sabores implements Initializable {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] items = linea.split(",");
-                String nombreSabor = items[0];
-                String precioSabor = items[1];
-                cbsabor1.getItems().add(nombreSabor + " - " + precioSabor);
-                cbsabor2.getItems().add(nombreSabor + " - " + precioSabor);
+                cbsabor1.getItems().add(new Sabores(items[0],Double.parseDouble(items[1])));
+                cbsabor2.getItems().add(new Sabores(items[0],Double.parseDouble(items[1])));
 
             }
 
@@ -125,17 +146,16 @@ public class Sabores implements Initializable {
         BaseHelado.stage.setTitle("ArmaTuHelado2");
         BaseHelado.stage.show();
     }
+    
+    @Override
+    public String toString(){
+        return nombre+" - "+precio;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarcb();
         
-        double suma = 0.0;
-        
-        for (Double valor : VentanaOpciones.valoresAPagar){
-            suma += valor;
-        }
-        lblValor.setText("Valor a pagar: "+suma);
-        
+        VentanaOpciones.cargarValorAPagar(lblValor);
     }
 }

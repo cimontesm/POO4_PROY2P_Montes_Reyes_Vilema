@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="207.0" prefWidth="400.0" style="-fx-background-color: plum;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.Pedido">
+<Pane fx:id="rootelim" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="207.0" prefWidth="400.0" style="-fx-background-color: plum;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.Pedido">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="37.0" text="Está seguro de eliminar el componente?">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutX="100.0" layoutY="93.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+      <HBox fx:id="hbotoneselim" alignment="CENTER" layoutX="100.0" layoutY="93.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button fx:id="btnconf" mnemonicParsing="false" onAction="#confirmar" styleClass="color-btns" stylesheets="@style/styles.css" text="Confirmar" textFill="#652183">
+            <Button fx:id="btnconf3" mnemonicParsing="false" onAction="#confirmarElim" styleClass="color-btns" stylesheets="@style/styles.css" text="Confirmar" textFill="#652183">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

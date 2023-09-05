@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,17 @@ public class Topping implements Initializable {
 
     String nombre;
     double precio;
+    ArrayList<CheckBox> cboxes;
+    ArrayList<Double> precios;
+
+    public Topping(){
+        
+    }
+    
+    public Topping(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
 
     @FXML
     private Pane root;
@@ -67,6 +79,23 @@ public class Topping implements Initializable {
 
     @FXML
     public void continuar(){
+        
+        ArrayList<Boolean> lbooleanos = elementoSeleccionado(cboxes);
+        int longitud = Math.min(cboxes.size(), lbooleanos.size());
+        
+        for (int i=0;i<longitud;i++){
+            CheckBox elemento = cboxes.get(i);
+            boolean bool = lbooleanos.get(i);
+            double precio = precios.get(i);
+            
+            if (bool){
+                VentanaOpciones.componentes.add(elemento.getUserData());
+                VentanaOpciones.valoresAPagar.add(precio);
+                
+            }
+            
+        }
+        
         try {
             Pedido.mostrarVentanaPedido();
         } catch(IOException ex){
@@ -75,6 +104,9 @@ public class Topping implements Initializable {
     }
 
     public void cargarTopping() {
+        cboxes = new ArrayList<>();
+        precios = new ArrayList<>();
+        
         try ( BufferedReader br = new BufferedReader(new FileReader("toppings.txt"))) {
             String linea;
             int i = 1;
@@ -87,7 +119,10 @@ public class Topping implements Initializable {
                     String checkBoxName = "cb" + i;
                     CheckBox checkBox = (CheckBox) getClass().getDeclaredField(checkBoxName).get(this);
                     checkBox.setText(nombreTopping + " - " + precioTopping);
-
+                    checkBox.setUserData(new Topping(nombreTopping,Double.parseDouble(precioTopping)));
+                    cboxes.add(checkBox);
+                    precios.add(Double.parseDouble(precioTopping));
+                    
                     i++;
                 }
 
@@ -109,10 +144,26 @@ public class Topping implements Initializable {
         BaseHelado.stage.setTitle("ArmaTuHelado3");
         BaseHelado.stage.show();
     }
+    
+    public ArrayList<Boolean> elementoSeleccionado(ArrayList<CheckBox> cboxes){
+        ArrayList<Boolean> retorno = new ArrayList<>();
+        
+        for (CheckBox c : cboxes){
+            if (c.isSelected()){
+                retorno.add(true);
+            } else {
+                retorno.add(false);
+            }
+        }
+        return retorno;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTopping();
+        
+        VentanaOpciones.cargarValorAPagar(lblValor);
+        
     }
     
 }

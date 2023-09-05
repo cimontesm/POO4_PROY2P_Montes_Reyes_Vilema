@@ -4,8 +4,13 @@
  */
 package poo4_proy2p;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -33,6 +38,9 @@ public class Pago implements Pagable{
     
     @FXML
     private RadioButton rbefectivo;
+    
+    @FXML
+    private HBox hdetalle;
     
     @FXML
     private HBox hdatos;
@@ -70,10 +78,41 @@ public class Pago implements Pagable{
     public void cancelar(){
         
     }
+    
+    public void modoPago(){
+        if(rbtarjeta.isSelected()){
+            //incrementar valor a pagar por 10% TO DO
+            HBox h = new HBox();
+            
+            VBox vlab = new VBox();
+            Label nom = new Label("Nombre: ");
+            Label num = new Label("Numero: ");
+            Label caducidad = new Label("Caducidad: ");
+            Label cvv = new Label("CVV: ");
+            vlab.getChildren().addAll(nom,num,caducidad,cvv);
+            
+            VBox vdatos = new VBox();
+            
+            Label l = new Label("Ingrese los datos de su tarjeta:");
+            
+        }else if (rbefectivo.isSelected()){
+            
+        }
+    }
 
     @Override
     public void generarTransaccion() {
         //TO DO
+    }
+    
+    public static void mostrarVentanaPago() throws IOException{
+        FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
+        Parent root = fxmLoader.load();
+        BaseHelado.scene = new Scene(root,600,400);
+        BaseHelado.stage.setScene(BaseHelado.scene);
+        BaseHelado.stage.setTitle("ArmaTuHelado5");
+        BaseHelado.stage.show();
+        
     }
     
     

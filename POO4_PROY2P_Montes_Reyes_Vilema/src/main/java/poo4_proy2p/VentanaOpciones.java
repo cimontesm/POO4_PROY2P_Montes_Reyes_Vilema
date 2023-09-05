@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+//import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -143,7 +144,7 @@ public class VentanaOpciones implements Initializable {
         Thread hilo = new Thread(()->{
             for(Local local:locales){
                 Platform.runLater(()->{
-                    try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/pinH.png"))){
+                    try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))){
                         Image image = new Image(input);
                         
                         ImageView punto = new ImageView(image);
@@ -285,6 +286,20 @@ public class VentanaOpciones implements Initializable {
         mostrarLocales(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public static void cargarValorAPagar(Label lblValor){
+        double suma = 0.0;
+//        DecimalFormat df = new DecimalFormat("#.##");
+        
+        for (Double valor : VentanaOpciones.valoresAPagar){
+            suma += valor;
+        }
+//        String numFormat = df.format(suma);
+        
+//        lblValor.setText("Valor a pagar: "+Double.parseDouble(numFormat));
+        lblValor.setText("Valor a pagar: "+suma);
+        
     }
     
 }
