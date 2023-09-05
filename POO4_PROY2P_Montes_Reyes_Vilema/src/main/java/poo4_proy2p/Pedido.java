@@ -7,7 +7,10 @@ package poo4_proy2p;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -56,7 +59,7 @@ public class Pedido implements Initializable {
     
     @FXML
     private Button btnConfirmar;
-    
+        
     @FXML
     private Button btnCancelar;
     
@@ -98,7 +101,35 @@ public class Pedido implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb){
+        cargarListView();
+        
         VentanaOpciones.cargarValorAPagar(lblValor);
+        
+    }
+    
+    public void cargarListView(){
+        ArrayList<String> elementos = new ArrayList<>();
+        
+        for (Object componente : VentanaOpciones.componentes){
+            if (componente instanceof BaseHelado){
+                BaseHelado bh = (BaseHelado) componente;
+                elementos.add("Base: "+bh.getNombre());
+                
+            } else if (componente instanceof Sabores){
+                Sabores s = (Sabores) componente;
+                elementos.add("Sabor: "+s.getNombre());
+                
+            } else if (componente instanceof Topping){
+                Topping tp = (Topping) componente;
+                elementos.add("Topping: "+tp.getNombre());
+                
+            }
+            
+        }
+        
+        ObservableList<String> items = FXCollections.observableArrayList(elementos);
+        lv.setItems(items);
+        lv.setDisable(false);
         
     }
     
