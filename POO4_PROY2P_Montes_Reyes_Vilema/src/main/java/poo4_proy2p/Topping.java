@@ -113,6 +113,9 @@ public class Topping implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTopping();
+        
+        VentanaOpciones.cargarValorAPagar(lblValor);
+        
     }
     
 }
