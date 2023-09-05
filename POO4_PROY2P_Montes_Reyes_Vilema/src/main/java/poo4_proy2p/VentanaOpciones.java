@@ -41,6 +41,7 @@ public class VentanaOpciones implements Initializable {
     public static Usuario usuario = null;
     public static ArrayList<Pedido> pedidos = new ArrayList<>();
     public static ArrayList<Object> componentes = new ArrayList<>();
+    public static ArrayList<Double> valoresAPagar = new ArrayList<>();
     
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
         VentanaOpciones.usuario = usuario;
