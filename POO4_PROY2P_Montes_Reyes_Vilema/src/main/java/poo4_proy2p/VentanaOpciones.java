@@ -18,7 +18,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,9 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -43,6 +40,8 @@ import javafx.stage.Stage;
 public class VentanaOpciones implements Initializable {
     public static Usuario usuario = null;
     public static ArrayList<Pedido> pedidos = new ArrayList<>();
+    public static ArrayList<Object> componentes = new ArrayList<>();
+    public static ArrayList<Double> valoresAPagar = new ArrayList<>();
     
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
         VentanaOpciones.usuario = usuario;
@@ -92,13 +91,6 @@ public class VentanaOpciones implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Pedidos Generados");
         stage.show();
-        
-//        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent t){
-//                
-//            }
-//        });
         
     }
     

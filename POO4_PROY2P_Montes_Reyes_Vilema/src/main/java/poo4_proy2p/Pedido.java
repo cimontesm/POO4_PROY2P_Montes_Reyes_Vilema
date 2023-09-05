@@ -100,5 +100,13 @@ public class Pedido {
         BaseHelado.stage.show();
     }
     
+    @FXML
+    public void cancelar2(){
+        
+    }
     
+    @FXML
+    public void cancelar3(){
+        
+    }
 }

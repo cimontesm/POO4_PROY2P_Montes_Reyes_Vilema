@@ -32,6 +32,11 @@ public class Sabores implements Initializable {
     String nombre;
     double precio;
 
+    public Sabores(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
     @FXML
     private Pane root;
 
@@ -55,6 +60,9 @@ public class Sabores implements Initializable {
 
     @FXML
     private Label lblValor;
+    
+    @FXML
+    private Label lblmensaje;
 
     @FXML
     private Button btnContinuar;
@@ -66,14 +74,19 @@ public class Sabores implements Initializable {
             try {
                 throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
             } catch (IncompleteStageException i) {
-                i.printStackTrace();
+//                i.printStackTrace();
+                System.out.println(i.getMessage());
             }
+            lblmensaje.setText("Debe seleccionar al menos una opcion para continuar");
 
         } else {
+            
+            
             try {
                 Topping.cargarVentanaTopping();
             } catch (IOException ex) {
-                ex.printStackTrace();
+//                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
         }
     }
@@ -112,5 +125,13 @@ public class Sabores implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarcb();
+        
+        double suma = 0.0;
+        
+        for (Double valor : VentanaOpciones.valoresAPagar){
+            suma += valor;
+        }
+        lblValor.setText("Valor a pagar: "+suma);
+        
     }
 }
