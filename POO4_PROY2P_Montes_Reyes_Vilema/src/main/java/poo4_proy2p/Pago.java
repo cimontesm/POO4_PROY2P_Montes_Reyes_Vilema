@@ -5,8 +5,11 @@
 package poo4_proy2p;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,81 +25,75 @@ import javafx.scene.layout.VBox;
  *
  * @author cmontes
  */
-public class Pago implements Pagable{
-    
+public class Pago implements Pagable, Initializable {
+
     @FXML
     private Pane root;
-    
+
     @FXML
     private ImageView fondo;
-    
+
     @FXML
     private HBox hrb;
-    
+
     @FXML
     private RadioButton rbtarjeta;
-    
+
     @FXML
     private RadioButton rbefectivo;
-    
+
     @FXML
     private HBox hdetalle;
-    
+
     @FXML
     private HBox hdatos;
-    
+
     @FXML
-    private VBox vlabels; 
-    
+    private VBox vlabels;
+
     @FXML
     private VBox vtf;
-    
+
     @FXML
     private TextField tfvalor;
-    
+
     @FXML
     private TextField tfadt;
-    
+
     @FXML
     private TextField tfiva;
-    
+
     @FXML
     private TextField tftot;
-    
+
     @FXML
     private Button btnConfirmar;
-    
+
     @FXML
     private Button btnCancelar;
-    
+
     @FXML
-    public void confirmar(){
-        
+    public void confirmar() {
+
     }
-    
+
     @FXML
-    public void cancelar(){
-        
+    public void cancelar() {
+
     }
-    
-    public void modoPago(){
-        if(rbtarjeta.isSelected()){
+
+    public void modoPago() {
+        if (rbtarjeta.isSelected()) {
             //incrementar valor a pagar por 10% TO DO
-            HBox h = new HBox();
-            
-            VBox vlab = new VBox();
-            Label nom = new Label("Nombre: ");
-            Label num = new Label("Numero: ");
-            Label caducidad = new Label("Caducidad: ");
-            Label cvv = new Label("CVV: ");
-            vlab.getChildren().addAll(nom,num,caducidad,cvv);
-            
-            VBox vdatos = new VBox();
-            
-            Label l = new Label("Ingrese los datos de su tarjeta:");
-            
-        }else if (rbefectivo.isSelected()){
-            
+
+            try {
+                mostrarVentanaTarjeta();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        } else if (rbefectivo.isSelected()) {
+
         }
     }
 
@@ -104,16 +101,43 @@ public class Pago implements Pagable{
     public void generarTransaccion() {
         //TO DO
     }
-    
-    public static void mostrarVentanaPago() throws IOException{
+
+    public static void mostrarVentanaPago() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
         Parent root = fxmLoader.load();
-        BaseHelado.scene = new Scene(root,600,400);
+        BaseHelado.scene = new Scene(root, 600, 400);
         BaseHelado.stage.setScene(BaseHelado.scene);
         BaseHelado.stage.setTitle("ArmaTuHelado5");
         BaseHelado.stage.show();
-        
+
     }
-    
-    
+
+    public void mostrarVentanaTarjeta() throws IOException {
+        HBox h = new HBox();
+
+        VBox vlab = new VBox();
+        Label nom = new Label("Nombre: ");
+        Label num = new Label("Numero: ");
+        Label caducidad = new Label("Caducidad: ");
+        Label cvv = new Label("CVV: ");
+        vlab.getChildren().addAll(nom, num, caducidad, cvv);
+
+        VBox vdatos = new VBox();
+        TextField tfnombre = new TextField();
+        TextField tfnum = new TextField();
+        TextField tfcaduc = new TextField();
+        TextField tfcvv = new TextField();
+        vdatos.getChildren().addAll(tfnombre, tfnum, tfcaduc, tfcvv);
+
+        Label l = new Label("Ingrese los datos de su tarjeta:");
+
+        h.getChildren().addAll(l, vlab, vdatos);
+        root.getChildren().add(h);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //modoPago();
+    }
+
 }

@@ -65,27 +65,7 @@ public class Pedido implements Initializable {
     
     @FXML
     private Pane rootc;
-    
-    @FXML
-    private HBox hbtns;
-    
-    @FXML
-    private Button btnconf2;
-    
-    @FXML
-    private Button btncancelar2;
-    
-    @FXML
-    private Pane rootelim;
-    
-    @FXML
-    private HBox hbotoneselim;
-    
-    @FXML
-    private Button btnconf3;
-    
-    @FXML
-    private Button btncancelar3;
+
     
     @FXML
     public void confirmar(){
@@ -145,23 +125,6 @@ public class Pedido implements Initializable {
         BaseHelado.stage.show();
     }
     
-    @FXML
-    public void cancelar2(){
-        
-    }
     
-    @FXML
-    public void confirmarCancel(){
-        
-    }
     
-    @FXML
-    public void cancelar3(){
-        
-    }
-    
-    @FXML
-    public void confirmarElim(){
-        
-    }
 }
