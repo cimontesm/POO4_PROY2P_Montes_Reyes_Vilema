@@ -176,24 +176,5 @@ public class Pedido implements Initializable {
         BaseHelado.stage.setTitle("ArmaTuHelado4");
         BaseHelado.stage.show();
     }
-    
-    @FXML
-    public void cancelar2(){
-        
-    }
-    
-    @FXML
-    public void confirmarCancel(){
-        
-    }
-    
-    @FXML
-    public void cancelar3(){
-        
-    }
-    
-    @FXML
-    public void confirmarElim(){
-        
-    }
+       
 }
