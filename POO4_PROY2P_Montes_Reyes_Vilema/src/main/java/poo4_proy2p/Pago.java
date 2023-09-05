@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 public class Pago implements Pagable, Initializable {
 
     @FXML
-    private Pane root;
+    private static Pane root;
 
     @FXML
     private ImageView fondo;
@@ -112,7 +112,7 @@ public class Pago implements Pagable, Initializable {
 
     }
 
-    public void mostrarVentanaTarjeta() throws IOException {
+    public static void mostrarVentanaTarjeta() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
         HBox h = new HBox();
 
