@@ -20,7 +20,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btncancelar" mnemonicParsing="false" onAction="#cancelar" styleClass="color-btns" stylesheets="@style/styles.css" text="Cancelar">
+            <Button fx:id="btncancelar3" mnemonicParsing="false" onAction="#cancelar3" styleClass="color-btns" stylesheets="@style/styles.css" text="Cancelar">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

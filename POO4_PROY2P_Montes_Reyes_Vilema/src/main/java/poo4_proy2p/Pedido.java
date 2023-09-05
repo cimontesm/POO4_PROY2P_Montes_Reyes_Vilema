@@ -99,4 +99,14 @@ public class Pedido {
         BaseHelado.stage.setTitle("ArmaTuHelado4");
         BaseHelado.stage.show();
     }
+    
+    @FXML
+    public void cancelar2(){
+        
+    }
+    
+    @FXML
+    public void cancelar3(){
+        
+    }
 }
