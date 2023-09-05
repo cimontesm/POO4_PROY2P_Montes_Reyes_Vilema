@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -58,6 +59,30 @@ public class Pedido {
     
     @FXML
     private Button btnEliminar;
+    
+    @FXML
+    private Pane rootc;
+    
+    @FXML
+    private HBox hbtns;
+    
+    @FXML
+    private Button btnconf2;
+    
+    @FXML
+    private Button btncancelar2;
+    
+    @FXML
+    private Pane rootelim;
+    
+    @FXML
+    private HBox hbotoneselim;
+    
+    @FXML
+    private Button btnconf3;
+    
+    @FXML
+    private Button btncancelar3;
     
     @FXML
     public void confirmar(){
@@ -106,7 +131,17 @@ public class Pedido {
     }
     
     @FXML
+    public void confirmarCancel(){
+        
+    }
+    
+    @FXML
     public void cancelar3(){
+        
+    }
+    
+    @FXML
+    public void confirmarElim(){
         
     }
 }
