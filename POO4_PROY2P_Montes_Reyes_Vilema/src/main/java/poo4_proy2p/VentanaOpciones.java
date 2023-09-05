@@ -90,13 +90,6 @@ public class VentanaOpciones implements Initializable {
         stage.setTitle("Pedidos Generados");
         stage.show();
         
-//        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent t){
-//                
-//            }
-//        });
-        
     }
     
     public void cargarPedidos(Stage stage, ListView root, Scene scene){
