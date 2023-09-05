@@ -44,6 +44,14 @@ public class Topping implements Initializable {
         this.precio = precio;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
     @FXML
     private Pane root;
 
