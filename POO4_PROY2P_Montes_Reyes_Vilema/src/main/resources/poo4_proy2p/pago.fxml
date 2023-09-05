@@ -27,7 +27,7 @@
       </Label>
       <HBox fx:id="hrb" layoutX="70.0" layoutY="98.0" prefHeight="22.0" prefWidth="257.0" spacing="50.0">
          <children>
-            <RadioButton fx:id="rbtarjeta" mnemonicParsing="false" text="Tarjeta de Credito">
+            <RadioButton fx:id="rbtarjeta" mnemonicParsing="false" onAction="#mostrarVentanaTarjeta" text="Tarjeta de Credito">
                <toggleGroup>
                   <ToggleGroup fx:id="modopago" />
                </toggleGroup>
