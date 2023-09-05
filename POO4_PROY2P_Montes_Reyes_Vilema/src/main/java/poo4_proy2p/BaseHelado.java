@@ -38,6 +38,7 @@ public class BaseHelado implements Initializable {
     String nombre; 
     double precio;
     ArrayList<ToggleButton> tgbuttons;
+    ArrayList<Double> precios;
     public static Stage stage;
     public static Scene scene;
     
@@ -84,6 +85,7 @@ public class BaseHelado implements Initializable {
         ToggleButton tb = null;
         tgbuttons = new ArrayList<>();
         ToggleGroup tg = new ToggleGroup();
+        precios = new ArrayList<>();
         
         for (BaseHelado base : bases){
             try (FileInputStream input = new FileInputStream("src/main/resources/poo4_proy2p/"+base.getNombre()+".jpg")){
@@ -95,6 +97,7 @@ public class BaseHelado implements Initializable {
             }
 //            Label l1 = new Label(base.getNombre());
             Label l2 = new Label(String.valueOf(base.getPrecio()));
+            precios.add(base.getPrecio());
             l2.setStyle("-fx-text-fill: purple; -fx-font-weight: bold; -fx-font-size: 15px;");
             
             tb = crearToggleButton(base.getNombre(),imgView,tg);
@@ -137,12 +140,14 @@ public class BaseHelado implements Initializable {
         return tb;
     }
     
-    public boolean elementoSeleccionado(ArrayList<ToggleButton> tgbuttons){
-        boolean retorno = false;
+    public ArrayList<Boolean> elementoSeleccionado(ArrayList<ToggleButton> tgbuttons){
+        ArrayList<Boolean> retorno = new ArrayList<>();
         
         for (ToggleButton t : tgbuttons){
             if (t.isSelected()){
-                retorno = true;
+                retorno.add(true);
+            } else {
+                retorno.add(false);
             }
         }
         return retorno;
@@ -165,8 +170,36 @@ public class BaseHelado implements Initializable {
     
     @FXML
     public void continuar(){
+        ArrayList<Boolean> lbooleanos = elementoSeleccionado(tgbuttons);
+        int longitud = Math.min(tgbuttons.size(), lbooleanos.size());
+        boolean contieneTrue = false;
         
-        if (!elementoSeleccionado(tgbuttons)){
+        for (int i=0;i<longitud;i++){
+            ToggleButton elemento = tgbuttons.get(i);
+            boolean bool = lbooleanos.get(i);
+            double precio = precios.get(i);
+            
+            if (bool){
+                VentanaOpciones.componentes.add(new BaseHelado(elemento.getText(),precio));
+                VentanaOpciones.valoresAPagar.add(precio);
+                double suma = 0.0;
+                
+                for (Double valor : VentanaOpciones.valoresAPagar){
+                    suma += valor;
+                }
+                lblValor.setText("Valor a pagar: "+suma);
+            }
+            
+        }
+        
+        for (boolean bool : lbooleanos){
+            if (bool){
+                contieneTrue = true;
+                break;
+            }
+        }
+        
+        if (!contieneTrue){
             try {
                 throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
             } catch (IncompleteStageException ex1) {
