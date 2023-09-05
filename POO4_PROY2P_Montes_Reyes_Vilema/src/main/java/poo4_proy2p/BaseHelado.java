@@ -137,12 +137,14 @@ public class BaseHelado implements Initializable {
         return tb;
     }
     
-    public boolean elementoSeleccionado(ArrayList<ToggleButton> tgbuttons){
-        boolean retorno = false;
+    public ArrayList<Boolean> elementoSeleccionado(ArrayList<ToggleButton> tgbuttons){
+        ArrayList<Boolean> retorno = new ArrayList<>();
         
         for (ToggleButton t : tgbuttons){
             if (t.isSelected()){
-                retorno = true;
+                retorno.add(true);
+            } else {
+                retorno.add(false);
             }
         }
         return retorno;
@@ -165,8 +167,18 @@ public class BaseHelado implements Initializable {
     
     @FXML
     public void continuar(){
+        ArrayList<Boolean> lbooleanos = elementoSeleccionado(tgbuttons);
         
-        if (!elementoSeleccionado(tgbuttons)){
+        boolean contieneTrue = false;
+        
+        for (boolean bool : lbooleanos){
+            if (bool){
+                contieneTrue = true;
+                break;
+            }
+        }
+        
+        if (!contieneTrue){
             try {
                 throw new IncompleteStageException("Debe seleccionar al menos una opcion para continuar");
             } catch (IncompleteStageException ex1) {
