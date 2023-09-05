@@ -33,7 +33,7 @@ import javafx.scene.paint.Color;
 public class Pago implements Pagable, Initializable {
 
     @FXML
-    private Pane root;
+    private static Pane root;
 
     @FXML
     private ImageView fondo;
