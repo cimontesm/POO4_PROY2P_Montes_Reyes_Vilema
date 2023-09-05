@@ -99,7 +99,7 @@ public class Pago implements Pagable, Initializable {
 
     @Override
     public void generarTransaccion() {
-        //TO DO
+        Pago p = new Pago();
     }
 
     public static void mostrarVentanaPago() throws IOException {
