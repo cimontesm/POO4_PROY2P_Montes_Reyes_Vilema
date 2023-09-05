@@ -59,90 +59,60 @@ public class VentanaOpciones implements Initializable {
     @FXML
     private Button btnPedido;
     
+    private VBox root;
+    private String ultimoP;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
-        Thread pedidos = new Thread(()->{
-            while(true){
-                try{
-                    Platform.runLater(()->{
-                        ventanaPedidos();
-                    });
-                    Thread.sleep(5*60*1000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-
-            }
-                
-        });
-        pedidos.setDaemon(true);
-        pedidos.start();
+        Stage stage = new Stage();
+        stage.setTitle("Ventana de Pedidos");
         
-        btnLocales.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t){
-                
-            }
-        });
+        root = new VBox();
+        Scene scene = new Scene(root,400,200);
+        stage.setScene(scene);
+        stage.show();
+        agregarPedidos();
         
-//        btnPedido.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent t){
-//                try {
-//                    BaseHelado.mostrarVentanaPedido1();
-//                } catch (IOException ex) {
-//                    System.out.println(ex.getMessage());
-//                }
-//            }
-//        });
-        
-//        
     }
     
-    public void ventanaPedidos(){
-        Stage stage = new Stage();
-        VBox root = new VBox();
-        Scene scene = new Scene(root,420,420);
-        HBox h1 = new HBox();
-        try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
-            String linea;
-            ArrayList<String> pedidos = new ArrayList<>();
-            if ((linea=bf.readLine()) == null){
-                h1.getChildren().add(new Label(" "));
-            } else {
-                while((linea=bf.readLine())!= null){
-//                if(linea==null){
-//                    h1.getChildren().add(new Label(" "));
-//                }else{
-                    pedidos.add(linea);
-//                    h1.getChildren().add(new Label(linea));
-//                    root.getChildren().add(h1);
-//                    stage.setScene(scene);
-//                    stage.setTitle("Pedidos Generados");
-//                    stage.show();
-//                }
-//                linea = bf.readLine();
-
+    public void agregarPedidos(){
+        Thread pedidoT = new Thread(()->{
+            while(true){
+                String pedido = obtenerPedido();
+                if(pedido!= null&&!pedido.equals(ultimoP)){
+                    Platform.runLater(()->{
+                        Label lpedido = new Label(pedido);
+                        root.getChildren().add(lpedido);
+                    });
+                    ultimoP = pedido;
+                }
+                try{
+                    Thread.sleep(5000);
+                    
+                }catch(InterruptedException e){
+                    System.out.println("Algo salio mal.");
                 }
             }
-            for (String pedido : pedidos){
-                h1.getChildren().add(new Label(pedido));
-                
+        });
+        pedidoT.setDaemon(true);
+        pedidoT.start();
+    }
+    
+    public String obtenerPedido(){
+        try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
+            String linea = bf.readLine();
+            while(linea!=null){
+                return linea;
             }
-            root.getChildren().add(h1);
             
-            stage.setScene(scene);
-            stage.setTitle("Pedidos Generados");
-            stage.show();
         } catch (FileNotFoundException ex) {
-            System.out.println("No se encontro el archivo.");
+            ex.printStackTrace();
         } catch (IOException ex) {
-            System.out.println("Algo salio mal.");
+            ex.printStackTrace();
         }
-        
-        
+        return null;
     }
     
     @FXML
