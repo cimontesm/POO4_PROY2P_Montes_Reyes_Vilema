@@ -32,6 +32,11 @@ public class Sabores implements Initializable {
     String nombre;
     double precio;
 
+    public Sabores(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
     @FXML
     private Pane root;
 
@@ -54,7 +59,7 @@ public class Sabores implements Initializable {
     private ComboBox<String> cbsabor2;
 
     @FXML
-    public Label lblValor;
+    private Label lblValor;
     
     @FXML
     private Label lblmensaje;
@@ -75,6 +80,8 @@ public class Sabores implements Initializable {
             lblmensaje.setText("Debe seleccionar al menos una opcion para continuar");
 
         } else {
+            
+            
             try {
                 Topping.cargarVentanaTopping();
             } catch (IOException ex) {
