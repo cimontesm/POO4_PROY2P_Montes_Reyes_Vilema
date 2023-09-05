@@ -111,7 +111,7 @@ public class Pago implements Pagable, Initializable {
 
     public static void mostrarVentanaPago() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
-        Parent root = fxmLoader.load();
+        Pago.root = fxmLoader.load();
         BaseHelado.scene = new Scene(root, 600, 400);
         BaseHelado.stage.setScene(BaseHelado.scene);
         BaseHelado.stage.setTitle("ArmaTuHelado5");
