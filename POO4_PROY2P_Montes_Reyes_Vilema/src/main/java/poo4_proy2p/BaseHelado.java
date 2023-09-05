@@ -182,12 +182,7 @@ public class BaseHelado implements Initializable {
             if (bool){
                 VentanaOpciones.componentes.add(new BaseHelado(elemento.getText(),precio));
                 VentanaOpciones.valoresAPagar.add(precio);
-                double suma = 0.0;
                 
-                for (Double valor : VentanaOpciones.valoresAPagar){
-                    suma += valor;
-                }
-                lblValor.setText("Valor a pagar: "+suma);
             }
             
         }

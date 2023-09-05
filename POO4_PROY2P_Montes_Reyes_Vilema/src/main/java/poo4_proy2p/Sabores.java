@@ -54,7 +54,7 @@ public class Sabores implements Initializable {
     private ComboBox<String> cbsabor2;
 
     @FXML
-    private Label lblValor;
+    public Label lblValor;
     
     @FXML
     private Label lblmensaje;
@@ -118,5 +118,13 @@ public class Sabores implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarcb();
+        
+        double suma = 0.0;
+        
+        for (Double valor : VentanaOpciones.valoresAPagar){
+            suma += valor;
+        }
+        lblValor.setText("Valor a pagar: "+suma);
+        
     }
 }
