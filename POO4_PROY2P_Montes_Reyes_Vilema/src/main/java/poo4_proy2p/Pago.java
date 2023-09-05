@@ -10,16 +10,21 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -71,6 +76,8 @@ public class Pago implements Pagable, Initializable {
 
     @FXML
     private Button btnCancelar;
+    @FXML
+    private ToggleGroup modopago;
 
     @FXML
     public void confirmar() throws IOException {
@@ -104,7 +111,7 @@ public class Pago implements Pagable, Initializable {
 
     public static void mostrarVentanaPago() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
-        Parent root = fxmLoader.load();
+        Pago.root = fxmLoader.load();
         BaseHelado.scene = new Scene(root, 600, 400);
         BaseHelado.stage.setScene(BaseHelado.scene);
         BaseHelado.stage.setTitle("ArmaTuHelado5");
@@ -112,9 +119,11 @@ public class Pago implements Pagable, Initializable {
 
     }
 
-    public static void mostrarVentanaTarjeta() throws IOException {
+    @FXML
+    public  void mostrarVentanaTarjeta() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
-        HBox h = new HBox();
+        VBox vb = new VBox();
+        HBox hb = new HBox();
 
         VBox vlab = new VBox();
         Label nom = new Label("Nombre: ");
@@ -122,6 +131,8 @@ public class Pago implements Pagable, Initializable {
         Label caducidad = new Label("Caducidad: ");
         Label cvv = new Label("CVV: ");
         vlab.getChildren().addAll(nom, num, caducidad, cvv);
+        vlab.setSpacing(24);
+        
 
         VBox vdatos = new VBox();
         TextField tfnombre = new TextField();
@@ -129,16 +140,36 @@ public class Pago implements Pagable, Initializable {
         TextField tfcaduc = new TextField();
         TextField tfcvv = new TextField();
         vdatos.getChildren().addAll(tfnombre, tfnum, tfcaduc, tfcvv);
+        vdatos.setSpacing(15);
+        
 
         Label l = new Label("Ingrese los datos de su tarjeta:");
-
-        h.getChildren().addAll(l, vlab, vdatos);
-        root.getChildren().add(h);
+        l.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        Color colorP = Color.web("#3e0b63");
+        l.setTextFill(colorP);
         
-        BaseHelado.scene = new Scene(root, 600, 400);
-        BaseHelado.stage.setScene(BaseHelado.scene);
-        BaseHelado.stage.setTitle("ArmaTuHelado6");
-        BaseHelado.stage.show();
+        
+        
+        
+        root.getChildren().add(l);
+        l.setLayoutX(293);
+        l.setLayoutY(151);
+
+        hb.getChildren().addAll( vlab, vdatos);
+        hb.setSpacing(20);
+        HBox.setMargin(hb, new Insets(10,0,0,5));
+        
+        hdetalle.getChildren().add(hb);
+        hdetalle.setSpacing(20);
+        BackgroundFill backgroundFill = new BackgroundFill(Color.PINK, null, null);
+        Background background = new Background(backgroundFill);
+        hdetalle.setBackground(background);
+//        root.getChildren().add(h);
+//        
+//        BaseHelado.scene = new Scene(root, 600, 400);
+//        BaseHelado.stage.setScene(BaseHelado.scene);
+//        BaseHelado.stage.setTitle("ArmaTuHelado6");
+//        BaseHelado.stage.show();
     }
 
     @Override

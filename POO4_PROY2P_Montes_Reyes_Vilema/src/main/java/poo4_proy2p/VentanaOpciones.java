@@ -273,7 +273,7 @@ public class VentanaOpciones implements Initializable {
         ImageView imageView = null;
 
         try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/mapa2.png"))){
-            Image image = new Image(input,800,600,true,true);
+            Image image = new Image(input);
             imageView = new ImageView(image);
             
         } catch (FileNotFoundException ex) {
