@@ -11,13 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Toggle;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -25,13 +24,48 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-
+import javafx.scene.control.ToggleGroup;
 /**
  *
  * @author cmontes
  */
 public class Pago implements Pagable, Initializable {
+    private String nombre;
+    private double total;
+    private String tipo;
 
+    public Pago(String nombre, double total, String tipo) {
+        this.nombre = nombre;
+        this.total = total;
+        this.tipo = tipo;
+    }
+    public Pago(){
+        
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     @FXML
     private static Pane root;
 
@@ -90,8 +124,13 @@ public class Pago implements Pagable, Initializable {
     }
 
     public void modoPago() {
-        if (rbtarjeta.isSelected()) {
+        double total = obtenerSuma();
+        Toggle seleccion = modopago.getSelectedToggle();
+        if (rbtarjeta == seleccion) {
             //incrementar valor a pagar por 10% TO DO
+            total += total * 0.10;
+            tfvalor.setText(String.valueOf(total));
+            tfvalor.setEditable(false);
 
             try {
                 mostrarVentanaTarjeta();
@@ -100,13 +139,63 @@ public class Pago implements Pagable, Initializable {
             }
 
         } else if (rbefectivo.isSelected()) {
-
+            generarTransaccion();
+            tfvalor.setText("Hola");
         }
     }
 
     @Override
-    public void generarTransaccion() {
-        Pago p = new Pago();
+    public Pago generarTransaccion() {
+        Toggle seleccion = modopago.getSelectedToggle();
+        double total = obtenerSuma();
+        double iva = 0.83;
+        double adicionalT = 0.63;
+        Pago p = null;
+        if (seleccion.equals(rbtarjeta)) {
+                //incrementar valor a pagar por 10% TO DO
+                total += total * 0.10;
+
+                tfvalor.setText(String.valueOf(total));
+                tfvalor.setEditable(false);
+                tfadt.setText(String.valueOf(adicionalT));
+                tfiva.setText(String.valueOf(iva));
+                tftot.setText(String.valueOf(total+iva+adicionalT));
+                tfadt.setEditable(false);
+                tfiva.setEditable(false);
+                tftot.setEditable(false);
+                p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total)+(adicionalT*total),"Tarjeta");
+                
+
+                try {
+                    mostrarVentanaTarjeta();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+        }   else if (seleccion.equals(rbefectivo)) {
+                tfvalor.setText(String.valueOf(total));
+                tfadt.setText("0.0");
+                tfiva.setText(String.valueOf("0.0"));
+                tftot.setText(String.valueOf(total+(iva*total)));
+                hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
+                
+                
+                
+
+                tfvalor.setEditable(false);
+                tfadt.setEditable(false);
+                tfiva.setEditable(false);
+                tftot.setEditable(false);
+                p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total),"Efectivo");
+            }
+        return p;
+    }
+    
+    public double obtenerSuma(){
+        double total = 0;
+        for(double valor:VentanaOpciones.valoresAPagar){
+            total+=valor;
+        }
+        return total;
     }
 
     public static void mostrarVentanaPago() throws IOException {
@@ -164,17 +253,12 @@ public class Pago implements Pagable, Initializable {
         BackgroundFill backgroundFill = new BackgroundFill(Color.PINK, null, null);
         Background background = new Background(backgroundFill);
         hdetalle.setBackground(background);
-//        root.getChildren().add(h);
-//        
-//        BaseHelado.scene = new Scene(root, 600, 400);
-//        BaseHelado.stage.setScene(BaseHelado.scene);
-//        BaseHelado.stage.setTitle("ArmaTuHelado6");
-//        BaseHelado.stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        modoPago();
+        generarTransaccion();
+        //modoPago();
     }
 
 }

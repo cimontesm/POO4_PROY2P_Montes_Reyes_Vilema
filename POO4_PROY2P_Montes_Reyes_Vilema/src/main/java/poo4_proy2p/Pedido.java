@@ -5,9 +5,15 @@
  */
 package poo4_proy2p;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,22 +33,34 @@ import javafx.stage.Stage;
  *
  * @author cmontes
  */
-public class Pedido implements Initializable {
+public class Pedido implements Initializable, Serializable {
 
     public static Scene scene;
     public static Stage stage;
-    String nombre;
+    String nombreC;
     double total;
-    String id;
+    static int id = (new Random()).nextInt(9000) + 1000;
 
     public Pedido() {
         stage = new Stage();
     }
-
-    public Pedido(String nombre, double total, String id) {
-        this.nombre = nombre;
+    
+    public Pedido(String nombreC, double total) {
+        this.nombreC = nombreC;
         this.total = total;
-        this.id = id;
+        id++;
+    }
+
+    public String getNombreC() {
+        return nombreC;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public static int getId() {
+        return id;
     }
 
     @FXML
@@ -68,10 +86,33 @@ public class Pedido implements Initializable {
 
     @FXML
     public void confirmar() {
+        double total = 0.0;
+        
+        for (Double valor : VentanaOpciones.valoresAPagar){
+            total += valor;
+        }
+        
+        Pedido p = new Pedido(VentanaOpciones.usuario.getUsuario(),total);
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("pedidos.txt",true))){
+            bw.write(p.toString()+"\n");
+            
+        } catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(String.valueOf(Pedido.getId())+"Pedido.bin"))){
+            out.writeObject(p);
+            
+        } catch (IOException ex2){
+            System.out.println(ex2.getMessage());
+        }
+        
         try {
             Pago.mostrarVentanaPago();
         } catch (IOException e) {
-            System.out.println(e);
+//            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -139,9 +180,9 @@ public class Pedido implements Initializable {
 
     @Override
     public String toString() {
-        return nombre + "," + id;
+        return id + "," + nombreC + "," + total;
     }
-
+    
     public static void mostrarVentanaPedido() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Topping.class.getResource("pedidogen.fxml"));
         Parent root = fxmLoader.load();
