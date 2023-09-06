@@ -137,7 +137,8 @@ public class Pedido implements Initializable, Serializable {
         try {
             Pago.mostrarVentanaPago();
         } catch (IOException e) {
-            System.out.println(e);
+//            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
