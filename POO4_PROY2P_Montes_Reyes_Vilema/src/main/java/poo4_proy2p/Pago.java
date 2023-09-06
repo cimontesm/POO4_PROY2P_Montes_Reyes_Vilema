@@ -151,7 +151,7 @@ public class Pago implements Pagable, Initializable {
         double iva = 0.83;
         double adicionalT = 0.63;
         Pago p = null;
-        if (seleccion.equals(rbtarjeta)) {
+        if (seleccion==rbtarjeta) {
                 //incrementar valor a pagar por 10% TO DO
                 total += total * 0.10;
 
@@ -171,7 +171,7 @@ public class Pago implements Pagable, Initializable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-        }   else if (seleccion.equals(rbefectivo)) {
+        }   else if (seleccion==rbefectivo) {
                 tfvalor.setText(String.valueOf(total));
                 tfadt.setText("0.0");
                 tfiva.setText(String.valueOf("0.0"));
@@ -186,7 +186,9 @@ public class Pago implements Pagable, Initializable {
                 tfiva.setEditable(false);
                 tftot.setEditable(false);
                 p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total),"Efectivo");
-            }
+            }else{
+            tfvalor.setText("Hola");
+        }
         return p;
     }
     
