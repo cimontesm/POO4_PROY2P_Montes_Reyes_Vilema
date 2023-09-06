@@ -7,6 +7,8 @@ package poo4_proy2p;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -114,7 +116,7 @@ public class Pago implements Pagable, Initializable {
     @FXML
     private Button btnCancelar;
 
-    
+    ToggleGroup modopago;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,66 +124,68 @@ public class Pago implements Pagable, Initializable {
         rbefectivo.setToggleGroup(modopago);
         rbtarjeta.setToggleGroup(modopago);
         generarTransaccion();
-        
-    }
+        modopago = new ToggleGroup();
 
-    @FXML
-    public void confirmar() throws IOException {
-        OrdenGenerada.mostrarVentanaFinal();
-        
-    }
-
-    @FXML
-    public void cancelar() {
-        
-    }
-
-
-    @Override
-    public Pago generarTransaccion() {
-        ToggleGroup modopago = new ToggleGroup();
-        rbefectivo.setToggleGroup(modopago);
-        rbtarjeta.setToggleGroup(modopago);
         double total = obtenerSuma();
         double iva = 0.83;
         double adicionalT = 0.63;
         Pago p = null;
 
-        if (modopago.getSelectedToggle() == rbtarjeta) {
-            //incrementar valor a pagar por 10% TO DO
-            total += total * 0.10;
+        
+        rbefectivo.setToggleGroup(modopago);
+        rbefectivo.setToggleGroup(modopago);
+        rbtarjeta.setToggleGroup(modopago);
 
-            tfvalor.setText(String.valueOf(total));
-            tfvalor.setDisable(true);
-            tfadt.setText(String.valueOf(adicionalT));
-            tfiva.setText(String.valueOf(iva));
-            tftot.setText(String.valueOf(total + iva + adicionalT));
-            tfadt.setDisable(true);
-            tfiva.setDisable(true);
-            tftot.setDisable(true);
-            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total) + (adicionalT * total), "Tarjeta");
+        
+        modopago.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (newValue == rbtarjeta) {
+                    double total = obtenerSuma();
+                    total += total * 0.10;
 
-            try {
-                mostrarVentanaTarjeta();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                    tfvalor.setText(String.valueOf(total));
+                    tfvalor.setDisable(true);
+                    tfadt.setText(String.valueOf(adicionalT));
+                    tfiva.setText(String.valueOf(iva));
+                    tftot.setText(String.valueOf(total + iva + adicionalT));
+                    tfadt.setDisable(true);
+                    tfiva.setDisable(true);
+                    tftot.setDisable(true);
+                    final Pago p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total) + (adicionalT * total), "Tarjeta");
+
+                    try {
+                        mostrarVentanaTarjeta();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    tfvalor.setText(String.valueOf(total));
+                    tfadt.setText("0.0");
+                    tfiva.setText(String.valueOf("0.0"));
+                    tftot.setText(String.valueOf(total + (iva * total)));
+                    hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
+
+                    tfvalor.setDisable(true);
+                    tfadt.setDisable(true);
+                    tfiva.setDisable(true);
+                    tftot.setDisable(true);
+                    final Pago p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total), "Efectivo");
+                }
             }
-        } else if (modopago.getSelectedToggle() == rbefectivo) {
-            tfvalor.setText(String.valueOf(total));
-            tfadt.setText("0.0");
-            tfiva.setText(String.valueOf("0.0"));
-            tftot.setText(String.valueOf(total + (iva * total)));
-            hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
+        });
 
-            tfvalor.setDisable(true);
-            tfadt.setDisable(true);
-            tfiva.setDisable(true);
-            tftot.setDisable(true);
-            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total), "Efectivo");
-        } else {
-            tfvalor.setText("Hola");
-        }
-        return p;
+    }
+
+    @FXML
+    public void confirmar() throws IOException {
+        OrdenGenerada.mostrarVentanaFinal();
+
+    }
+
+    @FXML
+    public void cancelar() {
+
     }
 
     public double obtenerSuma() {
@@ -242,6 +246,11 @@ public class Pago implements Pagable, Initializable {
         BackgroundFill backgroundFill = new BackgroundFill(Color.PINK, null, null);
         Background background = new Background(backgroundFill);
         hdetalle.setBackground(background);
+    }
+
+    @Override
+    public Pago generarTransaccion() {
+        return null;
     }
 
 }
