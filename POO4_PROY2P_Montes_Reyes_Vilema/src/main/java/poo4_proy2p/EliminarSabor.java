@@ -4,8 +4,11 @@
  */
 package poo4_proy2p;
 
+import java.io.IOException;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -14,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author cmontes
  */
-public class EliminarSabor {
+public class EliminarSabor extends Pedido{
 
     private Stage stageEliminar;
 
@@ -22,6 +25,9 @@ public class EliminarSabor {
         this.stageEliminar = stageEliminar;
     }
 
+    public EliminarSabor(){
+        
+    }
     @FXML
     private Pane rootelim;
 
@@ -41,8 +47,31 @@ public class EliminarSabor {
         }
     }
 
+    ListView<String> listView = lv;
+    
+    
+    
     @FXML
-    public void confirmarElim() {
+    public void confirmarElim() throws IOException {
+        cargarListView();
+        String elementoSeleccionado = listView.getSelectionModel().getSelectedItem();
 
+        if (elementoSeleccionado != null) {
+           
+            boolean esSabor = Pedido.esSabor(elementoSeleccionado);
+
+            if (esSabor) {
+                
+                ObservableList<String> items = lv.getItems();
+
+               
+                if (items.size() > 1) {
+                   
+                    items.remove(elementoSeleccionado);
+                } else {
+                    System.out.println("debe de haber al menos un sabor");
+                }
+            }
+        }
     }
 }
