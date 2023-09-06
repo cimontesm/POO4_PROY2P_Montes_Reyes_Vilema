@@ -42,17 +42,17 @@ public class OrdenGenerada {
     private ImageView foto;
 
     public void initialize() {
-        String idPedido = generarID();
+        String idPedido = String.valueOf(Pedido.id);
         lblpedido.setText("Tu pedido es el #" + idPedido + " te llamaremos cuando esté listo.");
         contarRegresivamente(Pedido.stage, lblcerrar, 5);
     }
 
-    public String generarID() {
-        Random random = new Random();
-        int numero = random.nextInt(10000);
-        String id = String.format("%04d", numero);
-        return id;
-    }
+//    public String generarID() {
+//        Random random = new Random();
+//        int numero = random.nextInt(10000);
+//        String id = String.format("%04d", numero);
+//        return id;
+//    }
 
     public static void mostrarVentanaFinal() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pago.class.getResource("ventanafinal.fxml"));
@@ -75,6 +75,9 @@ public class OrdenGenerada {
 
             if (segundosRestantes[0] == 0) {
                 stage.close(); // Cierra la ventana cuando llega a 0 segundos
+                BaseHelado.stage.close();
+                VentanaOpciones.componentes.clear();
+                VentanaOpciones.valoresAPagar.clear();
             }
         });
 
