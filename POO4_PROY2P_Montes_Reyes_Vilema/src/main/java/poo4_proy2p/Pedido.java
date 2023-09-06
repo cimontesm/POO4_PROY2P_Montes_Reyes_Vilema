@@ -26,7 +26,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -71,44 +70,19 @@ public class Pedido implements Initializable, Serializable {
     private ImageView fondo;
 
     @FXML
-    private ListView lv;
+    public ListView lv;
 
     @FXML
     private Label lblValor;
 
     @FXML
     private Button btnConfirmar;
-        
+
     @FXML
     private Button btnCancelar;
 
     @FXML
     private Button btnEliminar;
-
-    @FXML
-    private Pane rootc;
-    
-    @FXML
-    private HBox hbtns;
-    
-    @FXML
-    private Button btnconf2;
-    
-    @FXML
-    private Button btncancelar2;
-    
-    @FXML
-    private Pane rootelim;
-    
-    @FXML
-    private HBox hbotoneselim;
-    
-    @FXML
-    private Button btnconf3;
-    
-    @FXML
-    private Button btncancelar3;
-    
 
     @FXML
     public void confirmar() {
@@ -137,7 +111,8 @@ public class Pedido implements Initializable, Serializable {
         try {
             Pago.mostrarVentanaPago();
         } catch (IOException e) {
-            System.out.println(e);
+//            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -216,5 +191,19 @@ public class Pedido implements Initializable, Serializable {
         BaseHelado.stage.setTitle("ArmaTuHelado4");
         BaseHelado.stage.show();
     }
-       
+
+    public static boolean esSabor(String elemento) {
+        return elemento.startsWith("Sabor: ");
+    }
+
+    public ListView getLv() {
+        return lv;
+    }
+
+    public void setLv(ListView lv) {
+        this.lv = lv;
+    }
+
+    
+    
 }

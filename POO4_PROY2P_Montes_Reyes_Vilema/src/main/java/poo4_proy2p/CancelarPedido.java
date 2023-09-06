@@ -39,7 +39,12 @@ public class CancelarPedido {
 
     @FXML
     public void confirmarCancel() {
-
+        BaseHelado.stage.close();
+        stageCancelar.close();
+        
+        VentanaOpciones.componentes.clear();
+        VentanaOpciones.valoresAPagar.clear();
+        
     }
 
 }
