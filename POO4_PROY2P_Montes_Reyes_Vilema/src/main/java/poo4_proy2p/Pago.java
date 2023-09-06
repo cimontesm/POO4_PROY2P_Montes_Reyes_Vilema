@@ -29,8 +29,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.ToggleGroup;
 
 /**
+ * Clase pago Nos ayuda a generar las ventanas finales para saber cuánto debe
+ * pagar el usuario con efectivo o tarjeta.
  *
- * @author cmontes
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public class Pago implements Pagable, Initializable {
 
@@ -38,36 +42,77 @@ public class Pago implements Pagable, Initializable {
     private double total;
     private String tipo;
 
+    /**
+     * Construye un nuevo objeto Pago con la información proporcionada.
+     *
+     * @param nombre El nombre del beneficiario (String).
+     * @param total El monto total del pago (double).
+     * @param tipo El tipo de pago (String), por ejemplo, tarjeta de crédito o
+     * efectivo.
+     */
     public Pago(String nombre, double total, String tipo) {
         this.nombre = nombre;
         this.total = total;
         this.tipo = tipo;
     }
 
+    /**
+     * Construye un nuevo objeto Pago sin información inicial.
+     */
     public Pago() {
 
     }
 
+    /**
+     * Obtiene el nombre del Usuario.
+     *
+     * @return El nombre del Usuario como una cadena de caracteres.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Metodo setter para establecer el nombre del Usuario.
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Obtiene el total del Usuario.
+     *
+     * @return El total del Usuario como un double.
+     */
     public double getTotal() {
         return total;
     }
 
+    /**
+     * Metodo setter para establecer el total del Usuario.
+     *
+     * @param total
+     */
     public void setTotal(double total) {
         this.total = total;
     }
 
+    /**
+     * Obtiene el tipo de Usuario.
+     *
+     * @return El tipo de Usuario como una cadena de caracteres.
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     * Establece el tipo de Usuario.
+     *
+     * @param tipo El nuevo tipo de Usuario como una cadena de caracteres.
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -177,6 +222,13 @@ public class Pago implements Pagable, Initializable {
 
     }
 
+    /**
+     * Este método se utiliza para confirmar una acción y mostrar una ventana
+     * final.
+     *
+     * @throws IOException Si ocurre un error al intentar mostrar la ventana
+     * final.
+     */
     @FXML
     public void confirmar() throws IOException {
         OrdenGenerada.mostrarVentanaFinal();
@@ -199,6 +251,12 @@ public class Pago implements Pagable, Initializable {
         return total;
     }
 
+    /**
+     * Muestra la ventana de pago para realizar una transacción de pago.
+     *
+     * @throws IOException Si ocurre un error al cargar la interfaz gráfica de
+     * la ventana de pago.
+     */
     public static void mostrarVentanaPago() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
         Pago.root = fxmLoader.load();
@@ -209,6 +267,12 @@ public class Pago implements Pagable, Initializable {
 
     }
 
+    /**
+     * Muestra una ventana para ingresar los datos de una tarjeta de crédito.
+     *
+     * @throws IOException Si ocurre un error al cargar la interfaz gráfica de
+     * la ventana de tarjeta.
+     */
     @FXML
     public void mostrarVentanaTarjeta() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
@@ -251,6 +315,14 @@ public class Pago implements Pagable, Initializable {
         hdetalle.setBackground(background);
     }
 
+    /**
+     * Inicializa la ventana o control y realiza acciones de inicialización,
+     * como generar una transacción.
+     *
+     * @param url La ubicación relativa de la raíz del objeto a inicializar.
+     * @param rb El recurso de recursos que se pasa a través de la
+     * inicialización, o nulo si no hay ninguno.
+     */
     @Override
     public Pago generarTransaccion() {
         return null;
