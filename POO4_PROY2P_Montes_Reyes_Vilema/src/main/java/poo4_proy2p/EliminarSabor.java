@@ -5,10 +5,13 @@
 package poo4_proy2p;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.collections.ObservableList;
+//import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+//import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -17,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author cmontes
  */
-public class EliminarSabor extends Pedido{
+public class EliminarSabor {
 
     private Stage stageEliminar;
 
@@ -26,7 +29,7 @@ public class EliminarSabor extends Pedido{
     }
 
     public EliminarSabor(){
-        
+//        lv = new ListView<>();
     }
     @FXML
     private Pane rootelim;
@@ -47,31 +50,54 @@ public class EliminarSabor extends Pedido{
         }
     }
 
-    ListView<String> listView = lv;
+//    ListView<String> listView = lv;
     
     
     
     @FXML
     public void confirmarElim() throws IOException {
-        cargarListView();
-        String elementoSeleccionado = listView.getSelectionModel().getSelectedItem();
-
+        String elementoSeleccionado = Pedido.p.getLv().getSelectionModel().getSelectedItem();
+        ArrayList<Boolean> booleanos = new ArrayList<>();
+        ObservableList<String> items = Pedido.p.getLv().getItems();
+        
+        
         if (elementoSeleccionado != null) {
-           
-            boolean esSabor = Pedido.esSabor(elementoSeleccionado);
-
-            if (esSabor) {
+            int longitud =  Math.min(Pedido.p.getLv().getItems().size(),booleanos.size());
+            int trues = 0;
+            
+            for (String item : items){
+                item = Pedido.p.getLv().getSelectionModel().getSelectedItem();
                 
-                ObservableList<String> items = lv.getItems();
-
-               
-                if (items.size() > 1) {
-                   
-                    items.remove(elementoSeleccionado);
-                } else {
-                    System.out.println("debe de haber al menos un sabor");
+                boolean esSabor = Pedido.esSabor(item);
+                booleanos.add(esSabor);
+                if (esSabor){
+                    trues++;
                 }
+                
             }
+            
+            if (trues==1){
+                for (int i=0;i<longitud;i++){
+                    boolean bool = booleanos.get(i);
+                    String elemento = items.get(i);
+                    if (bool){
+                        items.remove(elemento);
+                        Pedido.p.getLv().setItems(items);
+                        VentanaOpciones.componentes.remove(i);
+                        VentanaOpciones.valoresAPagar.remove(i);
+                        stageEliminar.close();
+                    }
+                    
+                }
+                
+            } else {
+                System.out.println("debe de haber al menos un sabor");
+                stageEliminar.close();
+            }
+            
+        } else{
+            stageEliminar.close();
         }
+        
     }
 }
