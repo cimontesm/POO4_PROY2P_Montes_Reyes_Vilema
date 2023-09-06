@@ -25,11 +25,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.ToggleGroup;
+
 /**
  *
  * @author cmontes
  */
 public class Pago implements Pagable, Initializable {
+
     private String nombre;
     private double total;
     private String tipo;
@@ -39,8 +41,9 @@ public class Pago implements Pagable, Initializable {
         this.total = total;
         this.tipo = tipo;
     }
-    public Pago(){
-        
+
+    public Pago() {
+
     }
 
     public String getNombre() {
@@ -76,10 +79,10 @@ public class Pago implements Pagable, Initializable {
     private HBox hrb;
 
     @FXML
-    private  RadioButton rbtarjeta;
+    private RadioButton rbtarjeta;
 
     @FXML
-    private  RadioButton rbefectivo;
+    private RadioButton rbefectivo;
 
     @FXML
     private HBox hdetalle;
@@ -110,102 +113,81 @@ public class Pago implements Pagable, Initializable {
 
     @FXML
     private Button btnCancelar;
-   
-    ToggleGroup modopago;
+
     
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generarTransaccion();
-        modopago = new ToggleGroup();
+        ToggleGroup modopago = new ToggleGroup();
         rbefectivo.setToggleGroup(modopago);
-    rbtarjeta.setToggleGroup(modopago);
-        modoPago();
+        rbtarjeta.setToggleGroup(modopago);
+        generarTransaccion();
+        
     }
-    
 
     @FXML
     public void confirmar() throws IOException {
         OrdenGenerada.mostrarVentanaFinal();
+        
     }
 
     @FXML
     public void cancelar() {
-
+        
     }
 
-    public void modoPago() {
-        double total = obtenerSuma();
-        Toggle seleccion = modopago.getSelectedToggle();
-        if (rbtarjeta == seleccion) {
-            //incrementar valor a pagar por 10% TO DO
-            total += total * 0.10;
-            tfvalor.setText(String.valueOf(total));
-            tfvalor.setEditable(false);
 
-            try {
-                mostrarVentanaTarjeta();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-        } else if (rbefectivo.isSelected()) {
-            generarTransaccion();
-            tfvalor.setText("Hola");
-        }
-    }
-    
     @Override
     public Pago generarTransaccion() {
-        modopago = new ToggleGroup();
+        ToggleGroup modopago = new ToggleGroup();
         rbefectivo.setToggleGroup(modopago);
         rbtarjeta.setToggleGroup(modopago);
         double total = obtenerSuma();
         double iva = 0.83;
         double adicionalT = 0.63;
         Pago p = null;
-        
+
         if (modopago.getSelectedToggle() == rbtarjeta) {
-                //incrementar valor a pagar por 10% TO DO
-                total += total * 0.10;
+            //incrementar valor a pagar por 10% TO DO
+            total += total * 0.10;
 
-                tfvalor.setText(String.valueOf(total));
-                tfvalor.setDisable(true);
-                tfadt.setText(String.valueOf(adicionalT));
-                tfiva.setText(String.valueOf(iva));
-                tftot.setText(String.valueOf(total+iva+adicionalT));
-                tfadt.setDisable(true);
-                tfiva.setDisable(true);
-                tftot.setDisable(true);
-                p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total)+(adicionalT*total),"Tarjeta");
-                
+            tfvalor.setText(String.valueOf(total));
+            tfvalor.setDisable(true);
+            tfadt.setText(String.valueOf(adicionalT));
+            tfiva.setText(String.valueOf(iva));
+            tftot.setText(String.valueOf(total + iva + adicionalT));
+            tfadt.setDisable(true);
+            tfiva.setDisable(true);
+            tftot.setDisable(true);
+            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total) + (adicionalT * total), "Tarjeta");
 
-                try {
-                    mostrarVentanaTarjeta();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-        }   else if (modopago.getSelectedToggle() == rbefectivo) {
-                tfvalor.setText(String.valueOf(total));
-                tfadt.setText("0.0");
-                tfiva.setText(String.valueOf("0.0"));
-                tftot.setText(String.valueOf(total+(iva*total)));
-                hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
-     
-                tfvalor.setDisable(true);
-                tfadt.setDisable(true);
-                tfiva.setDisable(true);
-                tftot.setDisable(true);
-                p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total),"Efectivo");
-            }else{
+            try {
+                mostrarVentanaTarjeta();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } else if (modopago.getSelectedToggle() == rbefectivo) {
+            tfvalor.setText(String.valueOf(total));
+            tfadt.setText("0.0");
+            tfiva.setText(String.valueOf("0.0"));
+            tftot.setText(String.valueOf(total + (iva * total)));
+            hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
+
+            tfvalor.setDisable(true);
+            tfadt.setDisable(true);
+            tfiva.setDisable(true);
+            tftot.setDisable(true);
+            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total), "Efectivo");
+        } else {
             tfvalor.setText("Hola");
         }
         return p;
     }
-    
-    public double obtenerSuma(){
+
+    public double obtenerSuma() {
         double total = 0;
-        for(double valor:VentanaOpciones.valoresAPagar){
-            total+=valor;
+        for (double valor : VentanaOpciones.valoresAPagar) {
+            total += valor;
         }
         return total;
     }
@@ -221,7 +203,7 @@ public class Pago implements Pagable, Initializable {
     }
 
     @FXML
-    public  void mostrarVentanaTarjeta() throws IOException {
+    public void mostrarVentanaTarjeta() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("pago.fxml"));
         VBox vb = new VBox();
         HBox hb = new HBox();
@@ -233,7 +215,6 @@ public class Pago implements Pagable, Initializable {
         Label cvv = new Label("CVV: ");
         vlab.getChildren().addAll(nom, num, caducidad, cvv);
         vlab.setSpacing(24);
-        
 
         VBox vdatos = new VBox();
         TextField tfnombre = new TextField();
@@ -242,31 +223,25 @@ public class Pago implements Pagable, Initializable {
         TextField tfcvv = new TextField();
         vdatos.getChildren().addAll(tfnombre, tfnum, tfcaduc, tfcvv);
         vdatos.setSpacing(15);
-        
 
         Label l = new Label("Ingrese los datos de su tarjeta:");
         l.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
         Color colorP = Color.web("#3e0b63");
         l.setTextFill(colorP);
-        
-        
-        
-        
+
         root.getChildren().add(l);
         l.setLayoutX(293);
         l.setLayoutY(151);
 
-        hb.getChildren().addAll( vlab, vdatos);
+        hb.getChildren().addAll(vlab, vdatos);
         hb.setSpacing(20);
-        HBox.setMargin(hb, new Insets(10,0,0,5));
-        
+        HBox.setMargin(hb, new Insets(10, 0, 0, 5));
+
         hdetalle.getChildren().add(hb);
         hdetalle.setSpacing(20);
         BackgroundFill backgroundFill = new BackgroundFill(Color.PINK, null, null);
         Background background = new Background(backgroundFill);
         hdetalle.setBackground(background);
     }
-
-    
 
 }
