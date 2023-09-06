@@ -39,95 +39,94 @@ import javafx.stage.Stage;
  * @author cmontes
  */
 public class VentanaOpciones implements Initializable {
+
     public static Usuario usuario = null;
-    public static ArrayList<Pedido> pedidos = new ArrayList<>();
+    public static ArrayList<String> pedidos = new ArrayList<>();
     public static ArrayList<Object> componentes = new ArrayList<>();
     public static ArrayList<Double> valoresAPagar = new ArrayList<>();
-    
-    public static void mostrarVentanaOpciones(Usuario usuario) throws IOException{
+
+    public static void mostrarVentanaOpciones(Usuario usuario) throws IOException {
         VentanaOpciones.usuario = usuario;
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("VentanaOpciones.fxml"));
         Parent root = fxmLoader.load();
-        App.scene = new Scene(root,600,400);
+        App.scene = new Scene(root, 600, 400);
         App.stage.setScene(App.scene);
         App.stage.setTitle("Bienvenidos");
         App.stage.show();
     }
-    
+
     @FXML
     private Label lblBienvenida;
-   
+
     @FXML
     private Button btnLocales;
-    
+
     @FXML
     private Button btnPedido;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lblBienvenida.setText("Bienvenido/a "+usuario.getUsuario());
+        lblBienvenida.setText("Bienvenido/a " + usuario.getUsuario());
 //        crearVentanaPedidos();
         Stage stage = new Stage();
         ListView root = new ListView();
-        Scene scene = new Scene(root,420,420);
+        Scene scene = new Scene(root, 420, 420);
 //        HBox h1 = new HBox();
-        Thread pedidos = new Thread(()->{
-            while(true){
-                try{
-                    Platform.runLater(()->{
-                        cargarPedidos(stage,root,scene);
+        Thread pedidos = new Thread(() -> {
+            while (true) {
+                try {
+                    Platform.runLater(() -> {
+                        cargarPedidos(stage, root, scene);
                     });
                     Thread.sleep(5000);
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }
-                
+
         });
         pedidos.setDaemon(true);
         pedidos.start();
-        
+
         stage.setScene(scene);
         stage.setTitle("Pedidos Generados");
         stage.show();
-        
+
     }
-    
-    public void cargarPedidos(Stage stage, ListView root, Scene scene){
+
+    public void cargarPedidos(Stage stage, ListView root, Scene scene) {
         root.getItems().clear();
-        try(BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))){
+        try ( BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))) {
             String linea;
             pedidos.clear();
-            while((linea=bf.readLine())!= null){
+            while ((linea = bf.readLine()) != null) {
                 String[] datos = linea.trim().split(",");
-                Pedido p = new Pedido(datos[0],Double.parseDouble(datos[2]),datos[1]);
-                pedidos.add(p);
+//                Pedido p = new Pedido(datos[0], Double.parseDouble(datos[2]), Integer.parseInt(datos[1]));
+                pedidos.add(datos[1]+","+datos[0]);
 
             }
-            
+
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontro el archivo.");
         } catch (IOException ex) {
             System.out.println("Algo salio mal.");
         }
-        
-        ObservableList<Pedido> items = FXCollections.observableArrayList(pedidos);
+
+        ObservableList<String> items = FXCollections.observableArrayList(pedidos);
         root.setItems(items);
         root.setDisable(false);
-            
-        
+
     }
-    
+
     @FXML
-    public void mostrarVentanaPedido1(){
+    public void mostrarVentanaPedido1() {
         try {
             BaseHelado.stage = new Stage();
             FXMLLoader fxmloader = new FXMLLoader(VentanaOpciones.class.getResource("pedido.fxml"));
             Parent root;
             root = fxmloader.load();
-            BaseHelado.scene = new Scene(root,600,400);
+            BaseHelado.scene = new Scene(root, 600, 400);
             BaseHelado.stage.setScene(BaseHelado.scene);
             BaseHelado.stage.setTitle("ArmaTuHelado");
             BaseHelado.stage.show();
@@ -137,169 +136,160 @@ public class VentanaOpciones implements Initializable {
         }
     }
 
-  
     private void mostrarLocales(AnchorPane root) {
         ArrayList<Local> locales = hallarLocales();
         ArrayList<ImageView> ubicaciones = new ArrayList<>();
-        Thread hilo = new Thread(()->{
-            for(Local local:locales){
-                Platform.runLater(()->{
-                    try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))){
+        Thread hilo = new Thread(() -> {
+            for (Local local : locales) {
+                Platform.runLater(() -> {
+                    try ( FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))) {
                         Image image = new Image(input);
-                        
+
                         ImageView punto = new ImageView(image);
-                        punto.setFitWidth(300);
-                        punto.setFitHeight(300);
+                        punto.setFitWidth(200);
+                        punto.setFitHeight(200);
                         punto.setLayoutX(local.getCoordX());
                         punto.setLayoutY(local.getCoordY());
                         if (!ubicaciones.contains(punto)) {
                             ubicaciones.add(punto);
                             root.getChildren().addAll(punto);
                         }
-                        punto.setOnMouseClicked(event->mostrarInfo(local.nombre,local.horario));
-                        
-                        
-                        
-                        
+                        punto.setOnMouseClicked(event -> mostrarInfo(local.nombre, local.horario));
+
                     } catch (FileNotFoundException ex) {
                         ex.printStackTrace();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 });
-                
-                int tiempo = new Random().nextInt(10)+1;
-                try{
-                    Thread.sleep(tiempo*1000);
-                }catch(InterruptedException e){
+
+                int tiempo = new Random().nextInt(10) + 1;
+                try {
+                    Thread.sleep(tiempo * 1000);
+                } catch (InterruptedException e) {
                     System.out.println("Algo salio mal");
                 }
             }
-        
+
         });
         hilo.setDaemon(true);
         hilo.start();
-        
-        
+
     }
-    
-    
-    
-    public ArrayList<Local> hallarLocales(){
+
+    public ArrayList<Local> hallarLocales() {
         ArrayList<Local> locales = new ArrayList<>();
-        try(BufferedReader bf = new BufferedReader(new FileReader("locales.txt"))){
+        try ( BufferedReader bf = new BufferedReader(new FileReader("locales.txt"))) {
             String linea = bf.readLine();
-            while(linea!=null){
-                
+            while (linea != null) {
+
                 String datosP[] = linea.trim().split(",");
                 double coordX = Double.parseDouble(datosP[0]);
                 double coordY = Double.parseDouble(datosP[1]);
                 String nombre = datosP[2];
                 String horario = datosP[3];
-                Local local = new Local(coordX,coordY,nombre,horario);
+                Local local = new Local(coordX, coordY, nombre, horario);
                 locales.add(local);
-                
+
                 linea = bf.readLine();
             }
-            
-            
+
         } catch (FileNotFoundException ex) {
             System.out.println("No se encontro el archivo");;
         } catch (IOException ex) {
             System.out.println("Algo salio mal");
         }
-        
+
         return locales;
 
     }
-    
-    public void mostrarInfo(String nombre, String horario){
+
+    public void mostrarInfo(String nombre, String horario) {
         Stage stage = new Stage();
         VBox root = new VBox();
-        Scene scene = new Scene(root,300,150);
+        Scene scene = new Scene(root, 300, 150);
         Label lnombre = new Label(nombre);
         lnombre.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-        Label lhorario = new Label("Horario: "+horario);
+        Label lhorario = new Label("Horario: " + horario);
         Label lsegundos = new Label("Cerrando en 5 segundos...");
-        
-        root.getChildren().addAll(lnombre,lhorario,lsegundos);
+
+        root.getChildren().addAll(lnombre, lhorario, lsegundos);
         root.setPadding(new Insets(10));
-        
+
         stage.setScene(scene);
         stage.setTitle("Informacion de local");
         stage.show();
-        
-        
-        Thread duracion = new Thread(()->{
-            int tiempo = 5; 
-            while(tiempo>0){
-                
-                try{
+
+        Thread duracion = new Thread(() -> {
+            int tiempo = 5;
+            while (tiempo > 0) {
+
+                try {
                     Thread.sleep(1000);
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     System.out.println("Algo salio mal");
                 }
-                tiempo --;
-                
+                tiempo--;
+
                 final int segundosF = tiempo;
-                
-                Platform.runLater(()->{
-                    lsegundos.setText("Cerrando en "+segundosF+" restantes");
+
+                Platform.runLater(() -> {
+                    lsegundos.setText("Cerrando en " + segundosF + " restantes");
 
                 });
-               
+
             }
-            Platform.runLater(()->{
-                
+            Platform.runLater(() -> {
+
                 stage.close();
-        
+
             });
-            
-        
+
         });
-        
+
         duracion.setDaemon(true);
         duracion.start();
-        
-        
+
     }
 
     @FXML
     private void verMapa(ActionEvent event) {
-            
+
         Stage stage = new Stage();
         AnchorPane root = new AnchorPane();
-        Scene scene = new Scene(root,800,600);
+        Scene scene = new Scene(root, 800, 600);
         ImageView imageView = null;
 
-        try(FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/mapa2.png"))){
+        try ( FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/mapa2.png"))) {
             Image image = new Image(input);
             imageView = new ImageView(image);
-            
+            imageView.setFitWidth(800);
+            imageView.setFitHeight(600);
+
         } catch (FileNotFoundException ex) {
-            System.out.println("No se encontro el archivo");;
+            System.out.println("No se encontro el archivo");
         } catch (IOException ex) {
             System.out.println("Algo salio mal");
         }
-        
+
         root.getChildren().add(imageView);
         mostrarLocales(root);
         stage.setScene(scene);
         stage.show();
     }
-    
-    public static void cargarValorAPagar(Label lblValor){
+
+    public static void cargarValorAPagar(Label lblValor) {
         double suma = 0.0;
 //        DecimalFormat df = new DecimalFormat("#.##");
-        
-        for (Double valor : VentanaOpciones.valoresAPagar){
+
+        for (Double valor : VentanaOpciones.valoresAPagar) {
             suma += valor;
         }
 //        String numFormat = df.format(suma);
-        
+
 //        lblValor.setText("Valor a pagar: "+Double.parseDouble(numFormat));
-        lblValor.setText("Valor a pagar: "+suma);
-        
+        lblValor.setText("Valor a pagar: " + suma);
+
     }
-    
+
 }

@@ -114,8 +114,8 @@ public class Pago implements Pagable, Initializable {
     private ToggleGroup modopago;
 
     @FXML
-    public void confirmar() {
-
+    public void confirmar() throws IOException {
+        OrdenGenerada.mostrarVentanaFinal();
     }
 
     @FXML
