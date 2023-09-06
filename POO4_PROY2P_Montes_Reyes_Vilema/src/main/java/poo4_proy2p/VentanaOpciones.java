@@ -35,16 +35,50 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
+ * Clase VentanaOpciones me permite crear las primeras ventanas para encontrar
+ * locales o realizar un pedido además nos ayuda como controlador para alguna
+ * escena como pedido. nos ayuda a generar los contenidos de las ventanas con
+ * las opciones indicadas.
  *
- * @author cmontes
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public class VentanaOpciones implements Initializable {
 
+    /**
+     * Almacena información sobre el usuario actual que está interactuando con
+     * la aplicación. Puede ser utilizado para rastrear la sesión y la
+     * interacción del usuario.
+     */
     public static Usuario usuario = null;
+
+    /**
+     * Almacena una lista de pedidos realizados por el usuario actual o por la
+     * sesión actual. Los pedidos se agregan a esta lista para su posterior
+     * procesamiento o seguimiento.
+     */
     public static ArrayList<String> pedidos = new ArrayList<>();
+
+    /**
+     * Almacena una lista de componentes seleccionados por el usuario para armar
+     * su pedido. Los componentes pueden incluir bases, sabores, toppings, etc.
+     */
     public static ArrayList<Object> componentes = new ArrayList<>();
+
+    /**
+     * Almacena una lista de valores asociados a los componentes seleccionados
+     * por el usuario. Cada valor corresponde al costo de un componente y se
+     * utiliza para calcular el costo total del pedido.
+     */
     public static ArrayList<Double> valoresAPagar = new ArrayList<>();
 
+    /**
+     * Muestra la ventana de opciones para el usuario especificado.
+     *
+     * @param usuario El usuario para el cual se muestra la ventana de opciones.
+     * @throws IOException Si ocurre un error al cargar la interfaz de usuario.
+     */
     public static void mostrarVentanaOpciones(Usuario usuario) throws IOException {
         VentanaOpciones.usuario = usuario;
         FXMLLoader fxmLoader = new FXMLLoader(VentanaOpciones.class.getResource("VentanaOpciones.fxml"));
@@ -64,6 +98,13 @@ public class VentanaOpciones implements Initializable {
     @FXML
     private Button btnPedido;
 
+    /**
+     * Inicializa la ventana de opciones para el usuario actual y carga pedidos
+     * de forma periódica.
+     *
+     * @param url Recurso URL (no utilizado en este contexto).
+     * @param rb ResourceBundle (no utilizado en este contexto).
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lblBienvenida.setText("Bienvenido/a " + usuario.getUsuario());
@@ -95,15 +136,23 @@ public class VentanaOpciones implements Initializable {
 
     }
 
+    /**
+     * Carga pedidos desde un archivo, muestra la lista de pedidos y actualiza
+     * la interfaz de usuario.
+     *
+     * @param stage La ventana de Stage actual.
+     * @param root El ListView donde se mostrarán los pedidos.
+     * @param scene La escena de la ventana actual.
+     */
     public void cargarPedidos(Stage stage, ListView root, Scene scene) {
         root.getItems().clear();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader("pedidos.txt"))) {
             String linea;
             pedidos.clear();
             while ((linea = bf.readLine()) != null) {
                 String[] datos = linea.trim().split(",");
 //                Pedido p = new Pedido(datos[0], Double.parseDouble(datos[2]), Integer.parseInt(datos[1]));
-                pedidos.add(datos[1]+","+datos[0]);
+                pedidos.add(datos[1] + "," + datos[0]);
 
             }
 
@@ -119,6 +168,10 @@ public class VentanaOpciones implements Initializable {
 
     }
 
+    /**
+     * Abre una nueva ventana para mostrar el pedido actual y sus detalles. Esta
+     * ventana permite a los usuarios revisar su pedido antes de confirmarlo.
+     */
     @FXML
     public void mostrarVentanaPedido1() {
         try {
@@ -136,13 +189,23 @@ public class VentanaOpciones implements Initializable {
         }
     }
 
+    /**
+     * Muestra ubicaciones de locales en un mapa y actualiza su estado de forma
+     * periódica. Utiliza imágenes para representar las ubicaciones de los
+     * locales y muestra información detallada al hacer clic en cada ubicación.
+     * Este método inicia un hilo de ejecución para actualizar periódicamente la
+     * información de los locales.
+     *
+     * @param root El nodo raíz en el que se mostrarán las ubicaciones de los
+     * locales.
+     */
     private void mostrarLocales(AnchorPane root) {
         ArrayList<Local> locales = hallarLocales();
         ArrayList<ImageView> ubicaciones = new ArrayList<>();
         Thread hilo = new Thread(() -> {
             for (Local local : locales) {
                 Platform.runLater(() -> {
-                    try ( FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))) {
+                    try (FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/logo1.png"))) {
                         Image image = new Image(input);
 
                         ImageView punto = new ImageView(image);
@@ -177,9 +240,19 @@ public class VentanaOpciones implements Initializable {
 
     }
 
+    /**
+     * Recupera la información de locales a partir de un archivo y la almacena
+     * en una lista. Lee un archivo de texto llamado "locales.txt" que contiene
+     * información sobre los locales, como coordenadas geográficas, nombres y
+     * horarios. Luego, crea objetos Local a partir de los datos leídos y los
+     * agrega a una lista de locales.
+     *
+     * @return Una lista de objetos Local que representan los locales
+     * encontrados en el archivo.
+     */
     public ArrayList<Local> hallarLocales() {
         ArrayList<Local> locales = new ArrayList<>();
-        try ( BufferedReader bf = new BufferedReader(new FileReader("locales.txt"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader("locales.txt"))) {
             String linea = bf.readLine();
             while (linea != null) {
 
@@ -204,6 +277,15 @@ public class VentanaOpciones implements Initializable {
 
     }
 
+    /**
+     * Muestra información detallada sobre un local, incluyendo su nombre,
+     * horario y un temporizador de cierre.
+     *
+     * @param nombre El nombre del local que se mostrará en la ventana de
+     * información.
+     * @param horario El horario del local que se mostrará en la ventana de
+     * información.
+     */
     public void mostrarInfo(String nombre, String horario) {
         Stage stage = new Stage();
         VBox root = new VBox();
@@ -252,6 +334,14 @@ public class VentanaOpciones implements Initializable {
 
     }
 
+    /**
+     * Abre una ventana que muestra un mapa y la ubicación de varios locales.
+     * Cada local se representa como un punto en el mapa con su nombre y
+     * horario. Además, se inicia un hilo que actualiza periódicamente la
+     * ubicación de los locales.
+     *
+     * @param event El evento de acción que desencadena la apertura del mapa.
+     */
     @FXML
     private void verMapa(ActionEvent event) {
 
@@ -260,7 +350,7 @@ public class VentanaOpciones implements Initializable {
         Scene scene = new Scene(root, 800, 600);
         ImageView imageView = null;
 
-        try ( FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/mapa2.png"))) {
+        try (FileInputStream input = new FileInputStream(new File("src/main/resources/poo4_proy2p/mapa2.png"))) {
             Image image = new Image(input);
             imageView = new ImageView(image);
             imageView.setFitWidth(800);
@@ -278,6 +368,11 @@ public class VentanaOpciones implements Initializable {
         stage.show();
     }
 
+    /**
+     * Calcula y muestra el valor total a pagar en la etiqueta especificada.
+     *
+     * @param lblValor La etiqueta en la que se mostrará el valor total a pagar.
+     */
     public static void cargarValorAPagar(Label lblValor) {
         double suma = 0.0;
 //        DecimalFormat df = new DecimalFormat("#.##");

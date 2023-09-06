@@ -13,7 +13,16 @@ import java.io.IOException;
  */
 public class App extends Application {
 
+    /**
+     * La escena actual en la aplicación JavaFX. Esta variable se utiliza para
+     * gestionar y cambiar la escena actual en la interfaz de usuario.
+     */
     public static Scene scene;
+    /**
+     * La ventana principal de la aplicación JavaFX. Esta variable representa la
+     * ventana principal de la aplicación y se utiliza para mostrar y gestionar
+     * ventanas y diálogos.
+     */
     public static Stage stage;
 
     /**
@@ -43,7 +52,6 @@ public class App extends Application {
      * @param args Los argumentos de línea de comandos (que generalmente no se
      * utilizan en una aplicación JavaFX).
      */
-
     public static void main(String[] args) {
         launch();
 

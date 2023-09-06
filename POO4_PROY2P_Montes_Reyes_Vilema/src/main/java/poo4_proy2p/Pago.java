@@ -75,7 +75,7 @@ public class Pago implements Pagable, Initializable {
     /**
      * Metodo setter para establecer el nombre del Usuario.
      *
-     * @param nombre
+     * @param nombre asignado
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -93,7 +93,7 @@ public class Pago implements Pagable, Initializable {
     /**
      * Metodo setter para establecer el total del Usuario.
      *
-     * @param total
+     * @param total asignado
      */
     public void setTotal(double total) {
         this.total = total;
@@ -163,6 +163,19 @@ public class Pago implements Pagable, Initializable {
 
     ToggleGroup modopago;
 
+    /**
+     * Inicializa la ventana de pago con las opciones de pago disponibles.
+     *
+     * Este método se ejecuta cuando se carga la ventana de pago y configura las
+     * opciones de pago disponibles, como efectivo y tarjeta. Además, calcula el
+     * total a pagar y muestra la información relacionada con la opción de pago
+     * seleccionada.
+     *
+     * @param url La ubicación relativa del recurso, o null si no está
+     * disponible.
+     * @param rb El ResourceBundle para localizar objetos, o null si no está
+     * disponible.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ToggleGroup modopago = new ToggleGroup();
@@ -176,12 +189,10 @@ public class Pago implements Pagable, Initializable {
         double adicionalT = 0.63;
         Pago p = null;
 
-        
         rbefectivo.setToggleGroup(modopago);
         rbefectivo.setToggleGroup(modopago);
         rbtarjeta.setToggleGroup(modopago);
 
-        
         modopago.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -235,14 +246,29 @@ public class Pago implements Pagable, Initializable {
 
     }
 
+    /**
+     * Cierra la ventana actual y borra los elementos del pedido.
+     *
+     * Este método se utiliza para cancelar el pedido actual. Cierra la ventana
+     * en la que se encuentra y borra cualquier información relacionada con el
+     * pedido, incluyendo los elementos seleccionados y los valores acumulados.
+     */
     @FXML
     public void cancelar() {
         BaseHelado.stage.close();
-        
+
         VentanaOpciones.componentes.clear();
         VentanaOpciones.valoresAPagar.clear();
     }
 
+    /**
+     * Calcula y devuelve la suma de los valores en la lista de precios.
+     *
+     * Este método itera a través de la lista de valores almacenados en
+     * VentanaOpciones.valoresAPagar y calcula la suma total de esos valores.
+     *
+     * @return El valor total acumulado de los elementos seleccionados.
+     */
     public double obtenerSuma() {
         double total = 0;
         for (double valor : VentanaOpciones.valoresAPagar) {
@@ -315,14 +341,6 @@ public class Pago implements Pagable, Initializable {
         hdetalle.setBackground(background);
     }
 
-    /**
-     * Inicializa la ventana o control y realiza acciones de inicialización,
-     * como generar una transacción.
-     *
-     * @param url La ubicación relativa de la raíz del objeto a inicializar.
-     * @param rb El recurso de recursos que se pasa a través de la
-     * inicialización, o nulo si no hay ninguno.
-     */
     @Override
     public Pago generarTransaccion() {
         return null;

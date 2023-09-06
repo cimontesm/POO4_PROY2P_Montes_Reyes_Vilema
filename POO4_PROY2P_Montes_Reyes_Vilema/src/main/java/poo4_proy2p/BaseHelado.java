@@ -31,8 +31,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * Clase Base Helado Nos ayuda a generar la ventana de las bases, crearlas, leer el archivo
- * colocar las imágenes y seleccionar y recuperar las selecciones de los usuarios. 
+ * Clase Base Helado Nos ayuda a generar la ventana de las bases, crearlas, leer
+ * el archivo colocar las imágenes y seleccionar y recuperar las selecciones de
+ * los usuarios.
+ *
  * @author Cecilia Montes
  * @author Kimberly Reyes
  * @author Daniel Vilema
@@ -43,7 +45,16 @@ public class BaseHelado implements Initializable {
     double precio;
     ArrayList<ToggleButton> tgbuttons;
     ArrayList<Double> precios;
+    /**
+     * La escena actual en la aplicación JavaFX. Esta variable se utiliza para
+     * gestionar y cambiar la escena actual en la interfaz de usuario.
+     */
     public static Stage stage;
+    /**
+     * La ventana principal de la aplicación JavaFX. Esta variable representa la
+     * ventana principal de la aplicación y se utiliza para mostrar y gestionar
+     * ventanas y diálogos.
+     */
     public static Scene scene;
 
     /**

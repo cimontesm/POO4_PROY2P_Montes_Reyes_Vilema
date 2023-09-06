@@ -40,9 +40,9 @@ public class EliminarSabor {
         this.stageEliminar = stageEliminar;
     }
 
-    public EliminarSabor() {
-//        lv = new ListView<>();
-    }
+//    public EliminarSabor() {
+////        lv = new ListView<>();
+//    }
     @FXML
     private Pane rootelim;
 

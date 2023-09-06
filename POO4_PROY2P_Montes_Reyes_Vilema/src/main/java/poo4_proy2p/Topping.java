@@ -35,19 +35,39 @@ public class Topping implements Initializable {
     ArrayList<CheckBox> cboxes;
     ArrayList<Double> precios;
 
-    public Topping(){
-        
+    /**
+     * Crea una instancia de la clase Topping sin inicializar sus atributos.
+     */
+    public Topping() {
+
     }
-    
+
+    /**
+     * Crea una instancia de la clase Topping con un nombre y un precio
+     * específicos.
+     *
+     * @param nombre El nombre del topping.
+     * @param precio El precio del topping.
+     */
     public Topping(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
 
+    /**
+     * Obtiene el nombre del topping.
+     *
+     * @return El nombre del topping.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Obtiene el precio del topping.
+     *
+     * @return El precio del topping.
+     */
     public double getPrecio() {
         return precio;
     }
@@ -85,37 +105,54 @@ public class Topping implements Initializable {
     @FXML
     private Button btnContinuar;
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón
+     * "Continuar" en la ventana de selección de toppings. Selecciona los
+     * toppings marcados por el usuario y los agrega a la lista de componentes
+     * del pedido actual. También agrega los precios de los toppings
+     * seleccionados a la lista de valores a pagar. Después de completar la
+     * selección, muestra la ventana de pedido para que el usuario continúe
+     * configurando su pedido.
+     */
     @FXML
-    public void continuar(){
-        
+    public void continuar() {
+
         ArrayList<Boolean> lbooleanos = elementoSeleccionado(cboxes);
         int longitud = Math.min(cboxes.size(), lbooleanos.size());
-        
-        for (int i=0;i<longitud;i++){
+
+        for (int i = 0; i < longitud; i++) {
             CheckBox elemento = cboxes.get(i);
             boolean bool = lbooleanos.get(i);
             double precio = precios.get(i);
-            
-            if (bool){
+
+            if (bool) {
                 VentanaOpciones.componentes.add(elemento.getUserData());
                 VentanaOpciones.valoresAPagar.add(precio);
-                
+
             }
-            
+
         }
-        
+
         try {
             Pedido.mostrarVentanaPedido();
-        } catch(IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
+    /**
+     * Carga los toppings disponibles desde el archivo "toppings.txt" y los
+     * muestra en forma de casillas de verificación (checkboxes). Los nombres y
+     * precios de los toppings se leen desde el archivo y se asignan a las
+     * casillas de verificación correspondientes. También se almacenan los
+     * precios de los toppings en la lista "precios" para su posterior uso en el
+     * cálculo del precio total.
+     */
     public void cargarTopping() {
         cboxes = new ArrayList<>();
         precios = new ArrayList<>();
-        
-        try ( BufferedReader br = new BufferedReader(new FileReader("toppings.txt"))) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader("toppings.txt"))) {
             String linea;
             int i = 1;
             while ((linea = br.readLine()) != null && i <= 6) {
@@ -127,10 +164,10 @@ public class Topping implements Initializable {
                     String checkBoxName = "cb" + i;
                     CheckBox checkBox = (CheckBox) getClass().getDeclaredField(checkBoxName).get(this);
                     checkBox.setText(nombreTopping + " - " + precioTopping);
-                    checkBox.setUserData(new Topping(nombreTopping,Double.parseDouble(precioTopping)));
+                    checkBox.setUserData(new Topping(nombreTopping, Double.parseDouble(precioTopping)));
                     cboxes.add(checkBox);
                     precios.add(Double.parseDouble(precioTopping));
-                    
+
                     i++;
                 }
 
@@ -143,8 +180,14 @@ public class Topping implements Initializable {
         }
 
     }
-    
-    public static void cargarVentanaTopping() throws IOException{
+
+    /**
+     * Carga y muestra la ventana de selección de toppings.
+     *
+     * @throws IOException Si ocurre un error al cargar la ventana de selección
+     * de toppings.
+     */
+    public static void cargarVentanaTopping() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Sabores.class.getResource("toppings.fxml"));
         Parent root = fxmLoader.load();
         BaseHelado.scene = new Scene(root, 600, 400);
@@ -152,12 +195,20 @@ public class Topping implements Initializable {
         BaseHelado.stage.setTitle("ArmaTuHelado3");
         BaseHelado.stage.show();
     }
-    
-    public ArrayList<Boolean> elementoSeleccionado(ArrayList<CheckBox> cboxes){
+
+    /**
+     * Verifica si cada casilla de verificación en la lista está seleccionada o
+     * no.
+     *
+     * @param cboxes La lista de casillas de verificación a verificar.
+     * @return Una lista de valores booleanos que indican si cada casilla de
+     * verificación está seleccionada o no.
+     */
+    public ArrayList<Boolean> elementoSeleccionado(ArrayList<CheckBox> cboxes) {
         ArrayList<Boolean> retorno = new ArrayList<>();
-        
-        for (CheckBox c : cboxes){
-            if (c.isSelected()){
+
+        for (CheckBox c : cboxes) {
+            if (c.isSelected()) {
                 retorno.add(true);
             } else {
                 retorno.add(false);
@@ -166,12 +217,19 @@ public class Topping implements Initializable {
         return retorno;
     }
 
+    /**
+     * Inicializa la ventana de selección de Toppings.
+     *
+     * @param url La ubicación relativa de la raíz del objeto a inicializar.
+     * @param rb El recurso de recursos que se pasó al cargador de objetos, o
+     * nulo si no hay ninguno.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTopping();
-        
+
         VentanaOpciones.cargarValorAPagar(lblValor);
-        
+
     }
-    
+
 }
