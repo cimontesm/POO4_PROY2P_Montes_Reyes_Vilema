@@ -76,10 +76,10 @@ public class Pago implements Pagable, Initializable {
     private HBox hrb;
 
     @FXML
-    private RadioButton rbtarjeta;
+    private  RadioButton rbtarjeta;
 
     @FXML
-    private RadioButton rbefectivo;
+    private  RadioButton rbefectivo;
 
     @FXML
     private HBox hdetalle;
@@ -110,8 +110,18 @@ public class Pago implements Pagable, Initializable {
 
     @FXML
     private Button btnCancelar;
-    @FXML
-    private ToggleGroup modopago;
+   
+    ToggleGroup modopago;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        generarTransaccion();
+        modopago = new ToggleGroup();
+        rbefectivo.setToggleGroup(modopago);
+    rbtarjeta.setToggleGroup(modopago);
+        modoPago();
+    }
+    
 
     @FXML
     public void confirmar() throws IOException {
@@ -143,26 +153,29 @@ public class Pago implements Pagable, Initializable {
             tfvalor.setText("Hola");
         }
     }
-
+    
     @Override
     public Pago generarTransaccion() {
-        Toggle seleccion = modopago.getSelectedToggle();
+        modopago = new ToggleGroup();
+        rbefectivo.setToggleGroup(modopago);
+        rbtarjeta.setToggleGroup(modopago);
         double total = obtenerSuma();
         double iva = 0.83;
         double adicionalT = 0.63;
         Pago p = null;
-        if (seleccion==rbtarjeta) {
+        
+        if (modopago.getSelectedToggle() == rbtarjeta) {
                 //incrementar valor a pagar por 10% TO DO
                 total += total * 0.10;
 
                 tfvalor.setText(String.valueOf(total));
-                tfvalor.setEditable(false);
+                tfvalor.setDisable(true);
                 tfadt.setText(String.valueOf(adicionalT));
                 tfiva.setText(String.valueOf(iva));
                 tftot.setText(String.valueOf(total+iva+adicionalT));
-                tfadt.setEditable(false);
-                tfiva.setEditable(false);
-                tftot.setEditable(false);
+                tfadt.setDisable(true);
+                tfiva.setDisable(true);
+                tftot.setDisable(true);
                 p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total)+(adicionalT*total),"Tarjeta");
                 
 
@@ -171,20 +184,17 @@ public class Pago implements Pagable, Initializable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-        }   else if (seleccion==rbefectivo) {
+        }   else if (modopago.getSelectedToggle() == rbefectivo) {
                 tfvalor.setText(String.valueOf(total));
                 tfadt.setText("0.0");
                 tfiva.setText(String.valueOf("0.0"));
                 tftot.setText(String.valueOf(total+(iva*total)));
                 hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
-                
-                
-                
-
-                tfvalor.setEditable(false);
-                tfadt.setEditable(false);
-                tfiva.setEditable(false);
-                tftot.setEditable(false);
+     
+                tfvalor.setDisable(true);
+                tfadt.setDisable(true);
+                tfiva.setDisable(true);
+                tftot.setDisable(true);
                 p = new Pago(VentanaOpciones.usuario.usuario,total+(iva*total),"Efectivo");
             }else{
             tfvalor.setText("Hola");
@@ -257,10 +267,6 @@ public class Pago implements Pagable, Initializable {
         hdetalle.setBackground(background);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        generarTransaccion();
-        //modoPago();
-    }
+    
 
 }
