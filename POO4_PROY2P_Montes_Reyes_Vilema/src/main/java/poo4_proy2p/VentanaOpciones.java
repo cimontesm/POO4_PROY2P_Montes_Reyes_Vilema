@@ -41,7 +41,7 @@ import javafx.stage.Stage;
 public class VentanaOpciones implements Initializable {
 
     public static Usuario usuario = null;
-    public static ArrayList<Pedido> pedidos = new ArrayList<>();
+    public static ArrayList<String> pedidos = new ArrayList<>();
     public static ArrayList<Object> componentes = new ArrayList<>();
     public static ArrayList<Double> valoresAPagar = new ArrayList<>();
 
@@ -102,8 +102,8 @@ public class VentanaOpciones implements Initializable {
             pedidos.clear();
             while ((linea = bf.readLine()) != null) {
                 String[] datos = linea.trim().split(",");
-                Pedido p = new Pedido(datos[0], Double.parseDouble(datos[2]), datos[1]);
-                pedidos.add(p);
+//                Pedido p = new Pedido(datos[0], Double.parseDouble(datos[2]), Integer.parseInt(datos[1]));
+                pedidos.add(datos[1]+","+datos[0]);
 
             }
 
@@ -113,7 +113,7 @@ public class VentanaOpciones implements Initializable {
             System.out.println("Algo salio mal.");
         }
 
-        ObservableList<Pedido> items = FXCollections.observableArrayList(pedidos);
+        ObservableList<String> items = FXCollections.observableArrayList(pedidos);
         root.setItems(items);
         root.setDisable(false);
 
