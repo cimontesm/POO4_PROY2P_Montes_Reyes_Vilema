@@ -185,7 +185,10 @@ public class Pago implements Pagable, Initializable {
 
     @FXML
     public void cancelar() {
-
+        BaseHelado.stage.close();
+        
+        VentanaOpciones.componentes.clear();
+        VentanaOpciones.valoresAPagar.clear();
     }
 
     public double obtenerSuma() {
