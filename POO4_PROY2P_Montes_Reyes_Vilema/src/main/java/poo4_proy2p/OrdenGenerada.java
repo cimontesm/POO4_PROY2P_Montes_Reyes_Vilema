@@ -21,8 +21,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
+ * Clase OrdenGenerada para controlar las ventanas
  *
- * @author cmontes
+ *
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public class OrdenGenerada {
 
@@ -41,12 +45,22 @@ public class OrdenGenerada {
     @FXML
     private ImageView foto;
 
+    /**
+     * Inicializa la ventana de confirmación de pedido. Genera un ID de pedido
+     * único y muestra un mensaje con el número de pedido. Realiza una cuenta
+     * regresiva para cerrar la ventana después de un tiempo determinado.
+     */
     public void initialize() {
         String idPedido = generarID();
         lblpedido.setText("Tu pedido es el #" + idPedido + " te llamaremos cuando esté listo.");
         contarRegresivamente(Pedido.stage, lblcerrar, 5);
     }
 
+    /**
+     * Genera un ID único de pedido.
+     *
+     * @return Un ID de pedido único en formato de cadena.
+     */
     public String generarID() {
         Random random = new Random();
         int numero = random.nextInt(10000);
@@ -54,6 +68,13 @@ public class OrdenGenerada {
         return id;
     }
 
+    /**
+     * Muestra la ventana final del proceso de pedido. Carga la interfaz de
+     * usuario desde el archivo "ventanafinal.fxml" y la muestra en la escena
+     * actual.
+     *
+     * @throws IOException Si ocurre un error al cargar la interfaz de usuario.
+     */
     public static void mostrarVentanaFinal() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pago.class.getResource("ventanafinal.fxml"));
         Parent root = fxmLoader.load();
@@ -64,9 +85,18 @@ public class OrdenGenerada {
 
     }
 
+    /**
+     * Realiza una cuenta regresiva y cierra la ventana después de un tiempo
+     * determinado.
+     *
+     * @param stage El objeto Stage que se cerrará al final de la cuenta
+     * regresiva.
+     * @param lblContador El objeto Label que muestra el contador de tiempo.
+     * @param segundos El número total de segundos para la cuenta regresiva.
+     */
     public static void contarRegresivamente(Stage stage, Label lblContador, int segundos) {
         Duration duracionTotal = Duration.seconds(segundos);
-        final int[] segundosRestantes = { segundos }; // Variable final para el seguimiento de los segundos restantes
+        final int[] segundosRestantes = {segundos}; // Variable final para el seguimiento de los segundos restantes
 
         // Crea un KeyFrame que se ejecutará cada segundo
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), e -> {

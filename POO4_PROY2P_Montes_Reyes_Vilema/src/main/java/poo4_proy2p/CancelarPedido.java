@@ -10,8 +10,12 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
+ * Clase CancelarPedido Nos ayuda a cerrar las ventanas en caso de cancelar los
+ * pedidos.
  *
- * @author cmontes
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public class CancelarPedido {
 
@@ -26,10 +30,20 @@ public class CancelarPedido {
     @FXML
     private Button btncancelar2;
 
+    /**
+     * Establece el objeto Stage que se utilizará para cancelar una operación.
+     *
+     * @param stageCancelar El objeto Stage que se utilizará para cancelar una
+     * operación.
+     */
     public void setStageCancelar(Stage stageCancelar) {
         this.stageCancelar = stageCancelar;
     }
 
+    /**
+     * Cancela una operación cerrando el objeto Stage proporcionado, si está
+     * disponible.
+     */
     @FXML
     public void cancelar2() {
         if (stageCancelar != null) {
@@ -37,14 +51,18 @@ public class CancelarPedido {
         }
     }
 
+    /**
+     * Confirma y ejecuta la cancelación de una operación. Cierra las ventanas
+     * asociadas, limpia las listas de componentes y valores a pagar.
+     */
     @FXML
     public void confirmarCancel() {
         BaseHelado.stage.close();
         stageCancelar.close();
-        
+
         VentanaOpciones.componentes.clear();
         VentanaOpciones.valoresAPagar.clear();
-        
+
     }
 
 }

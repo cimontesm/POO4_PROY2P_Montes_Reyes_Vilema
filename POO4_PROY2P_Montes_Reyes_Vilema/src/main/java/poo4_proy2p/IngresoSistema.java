@@ -22,55 +22,68 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-
 /**
+ * Clase para poder iniciar la sesion con los respectivos usuarios
  *
- * @author cmontes
+ *
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public class IngresoSistema implements Initializable {
-    
+
     @FXML
     private TextField tfusuario;
-    
+
     @FXML
     private ImageView imagenprincipal;
-    
+
     @FXML
     private Pane pane;
-    
+
     @FXML
     private HBox hDatos;
-    
+
     @FXML
     private VBox vLabels;
-    
+
     @FXML
     private VBox vDatos;
-    
+
     @FXML
     private TextField tfcontrasenia;
-    
+
     @FXML
     private Button btnIniciarSesion;
 
     ArrayList<Usuario> usuarios;
 
-   
-
     @FXML
     private VBox vLabelError;
 
+    /**
+     * Inicializa la clase con funcionalidad pendiente. Este método está
+     * diseñado para contener futuras implementaciones de funcionalidades
+     * específicas.
+     *
+     * @param url La ubicación relativa de la raíz del objeto a inicializar.
+     * @param rb El recurso de recursos que se pasa a través de la
+     * inicialización, o nulo si no hay ninguno.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TO DO
     }
-    
 
-
+    /**
+     * Maneja la acción de iniciar sesión de un usuario. Comprueba las
+     * credenciales ingresadas y muestra la ventana de opciones si son válidas.
+     * Muestra un mensaje de error si las credenciales son incorrectas.
+     */
     @FXML
     public void iniciarSesion() {
         usuarios = new ArrayList<>();
-        
+
         Usuario u1 = new Usuario("majoab", "majito1234");
         Usuario u2 = new Usuario("cx", "c21X");
         Usuario u3 = new Usuario("cmm", "12345");
@@ -95,15 +108,15 @@ public class IngresoSistema implements Initializable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                
-            } else if (datosErroneos){
+
+            } else if (datosErroneos) {
                 vLabelError.getChildren().clear();
                 tfusuario.clear();
                 tfcontrasenia.clear();
-            
+
                 Label lb = new Label("Datos Erróneos");
-                lb.setTextFill(Color.PALEVIOLETRED); 
-                lb.setFont(Font.font("System", FontWeight.BOLD, 15)); 
+                lb.setTextFill(Color.PALEVIOLETRED);
+                lb.setFont(Font.font("System", FontWeight.BOLD, 15));
                 lb.setStyle("-fx-background-color: POWDERBLUE");
                 lb.setTextAlignment(TextAlignment.CENTER);
 

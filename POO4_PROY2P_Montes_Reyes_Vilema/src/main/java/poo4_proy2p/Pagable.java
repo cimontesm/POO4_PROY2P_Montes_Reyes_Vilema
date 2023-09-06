@@ -5,8 +5,12 @@
 package poo4_proy2p;
 
 /**
+ * Interfaz pagable
  *
- * @author cmontes
+ *
+ * @author Cecilia Montes
+ * @author Kimberly Reyes
+ * @author Daniel Vilema
  */
 public interface Pagable {
     
