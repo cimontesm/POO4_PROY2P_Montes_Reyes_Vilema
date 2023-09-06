@@ -40,6 +40,7 @@ public class Pedido implements Initializable, Serializable {
     String nombreC;
     double total;
     static int id = (new Random()).nextInt(9000) + 1000;
+    static Pedido p = new Pedido();
 
     public Pedido() {
         stage = new Stage();
@@ -70,7 +71,7 @@ public class Pedido implements Initializable, Serializable {
     private ImageView fondo;
 
     @FXML
-    public ListView lv;
+    private ListView<String> lv;
 
     @FXML
     private Label lblValor;
@@ -84,6 +85,14 @@ public class Pedido implements Initializable, Serializable {
     @FXML
     private Button btnEliminar;
 
+    public ListView<String> getLv() {
+        return lv;
+    }
+
+    public void setLv(ListView<String> lv) {
+        this.lv = lv;
+    }
+    
     @FXML
     public void confirmar() {
         double total = 0.0;
@@ -92,7 +101,7 @@ public class Pedido implements Initializable, Serializable {
             total += valor;
         }
         
-        Pedido p = new Pedido(VentanaOpciones.usuario.getUsuario(),total);
+        p = new Pedido(VentanaOpciones.usuario.getUsuario(),total);
         
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("pedidos.txt",true))){
             bw.write(p.toString()+"\n");
@@ -116,17 +125,20 @@ public class Pedido implements Initializable, Serializable {
         }
     }
 
+//    public static ListView<String> lv;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarListView();
-
+        
         VentanaOpciones.cargarValorAPagar(lblValor);
 
     }
 
     public void cargarListView() {
         ArrayList<String> elementos = new ArrayList<>();
-
+//        ListView<String> lv2 = lv;
+        
         for (Object componente : VentanaOpciones.componentes) {
             if (componente instanceof BaseHelado) {
                 BaseHelado bh = (BaseHelado) componente;
@@ -143,13 +155,13 @@ public class Pedido implements Initializable, Serializable {
             }
 
         }
-
+        
         ObservableList<String> items = FXCollections.observableArrayList(elementos);
         lv.setItems(items);
         lv.setDisable(false);
 
     }
-
+    
     @FXML
     public void cancelar() throws IOException {
         FXMLLoader fxmLoader = new FXMLLoader(Pedido.class.getResource("cancelarcompra.fxml"));
@@ -195,15 +207,5 @@ public class Pedido implements Initializable, Serializable {
     public static boolean esSabor(String elemento) {
         return elemento.startsWith("Sabor: ");
     }
-
-    public ListView getLv() {
-        return lv;
-    }
-
-    public void setLv(ListView lv) {
-        this.lv = lv;
-    }
-
-    
     
 }

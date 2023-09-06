@@ -7,6 +7,8 @@ package poo4_proy2p;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -158,8 +160,67 @@ public class Pago implements Pagable, Initializable {
 
     @FXML
     private Button btnCancelar;
-    @FXML
-    private ToggleGroup modopago;
+
+    ToggleGroup modopago;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        ToggleGroup modopago = new ToggleGroup();
+        rbefectivo.setToggleGroup(modopago);
+        rbtarjeta.setToggleGroup(modopago);
+        generarTransaccion();
+        modopago = new ToggleGroup();
+
+        double total = obtenerSuma();
+        double iva = 0.83;
+        double adicionalT = 0.63;
+        Pago p = null;
+
+        
+        rbefectivo.setToggleGroup(modopago);
+        rbefectivo.setToggleGroup(modopago);
+        rbtarjeta.setToggleGroup(modopago);
+
+        
+        modopago.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                if (newValue == rbtarjeta) {
+                    double total = obtenerSuma();
+                    total += total * 0.10;
+
+                    tfvalor.setText(String.valueOf(total));
+                    tfvalor.setDisable(true);
+                    tfadt.setText(String.valueOf(adicionalT));
+                    tfiva.setText(String.valueOf(iva));
+                    tftot.setText(String.valueOf(total + iva + adicionalT));
+                    tfadt.setDisable(true);
+                    tfiva.setDisable(true);
+                    tftot.setDisable(true);
+                    final Pago p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total) + (adicionalT * total), "Tarjeta");
+
+                    try {
+                        mostrarVentanaTarjeta();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    tfvalor.setText(String.valueOf(total));
+                    tfadt.setText("0.0");
+                    tfiva.setText(String.valueOf("0.0"));
+                    tftot.setText(String.valueOf(total + (iva * total)));
+                    hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
+
+                    tfvalor.setDisable(true);
+                    tfadt.setDisable(true);
+                    tfiva.setDisable(true);
+                    tftot.setDisable(true);
+                    final Pago p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total), "Efectivo");
+                }
+            }
+        });
+
+    }
 
     /**
      * Este método se utiliza para confirmar una acción y mostrar una ventana
@@ -171,6 +232,7 @@ public class Pago implements Pagable, Initializable {
     @FXML
     public void confirmar() throws IOException {
         OrdenGenerada.mostrarVentanaFinal();
+
     }
 
     @FXML
@@ -178,83 +240,6 @@ public class Pago implements Pagable, Initializable {
 
     }
 
-    public void modoPago() {
-        double total = obtenerSuma();
-        Toggle seleccion = modopago.getSelectedToggle();
-        if (rbtarjeta == seleccion) {
-            //incrementar valor a pagar por 10% TO DO
-            total += total * 0.10;
-            tfvalor.setText(String.valueOf(total));
-            tfvalor.setEditable(false);
-
-            try {
-                mostrarVentanaTarjeta();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-        } else if (rbefectivo.isSelected()) {
-            generarTransaccion();
-            tfvalor.setText("Hola");
-        }
-    }
-
-    /**
-     * Genera una transacción de pago basada en la selección del modo de pago.
-     *
-     * @return Un objeto de tipo Pago que representa la transacción generada.
-     */
-    @Override
-    public Pago generarTransaccion() {
-        Toggle seleccion = modopago.getSelectedToggle();
-        double total = obtenerSuma();
-        double iva = 0.83;
-        double adicionalT = 0.63;
-        Pago p = null;
-        if (seleccion == rbtarjeta) {
-            //incrementar valor a pagar por 10% TO DO
-            total += total * 0.10;
-
-            tfvalor.setText(String.valueOf(total));
-            tfvalor.setEditable(false);
-            tfadt.setText(String.valueOf(adicionalT));
-            tfiva.setText(String.valueOf(iva));
-            tftot.setText(String.valueOf(total + iva + adicionalT));
-            tfadt.setEditable(false);
-            tfiva.setEditable(false);
-            tftot.setEditable(false);
-            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total) + (adicionalT * total), "Tarjeta");
-
-            try {
-                mostrarVentanaTarjeta();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        } else if (seleccion == rbefectivo) {
-            tfvalor.setText(String.valueOf(total));
-            tfadt.setText("0.0");
-            tfiva.setText(String.valueOf("0.0"));
-            tftot.setText(String.valueOf(total + (iva * total)));
-            hdatos.getChildren().add(new Label("Acercarse a Caja para pagar tu pedido."));
-
-            tfvalor.setEditable(false);
-            tfadt.setEditable(false);
-            tfiva.setEditable(false);
-            tftot.setEditable(false);
-            p = new Pago(VentanaOpciones.usuario.usuario, total + (iva * total), "Efectivo");
-        } else {
-            tfvalor.setText("Hola");
-        }
-        return p;
-    }
-
-    /**
-     * Calcula la suma total de los valores a pagar almacenados en la lista
-     * "valoresAPagar".
-     *
-     * @return La suma total de los valores a pagar como un número de punto
-     * flotante (double).
-     */
     public double obtenerSuma() {
         double total = 0;
         for (double valor : VentanaOpciones.valoresAPagar) {
@@ -336,9 +321,8 @@ public class Pago implements Pagable, Initializable {
      * inicialización, o nulo si no hay ninguno.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        generarTransaccion();
-        //modoPago();
+    public Pago generarTransaccion() {
+        return null;
     }
 
 }
