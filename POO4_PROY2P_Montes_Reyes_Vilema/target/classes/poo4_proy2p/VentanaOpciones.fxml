@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F5E8FF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.VentanaOpciones">
+   <children>
+      <ImageView fitHeight="114.0" fitWidth="655.0" layoutX="-98.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true" rotate="-12.8">
+         <image>
+            <Image url="@banderind.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="62.0" prefHeight="335.0" prefWidth="603.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="335.0" prefWidth="263.0">
+               <children>
+                  <Label fx:id="lblBienvenida" prefHeight="30.0" prefWidth="219.0" text="Mensaje de Bienvenida">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnLocales" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#verMapa" prefHeight="27.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Encuentra nuestro locales" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnPedido" mnemonicParsing="false" onAction="#mostrarVentanaPedido1" prefHeight="25.0" prefWidth="176.0" styleClass="color-btns" stylesheets="@style/styles.css" text="Haz tu pedido" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="251.0" layoutY="62.0" prefHeight="365.0" prefWidth="497.0">
+         <children>
+            <ImageView fitHeight="296.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" rotate="10.6">
+               <image>
+                  <Image url="@helado%20escena%202.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</Pane>

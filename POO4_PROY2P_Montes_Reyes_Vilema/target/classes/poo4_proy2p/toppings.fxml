@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.Topping">
+   <children>
+      <ImageView fx:id="fondo" fitHeight="400.0" fitWidth="725.0" layoutX="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pedidohelado2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="29.0" layoutY="45.0" text="Paso 3: Escoge los toppings" textFill="#3e0b63">
+         <font>
+            <Font name="AR CHRISTY" size="32.0" />
+         </font>
+      </Label>
+      <VBox fx:id="vcb" layoutX="29.0" layoutY="109.0" prefHeight="183.0" prefWidth="255.0" spacing="10.0" style="-fx-background-color: plum;">
+         <children>
+            <CheckBox fx:id="cb1" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="cb2" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="cb3" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="cb4" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="cb5" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="cb6" mnemonicParsing="false" text="CheckBox" />
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+      <Label fx:id="lblValor" layoutX="29.0" layoutY="351.0" text="Valor a pagar: " textFill="#845b9e">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnContinuar" layoutX="487.0" layoutY="350.0" mnemonicParsing="false" onAction="#continuar" styleClass="color-btns" stylesheets="@style/styles.css" text="Continuar" textFill="#845b9e">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

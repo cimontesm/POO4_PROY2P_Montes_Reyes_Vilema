@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poo4_proy2p.OrdenGenerada">
+   <children>
+      <ImageView fx:id="fondo" fitHeight="400.0" fitWidth="725.0" layoutX="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pedidohelado2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="28.0" layoutY="45.0" text="Tu orden se ha generado" textAlignment="CENTER" textFill="#3e0b63">
+         <font>
+            <Font name="AR CHRISTY" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblpedido" layoutX="28.0" layoutY="111.0" text="Pedido" textFill="#3e0b63">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="foto" fitHeight="192.0" fitWidth="345.0" layoutX="133.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@heladosfinal.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblcerrar" layoutX="358.0" layoutY="369.0" text="Esta ventana se cerrara en" textFill="#3e0b63">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
